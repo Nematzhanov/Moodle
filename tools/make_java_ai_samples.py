@@ -1,0 +1,1593 @@
+"""Создаёт java_ai_generated.csv — Java-код, сгенерированный ИИ «с нуля» (label=1).
+
+Зачем: C++-детектор работает хорошо потому, что в его датасете есть 162 примера
+настоящего ИИ-кода, написанного с нуля по типовым задачам. В Java-датасете
+класс «ИИ» состоял только из ПЕРЕПИСАННЫХ версий чужого кода — модель никогда
+не видела, как выглядит Java, которую ИИ пишет с нуля, и потому не распознавала
+её «в бою». Этот файл закрывает пробел тем же рецептом, что сработал в C++.
+
+Все примеры ниже сгенерированы ИИ (Claude) по типовым студенческим задачам,
+в разных манерах: с javadoc, с построчными комментариями и без комментариев.
+Файл подключается скриптом regenerate_java_split.py ТОЛЬКО в train.
+"""
+import os
+from pathlib import Path
+
+import pandas as pd
+
+OUT_PATH = Path(os.environ.get("CODECHECK_ROOT") or Path(__file__).resolve().parents[1]) / "data" / "sources" / "java_ai_generated.csv"
+
+SAMPLES = [
+# ── алгоритмы: сортировки/поиск ─────────────────────────────────────────────
+'''public class BubbleSortExample {
+    /**
+     * Sorts the given array in ascending order using bubble sort.
+     * Time complexity: O(n^2), space complexity: O(1).
+     */
+    public static void bubbleSort(int[] arr) {
+        int n = arr.length;
+        for (int i = 0; i < n - 1; i++) {
+            // After each pass, the largest element bubbles to the end
+            for (int j = 0; j < n - i - 1; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    int temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] numbers = {64, 34, 25, 12, 22, 11, 90};
+        bubbleSort(numbers);
+        for (int num : numbers) {
+            System.out.print(num + " ");
+        }
+    }
+}''',
+
+'''import java.util.Arrays;
+
+public class BinarySearchDemo {
+    /**
+     * Performs binary search on a sorted array.
+     * @param arr sorted array to search
+     * @param target value to find
+     * @return index of target, or -1 if not found
+     */
+    public static int binarySearch(int[] arr, int target) {
+        int left = 0;
+        int right = arr.length - 1;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (arr[mid] == target) {
+                return mid;
+            } else if (arr[mid] < target) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return -1;
+    }
+
+    public static void main(String[] args) {
+        int[] data = {2, 5, 8, 12, 16, 23, 38, 56, 72, 91};
+        System.out.println("Index of 23: " + binarySearch(data, 23));
+        System.out.println("Index of 40: " + binarySearch(data, 40));
+    }
+}''',
+
+'''public class SelectionSort {
+    public static void sort(int[] array) {
+        for (int i = 0; i < array.length - 1; i++) {
+            int minIndex = i;
+            for (int j = i + 1; j < array.length; j++) {
+                if (array[j] < array[minIndex]) {
+                    minIndex = j;
+                }
+            }
+            int temp = array[minIndex];
+            array[minIndex] = array[i];
+            array[i] = temp;
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] values = {29, 10, 14, 37, 13};
+        sort(values);
+        for (int value : values) {
+            System.out.print(value + " ");
+        }
+    }
+}''',
+
+'''import java.util.Scanner;
+
+public class LinearSearch {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter array size: ");
+        int n = scanner.nextInt();
+        int[] arr = new int[n];
+        System.out.println("Enter " + n + " elements:");
+        for (int i = 0; i < n; i++) {
+            arr[i] = scanner.nextInt();
+        }
+        System.out.print("Enter element to search: ");
+        int key = scanner.nextInt();
+
+        int foundIndex = -1;
+        for (int i = 0; i < n; i++) {
+            if (arr[i] == key) {
+                foundIndex = i;
+                break;
+            }
+        }
+
+        if (foundIndex >= 0) {
+            System.out.println("Element found at index " + foundIndex);
+        } else {
+            System.out.println("Element not found");
+        }
+        scanner.close();
+    }
+}''',
+
+'''/**
+ * Implementation of the merge sort algorithm.
+ */
+public class MergeSortImplementation {
+
+    public static void mergeSort(int[] arr, int left, int right) {
+        if (left < right) {
+            int mid = left + (right - left) / 2;
+            mergeSort(arr, left, mid);
+            mergeSort(arr, mid + 1, right);
+            merge(arr, left, mid, right);
+        }
+    }
+
+    private static void merge(int[] arr, int left, int mid, int right) {
+        int[] leftPart = new int[mid - left + 1];
+        int[] rightPart = new int[right - mid];
+
+        System.arraycopy(arr, left, leftPart, 0, leftPart.length);
+        System.arraycopy(arr, mid + 1, rightPart, 0, rightPart.length);
+
+        int i = 0, j = 0, k = left;
+        while (i < leftPart.length && j < rightPart.length) {
+            if (leftPart[i] <= rightPart[j]) {
+                arr[k++] = leftPart[i++];
+            } else {
+                arr[k++] = rightPart[j++];
+            }
+        }
+        while (i < leftPart.length) {
+            arr[k++] = leftPart[i++];
+        }
+        while (j < rightPart.length) {
+            arr[k++] = rightPart[j++];
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] data = {38, 27, 43, 3, 9, 82, 10};
+        mergeSort(data, 0, data.length - 1);
+        for (int value : data) {
+            System.out.print(value + " ");
+        }
+    }
+}''',
+
+# ── строки ──────────────────────────────────────────────────────────────────
+'''public class PalindromeChecker {
+    /**
+     * Checks whether the given string is a palindrome,
+     * ignoring case and non-alphanumeric characters.
+     */
+    public static boolean isPalindrome(String text) {
+        String cleaned = text.toLowerCase().replaceAll("[^a-z0-9]", "");
+        int left = 0;
+        int right = cleaned.length() - 1;
+        while (left < right) {
+            if (cleaned.charAt(left) != cleaned.charAt(right)) {
+                return false;
+            }
+            left++;
+            right--;
+        }
+        return true;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(isPalindrome("A man, a plan, a canal: Panama")); // true
+        System.out.println(isPalindrome("Hello, World!")); // false
+    }
+}''',
+
+'''import java.util.Scanner;
+
+public class VowelCounter {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a string: ");
+        String input = scanner.nextLine();
+
+        int vowelCount = 0;
+        for (char c : input.toLowerCase().toCharArray()) {
+            if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u') {
+                vowelCount++;
+            }
+        }
+
+        System.out.println("Number of vowels: " + vowelCount);
+        scanner.close();
+    }
+}''',
+
+'''public class StringReverser {
+    // Reverses a string without using StringBuilder
+    public static String reverse(String input) {
+        char[] characters = input.toCharArray();
+        int left = 0;
+        int right = characters.length - 1;
+        while (left < right) {
+            char temp = characters[left];
+            characters[left] = characters[right];
+            characters[right] = temp;
+            left++;
+            right--;
+        }
+        return new String(characters);
+    }
+
+    public static void main(String[] args) {
+        String original = "Hello, Java!";
+        System.out.println("Original: " + original);
+        System.out.println("Reversed: " + reverse(original));
+    }
+}''',
+
+'''import java.util.HashMap;
+import java.util.Map;
+
+public class WordFrequencyCounter {
+    public static void main(String[] args) {
+        String text = "the quick brown fox jumps over the lazy dog the end";
+
+        Map<String, Integer> frequencies = new HashMap<>();
+        for (String word : text.split("\\\\s+")) {
+            frequencies.put(word, frequencies.getOrDefault(word, 0) + 1);
+        }
+
+        for (Map.Entry<String, Integer> entry : frequencies.entrySet()) {
+            System.out.println(entry.getKey() + ": " + entry.getValue());
+        }
+    }
+}''',
+
+'''public class AnagramChecker {
+    /**
+     * Determines if two strings are anagrams of each other.
+     */
+    public static boolean areAnagrams(String first, String second) {
+        String a = first.toLowerCase().replaceAll("\\\\s", "");
+        String b = second.toLowerCase().replaceAll("\\\\s", "");
+
+        if (a.length() != b.length()) {
+            return false;
+        }
+
+        int[] counts = new int[26];
+        for (int i = 0; i < a.length(); i++) {
+            counts[a.charAt(i) - 'a']++;
+            counts[b.charAt(i) - 'a']--;
+        }
+
+        for (int count : counts) {
+            if (count != 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(areAnagrams("listen", "silent"));
+        System.out.println(areAnagrams("hello", "world"));
+    }
+}''',
+
+# ── числа/математика ────────────────────────────────────────────────────────
+'''import java.util.Scanner;
+
+public class FactorialCalculator {
+    /**
+     * Computes n! recursively.
+     */
+    public static long factorial(int n) {
+        if (n <= 1) {
+            return 1;
+        }
+        return n * factorial(n - 1);
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a number: ");
+        int number = scanner.nextInt();
+        System.out.println(number + "! = " + factorial(number));
+        scanner.close();
+    }
+}''',
+
+'''public class FibonacciSeries {
+    public static void main(String[] args) {
+        int n = 10;
+        long first = 0;
+        long second = 1;
+
+        System.out.print("Fibonacci series: " + first + " " + second);
+        for (int i = 2; i < n; i++) {
+            long next = first + second;
+            System.out.print(" " + next);
+            first = second;
+            second = next;
+        }
+        System.out.println();
+    }
+}''',
+
+'''import java.util.Scanner;
+
+public class PrimeNumberChecker {
+    /**
+     * Checks whether a number is prime using trial division
+     * up to the square root of the number.
+     */
+    public static boolean isPrime(int number) {
+        if (number < 2) {
+            return false;
+        }
+        for (int i = 2; i * i <= number; i++) {
+            if (number % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a number: ");
+        int num = scanner.nextInt();
+        if (isPrime(num)) {
+            System.out.println(num + " is a prime number");
+        } else {
+            System.out.println(num + " is not a prime number");
+        }
+        scanner.close();
+    }
+}''',
+
+'''public class GcdCalculator {
+    // Euclidean algorithm for greatest common divisor
+    public static int gcd(int a, int b) {
+        while (b != 0) {
+            int remainder = a % b;
+            a = b;
+            b = remainder;
+        }
+        return a;
+    }
+
+    public static void main(String[] args) {
+        System.out.println("GCD(48, 18) = " + gcd(48, 18));
+        System.out.println("GCD(100, 75) = " + gcd(100, 75));
+    }
+}''',
+
+'''import java.util.Scanner;
+
+public class ArmstrongNumber {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a number: ");
+        int number = scanner.nextInt();
+
+        int original = number;
+        int digits = String.valueOf(number).length();
+        int sum = 0;
+
+        while (number > 0) {
+            int digit = number % 10;
+            sum += Math.pow(digit, digits);
+            number /= 10;
+        }
+
+        if (sum == original) {
+            System.out.println(original + " is an Armstrong number");
+        } else {
+            System.out.println(original + " is not an Armstrong number");
+        }
+        scanner.close();
+    }
+}''',
+
+'''public class MultiplicationTable {
+    public static void main(String[] args) {
+        int number = 7;
+        System.out.println("Multiplication table for " + number + ":");
+        for (int i = 1; i <= 10; i++) {
+            System.out.println(number + " x " + i + " = " + (number * i));
+        }
+    }
+}''',
+
+'''import java.util.Scanner;
+
+public class TemperatureConverter {
+    /**
+     * Simple console utility that converts Celsius to Fahrenheit
+     * and vice versa depending on the user's choice.
+     */
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("1 - Celsius to Fahrenheit");
+        System.out.println("2 - Fahrenheit to Celsius");
+        System.out.print("Choose an option: ");
+        int choice = scanner.nextInt();
+
+        System.out.print("Enter temperature: ");
+        double temperature = scanner.nextDouble();
+
+        if (choice == 1) {
+            double fahrenheit = temperature * 9 / 5 + 32;
+            System.out.printf("%.1f C = %.1f F%n", temperature, fahrenheit);
+        } else if (choice == 2) {
+            double celsius = (temperature - 32) * 5 / 9;
+            System.out.printf("%.1f F = %.1f C%n", temperature, celsius);
+        } else {
+            System.out.println("Invalid option");
+        }
+        scanner.close();
+    }
+}''',
+
+# ── массивы/коллекции ───────────────────────────────────────────────────────
+'''public class ArrayStatistics {
+    public static void main(String[] args) {
+        int[] numbers = {12, 45, 7, 23, 56, 89, 34};
+
+        int min = numbers[0];
+        int max = numbers[0];
+        int sum = 0;
+
+        for (int number : numbers) {
+            if (number < min) min = number;
+            if (number > max) max = number;
+            sum += number;
+        }
+
+        double average = (double) sum / numbers.length;
+
+        System.out.println("Min: " + min);
+        System.out.println("Max: " + max);
+        System.out.println("Sum: " + sum);
+        System.out.printf("Average: %.2f%n", average);
+    }
+}''',
+
+'''import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class ListOperationsDemo {
+    public static void main(String[] args) {
+        List<Integer> numbers = new ArrayList<>();
+        numbers.add(42);
+        numbers.add(17);
+        numbers.add(93);
+        numbers.add(8);
+        numbers.add(56);
+
+        System.out.println("Original list: " + numbers);
+
+        Collections.sort(numbers);
+        System.out.println("Sorted: " + numbers);
+
+        Collections.reverse(numbers);
+        System.out.println("Reversed: " + numbers);
+
+        System.out.println("Max: " + Collections.max(numbers));
+        System.out.println("Min: " + Collections.min(numbers));
+    }
+}''',
+
+'''import java.util.HashSet;
+import java.util.Set;
+
+public class DuplicateFinder {
+    /**
+     * Prints all duplicate elements of the array using a HashSet.
+     */
+    public static void main(String[] args) {
+        int[] values = {4, 2, 7, 4, 9, 2, 5, 7, 1};
+
+        Set<Integer> seen = new HashSet<>();
+        Set<Integer> duplicates = new HashSet<>();
+
+        for (int value : values) {
+            if (!seen.add(value)) {
+                duplicates.add(value);
+            }
+        }
+
+        System.out.println("Duplicates: " + duplicates);
+    }
+}''',
+
+'''public class SecondLargestElement {
+    public static void main(String[] args) {
+        int[] arr = {12, 35, 1, 10, 34, 1};
+
+        int largest = Integer.MIN_VALUE;
+        int secondLargest = Integer.MIN_VALUE;
+
+        for (int value : arr) {
+            if (value > largest) {
+                secondLargest = largest;
+                largest = value;
+            } else if (value > secondLargest && value != largest) {
+                secondLargest = value;
+            }
+        }
+
+        System.out.println("Largest: " + largest);
+        System.out.println("Second largest: " + secondLargest);
+    }
+}''',
+
+'''import java.util.Arrays;
+
+public class ArrayRotation {
+    /**
+     * Rotates the array to the right by k positions
+     * using the reversal algorithm.
+     */
+    public static void rotate(int[] arr, int k) {
+        int n = arr.length;
+        k = k % n;
+        reverse(arr, 0, n - 1);
+        reverse(arr, 0, k - 1);
+        reverse(arr, k, n - 1);
+    }
+
+    private static void reverse(int[] arr, int start, int end) {
+        while (start < end) {
+            int temp = arr[start];
+            arr[start] = arr[end];
+            arr[end] = temp;
+            start++;
+            end--;
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] numbers = {1, 2, 3, 4, 5, 6, 7};
+        rotate(numbers, 3);
+        System.out.println(Arrays.toString(numbers));
+    }
+}''',
+
+# ── ООП ─────────────────────────────────────────────────────────────────────
+'''/**
+ * Demonstrates encapsulation with a simple bank account class.
+ */
+public class BankAccount {
+    private String owner;
+    private double balance;
+
+    public BankAccount(String owner, double initialBalance) {
+        this.owner = owner;
+        this.balance = initialBalance;
+    }
+
+    public void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+            System.out.println("Deposited: " + amount);
+        }
+    }
+
+    public void withdraw(double amount) {
+        if (amount > 0 && amount <= balance) {
+            balance -= amount;
+            System.out.println("Withdrawn: " + amount);
+        } else {
+            System.out.println("Insufficient funds");
+        }
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public static void main(String[] args) {
+        BankAccount account = new BankAccount("Alice", 100.0);
+        account.deposit(50.0);
+        account.withdraw(30.0);
+        account.withdraw(500.0);
+        System.out.println("Final balance: " + account.getBalance());
+    }
+}''',
+
+'''/**
+ * Demonstrates inheritance and method overriding.
+ */
+class Animal {
+    protected String name;
+
+    public Animal(String name) {
+        this.name = name;
+    }
+
+    public void makeSound() {
+        System.out.println(name + " makes a sound");
+    }
+}
+
+class Dog extends Animal {
+    public Dog(String name) {
+        super(name);
+    }
+
+    @Override
+    public void makeSound() {
+        System.out.println(name + " barks: Woof!");
+    }
+}
+
+class Cat extends Animal {
+    public Cat(String name) {
+        super(name);
+    }
+
+    @Override
+    public void makeSound() {
+        System.out.println(name + " meows: Meow!");
+    }
+}
+
+public class InheritanceDemo {
+    public static void main(String[] args) {
+        Animal[] animals = {
+            new Dog("Rex"),
+            new Cat("Whiskers"),
+            new Animal("Generic")
+        };
+
+        for (Animal animal : animals) {
+            animal.makeSound();
+        }
+    }
+}''',
+
+'''interface Shape {
+    double area();
+    double perimeter();
+}
+
+class Circle implements Shape {
+    private final double radius;
+
+    public Circle(double radius) {
+        this.radius = radius;
+    }
+
+    @Override
+    public double area() {
+        return Math.PI * radius * radius;
+    }
+
+    @Override
+    public double perimeter() {
+        return 2 * Math.PI * radius;
+    }
+}
+
+class Rectangle implements Shape {
+    private final double width;
+    private final double height;
+
+    public Rectangle(double width, double height) {
+        this.width = width;
+        this.height = height;
+    }
+
+    @Override
+    public double area() {
+        return width * height;
+    }
+
+    @Override
+    public double perimeter() {
+        return 2 * (width + height);
+    }
+}
+
+public class ShapeDemo {
+    public static void main(String[] args) {
+        Shape[] shapes = {new Circle(5), new Rectangle(4, 6)};
+        for (Shape shape : shapes) {
+            System.out.printf("Area: %.2f, Perimeter: %.2f%n",
+                    shape.area(), shape.perimeter());
+        }
+    }
+}''',
+
+'''import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * A simple student management example demonstrating
+ * classes, lists and basic CRUD operations.
+ */
+class Student {
+    private final int id;
+    private String name;
+    private double grade;
+
+    public Student(int id, String name, double grade) {
+        this.id = id;
+        this.name = name;
+        this.grade = grade;
+    }
+
+    public int getId() { return id; }
+    public String getName() { return name; }
+    public double getGrade() { return grade; }
+
+    @Override
+    public String toString() {
+        return String.format("Student{id=%d, name='%s', grade=%.1f}", id, name, grade);
+    }
+}
+
+public class StudentManager {
+    private final List<Student> students = new ArrayList<>();
+
+    public void addStudent(Student student) {
+        students.add(student);
+    }
+
+    public Student findById(int id) {
+        for (Student student : students) {
+            if (student.getId() == id) {
+                return student;
+            }
+        }
+        return null;
+    }
+
+    public double averageGrade() {
+        if (students.isEmpty()) {
+            return 0;
+        }
+        double sum = 0;
+        for (Student student : students) {
+            sum += student.getGrade();
+        }
+        return sum / students.size();
+    }
+
+    public static void main(String[] args) {
+        StudentManager manager = new StudentManager();
+        manager.addStudent(new Student(1, "Alice", 4.5));
+        manager.addStudent(new Student(2, "Bob", 3.8));
+        manager.addStudent(new Student(3, "Charlie", 4.9));
+
+        System.out.println("Found: " + manager.findById(2));
+        System.out.printf("Average grade: %.2f%n", manager.averageGrade());
+    }
+}''',
+
+'''/**
+ * Demonstrates an abstract class with template method pattern.
+ */
+abstract class Vehicle {
+    protected String model;
+
+    public Vehicle(String model) {
+        this.model = model;
+    }
+
+    // Template method
+    public void startJourney() {
+        checkFuel();
+        start();
+        System.out.println(model + " is on its way!");
+    }
+
+    protected void checkFuel() {
+        System.out.println("Checking fuel level...");
+    }
+
+    protected abstract void start();
+}
+
+class Car extends Vehicle {
+    public Car(String model) {
+        super(model);
+    }
+
+    @Override
+    protected void start() {
+        System.out.println("Turning ignition key...");
+    }
+}
+
+class ElectricScooter extends Vehicle {
+    public ElectricScooter(String model) {
+        super(model);
+    }
+
+    @Override
+    protected void start() {
+        System.out.println("Pressing power button...");
+    }
+}
+
+public class VehicleDemo {
+    public static void main(String[] args) {
+        Vehicle[] vehicles = {new Car("Toyota"), new ElectricScooter("Xiaomi")};
+        for (Vehicle vehicle : vehicles) {
+            vehicle.startJourney();
+        }
+    }
+}''',
+
+# ── исключения/файлы ────────────────────────────────────────────────────────
+'''import java.util.Scanner;
+
+public class SafeDivision {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        try {
+            System.out.print("Enter numerator: ");
+            int a = scanner.nextInt();
+            System.out.print("Enter denominator: ");
+            int b = scanner.nextInt();
+
+            int result = a / b;
+            System.out.println("Result: " + result);
+        } catch (ArithmeticException e) {
+            System.out.println("Error: division by zero is not allowed");
+        } catch (Exception e) {
+            System.out.println("Invalid input: " + e.getMessage());
+        } finally {
+            scanner.close();
+        }
+    }
+}''',
+
+'''/**
+ * Custom exception example: validating user age.
+ */
+class InvalidAgeException extends Exception {
+    public InvalidAgeException(String message) {
+        super(message);
+    }
+}
+
+public class AgeValidator {
+    public static void validateAge(int age) throws InvalidAgeException {
+        if (age < 0) {
+            throw new InvalidAgeException("Age cannot be negative: " + age);
+        }
+        if (age > 150) {
+            throw new InvalidAgeException("Age is unrealistically large: " + age);
+        }
+        System.out.println("Age " + age + " is valid");
+    }
+
+    public static void main(String[] args) {
+        int[] testAges = {25, -5, 200};
+        for (int age : testAges) {
+            try {
+                validateAge(age);
+            } catch (InvalidAgeException e) {
+                System.out.println("Validation failed: " + e.getMessage());
+            }
+        }
+    }
+}''',
+
+'''import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
+public class FileReadWriteDemo {
+    public static void main(String[] args) {
+        String fileName = "notes.txt";
+
+        // Write lines to the file
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
+            writer.write("First line");
+            writer.newLine();
+            writer.write("Second line");
+            writer.newLine();
+        } catch (IOException e) {
+            System.out.println("Write error: " + e.getMessage());
+            return;
+        }
+
+        // Read the file back
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                System.out.println("Read: " + line);
+            }
+        } catch (IOException e) {
+            System.out.println("Read error: " + e.getMessage());
+        }
+    }
+}''',
+
+# ── разное типичное ─────────────────────────────────────────────────────────
+'''import java.util.Scanner;
+
+public class GradeCalculator {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter your score (0-100): ");
+        int score = scanner.nextInt();
+
+        char grade;
+        if (score >= 90) {
+            grade = 'A';
+        } else if (score >= 80) {
+            grade = 'B';
+        } else if (score >= 70) {
+            grade = 'C';
+        } else if (score >= 60) {
+            grade = 'D';
+        } else {
+            grade = 'F';
+        }
+
+        System.out.println("Your grade: " + grade);
+        scanner.close();
+    }
+}''',
+
+'''import java.util.Random;
+import java.util.Scanner;
+
+public class NumberGuessingGame {
+    public static void main(String[] args) {
+        Random random = new Random();
+        Scanner scanner = new Scanner(System.in);
+        int secret = random.nextInt(100) + 1;
+        int attempts = 0;
+
+        System.out.println("Guess a number between 1 and 100!");
+
+        while (true) {
+            System.out.print("Your guess: ");
+            int guess = scanner.nextInt();
+            attempts++;
+
+            if (guess < secret) {
+                System.out.println("Too low!");
+            } else if (guess > secret) {
+                System.out.println("Too high!");
+            } else {
+                System.out.println("Correct! Attempts: " + attempts);
+                break;
+            }
+        }
+        scanner.close();
+    }
+}''',
+
+'''public class FizzBuzz {
+    public static void main(String[] args) {
+        for (int i = 1; i <= 30; i++) {
+            if (i % 15 == 0) {
+                System.out.println("FizzBuzz");
+            } else if (i % 3 == 0) {
+                System.out.println("Fizz");
+            } else if (i % 5 == 0) {
+                System.out.println("Buzz");
+            } else {
+                System.out.println(i);
+            }
+        }
+    }
+}''',
+
+'''import java.util.Scanner;
+
+public class SimpleCalculator {
+    /**
+     * A basic console calculator supporting +, -, *, /.
+     */
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter first number: ");
+        double first = scanner.nextDouble();
+        System.out.print("Enter operator (+, -, *, /): ");
+        char operator = scanner.next().charAt(0);
+        System.out.print("Enter second number: ");
+        double second = scanner.nextDouble();
+
+        double result;
+        switch (operator) {
+            case '+':
+                result = first + second;
+                break;
+            case '-':
+                result = first - second;
+                break;
+            case '*':
+                result = first * second;
+                break;
+            case '/':
+                if (second == 0) {
+                    System.out.println("Cannot divide by zero");
+                    scanner.close();
+                    return;
+                }
+                result = first / second;
+                break;
+            default:
+                System.out.println("Unknown operator");
+                scanner.close();
+                return;
+        }
+
+        System.out.println("Result: " + result);
+        scanner.close();
+    }
+}''',
+
+'''public class StarPyramid {
+    public static void main(String[] args) {
+        int rows = 5;
+        for (int i = 1; i <= rows; i++) {
+            // Print leading spaces
+            for (int j = rows - i; j > 0; j--) {
+                System.out.print(" ");
+            }
+            // Print stars
+            for (int k = 0; k < 2 * i - 1; k++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+    }
+}''',
+
+'''import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class TodoListApp {
+    private static final List<String> tasks = new ArrayList<>();
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        boolean running = true;
+
+        while (running) {
+            System.out.println("\\n1. Add task\\n2. Show tasks\\n3. Remove task\\n4. Exit");
+            System.out.print("Choose: ");
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Task description: ");
+                    tasks.add(scanner.nextLine());
+                    System.out.println("Task added.");
+                    break;
+                case 2:
+                    if (tasks.isEmpty()) {
+                        System.out.println("No tasks yet.");
+                    } else {
+                        for (int i = 0; i < tasks.size(); i++) {
+                            System.out.println((i + 1) + ". " + tasks.get(i));
+                        }
+                    }
+                    break;
+                case 3:
+                    System.out.print("Task number to remove: ");
+                    int index = scanner.nextInt() - 1;
+                    if (index >= 0 && index < tasks.size()) {
+                        System.out.println("Removed: " + tasks.remove(index));
+                    } else {
+                        System.out.println("Invalid task number.");
+                    }
+                    break;
+                case 4:
+                    running = false;
+                    break;
+                default:
+                    System.out.println("Unknown option.");
+            }
+        }
+        scanner.close();
+    }
+}''',
+
+'''import java.time.LocalDate;
+import java.time.Period;
+import java.util.Scanner;
+
+public class AgeCalculator {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter birth year: ");
+        int year = scanner.nextInt();
+        System.out.print("Enter birth month: ");
+        int month = scanner.nextInt();
+        System.out.print("Enter birth day: ");
+        int day = scanner.nextInt();
+
+        LocalDate birthDate = LocalDate.of(year, month, day);
+        Period age = Period.between(birthDate, LocalDate.now());
+
+        System.out.printf("You are %d years, %d months and %d days old%n",
+                age.getYears(), age.getMonths(), age.getDays());
+        scanner.close();
+    }
+}''',
+
+'''import java.util.Stack;
+
+public class BalancedBrackets {
+    /**
+     * Checks whether the bracket sequence in the string is balanced.
+     * Supports (), [] and {}.
+     */
+    public static boolean isBalanced(String expression) {
+        Stack<Character> stack = new Stack<>();
+        for (char c : expression.toCharArray()) {
+            if (c == '(' || c == '[' || c == '{') {
+                stack.push(c);
+            } else if (c == ')' || c == ']' || c == '}') {
+                if (stack.isEmpty()) {
+                    return false;
+                }
+                char open = stack.pop();
+                if ((c == ')' && open != '(')
+                        || (c == ']' && open != '[')
+                        || (c == '}' && open != '{')) {
+                    return false;
+                }
+            }
+        }
+        return stack.isEmpty();
+    }
+
+    public static void main(String[] args) {
+        System.out.println(isBalanced("{[()()]}"));  // true
+        System.out.println(isBalanced("([)]"));      // false
+    }
+}''',
+
+'''import java.util.LinkedList;
+import java.util.Queue;
+
+public class QueueDemo {
+    public static void main(String[] args) {
+        Queue<String> queue = new LinkedList<>();
+
+        // Enqueue elements
+        queue.offer("Alice");
+        queue.offer("Bob");
+        queue.offer("Charlie");
+
+        System.out.println("Queue: " + queue);
+        System.out.println("Front element: " + queue.peek());
+
+        // Dequeue elements one by one
+        while (!queue.isEmpty()) {
+            System.out.println("Serving: " + queue.poll());
+        }
+
+        System.out.println("Queue is empty: " + queue.isEmpty());
+    }
+}''',
+
+'''public class MatrixMultiplication {
+    public static int[][] multiply(int[][] a, int[][] b) {
+        int rows = a.length;
+        int cols = b[0].length;
+        int common = b.length;
+
+        int[][] result = new int[rows][cols];
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                for (int k = 0; k < common; k++) {
+                    result[i][j] += a[i][k] * b[k][j];
+                }
+            }
+        }
+        return result;
+    }
+
+    public static void main(String[] args) {
+        int[][] first = {{1, 2}, {3, 4}};
+        int[][] second = {{5, 6}, {7, 8}};
+
+        int[][] product = multiply(first, second);
+        for (int[] row : product) {
+            for (int value : row) {
+                System.out.print(value + " ");
+            }
+            System.out.println();
+        }
+    }
+}''',
+
+'''import java.util.stream.Collectors;
+import java.util.List;
+import java.util.Arrays;
+
+public class StreamApiDemo {
+    public static void main(String[] args) {
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+
+        // Filter even numbers, square them and collect to a list
+        List<Integer> evenSquares = numbers.stream()
+                .filter(n -> n % 2 == 0)
+                .map(n -> n * n)
+                .collect(Collectors.toList());
+
+        System.out.println("Even squares: " + evenSquares);
+
+        int sum = numbers.stream().mapToInt(Integer::intValue).sum();
+        System.out.println("Total sum: " + sum);
+
+        double average = numbers.stream()
+                .mapToInt(Integer::intValue)
+                .average()
+                .orElse(0);
+        System.out.println("Average: " + average);
+    }
+}''',
+
+'''public class BinaryToDecimal {
+    /**
+     * Converts a binary string to its decimal representation
+     * without using Integer.parseInt.
+     */
+    public static int convert(String binary) {
+        int decimal = 0;
+        for (char bit : binary.toCharArray()) {
+            decimal = decimal * 2 + (bit - '0');
+        }
+        return decimal;
+    }
+
+    public static void main(String[] args) {
+        String[] tests = {"101", "1111", "100000"};
+        for (String binary : tests) {
+            System.out.println(binary + " -> " + convert(binary));
+        }
+    }
+}''',
+
+'''import java.util.Scanner;
+
+public class LeapYearChecker {
+    public static boolean isLeapYear(int year) {
+        // A year is leap if divisible by 4, except centuries
+        // that are not divisible by 400
+        return (year % 4 == 0 && year % 100 != 0) || year % 400 == 0;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a year: ");
+        int year = scanner.nextInt();
+
+        if (isLeapYear(year)) {
+            System.out.println(year + " is a leap year");
+        } else {
+            System.out.println(year + " is not a leap year");
+        }
+        scanner.close();
+    }
+}''',
+
+'''class Node {
+    int data;
+    Node next;
+
+    Node(int data) {
+        this.data = data;
+    }
+}
+
+public class LinkedListReversal {
+    /**
+     * Reverses a singly linked list iteratively.
+     */
+    public static Node reverse(Node head) {
+        Node previous = null;
+        Node current = head;
+        while (current != null) {
+            Node nextNode = current.next;
+            current.next = previous;
+            previous = current;
+            current = nextNode;
+        }
+        return previous;
+    }
+
+    public static void printList(Node head) {
+        Node current = head;
+        while (current != null) {
+            System.out.print(current.data + " -> ");
+            current = current.next;
+        }
+        System.out.println("null");
+    }
+
+    public static void main(String[] args) {
+        Node head = new Node(1);
+        head.next = new Node(2);
+        head.next.next = new Node(3);
+        head.next.next.next = new Node(4);
+
+        System.out.print("Original: ");
+        printList(head);
+
+        head = reverse(head);
+        System.out.print("Reversed: ");
+        printList(head);
+    }
+}''',
+
+'''import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+public class CurrencyConverter {
+    private static final Map<String, Double> RATES = new HashMap<>();
+
+    static {
+        RATES.put("USD", 1.0);
+        RATES.put("EUR", 0.92);
+        RATES.put("GBP", 0.79);
+        RATES.put("JPY", 149.5);
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Amount in USD: ");
+        double amount = scanner.nextDouble();
+        System.out.print("Target currency (EUR/GBP/JPY): ");
+        String currency = scanner.next().toUpperCase();
+
+        Double rate = RATES.get(currency);
+        if (rate == null) {
+            System.out.println("Unsupported currency: " + currency);
+        } else {
+            System.out.printf("%.2f USD = %.2f %s%n", amount, amount * rate, currency);
+        }
+        scanner.close();
+    }
+}''',
+
+'''public class SumOfDigits {
+    public static void main(String[] args) {
+        int number = 48293;
+        int original = number;
+        int sum = 0;
+
+        while (number > 0) {
+            sum += number % 10;
+            number /= 10;
+        }
+
+        System.out.println("Sum of digits of " + original + " is " + sum);
+    }
+}''',
+
+'''import java.util.Arrays;
+import java.util.Comparator;
+
+public class StringSorter {
+    public static void main(String[] args) {
+        String[] words = {"banana", "Apple", "cherry", "date", "Elderberry"};
+
+        // Sort ignoring case
+        Arrays.sort(words, String.CASE_INSENSITIVE_ORDER);
+        System.out.println("Case-insensitive: " + Arrays.toString(words));
+
+        // Sort by length using a comparator
+        Arrays.sort(words, Comparator.comparingInt(String::length));
+        System.out.println("By length: " + Arrays.toString(words));
+    }
+}''',
+
+'''public class PowerCalculator {
+    /**
+     * Computes base^exponent using fast (binary) exponentiation.
+     * Works in O(log n) time.
+     */
+    public static long power(long base, int exponent) {
+        long result = 1;
+        while (exponent > 0) {
+            if ((exponent & 1) == 1) {
+                result *= base;
+            }
+            base *= base;
+            exponent >>= 1;
+        }
+        return result;
+    }
+
+    public static void main(String[] args) {
+        System.out.println("2^10 = " + power(2, 10));
+        System.out.println("3^7 = " + power(3, 7));
+        System.out.println("5^0 = " + power(5, 0));
+    }
+}''',
+
+'''import java.util.Scanner;
+
+public class VotingEligibility {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter your age: ");
+        int age = scanner.nextInt();
+
+        if (age >= 18) {
+            System.out.println("You are eligible to vote.");
+        } else {
+            System.out.println("You will be eligible in " + (18 - age) + " years.");
+        }
+        scanner.close();
+    }
+}''',
+
+'''import java.util.HashMap;
+import java.util.Map;
+
+public class RomanToInteger {
+    /**
+     * Converts a Roman numeral string to an integer.
+     */
+    public static int convert(String roman) {
+        Map<Character, Integer> values = new HashMap<>();
+        values.put('I', 1);
+        values.put('V', 5);
+        values.put('X', 10);
+        values.put('L', 50);
+        values.put('C', 100);
+        values.put('D', 500);
+        values.put('M', 1000);
+
+        int total = 0;
+        for (int i = 0; i < roman.length(); i++) {
+            int current = values.get(roman.charAt(i));
+            // If a smaller value precedes a larger one, subtract it
+            if (i + 1 < roman.length() && current < values.get(roman.charAt(i + 1))) {
+                total -= current;
+            } else {
+                total += current;
+            }
+        }
+        return total;
+    }
+
+    public static void main(String[] args) {
+        System.out.println("XIV = " + convert("XIV"));
+        System.out.println("MCMXCIV = " + convert("MCMXCIV"));
+    }
+}''',
+
+'''public class EvenOddSeparator {
+    public static void main(String[] args) {
+        int[] numbers = {15, 22, 8, 31, 44, 7, 60, 13};
+
+        System.out.print("Even: ");
+        for (int number : numbers) {
+            if (number % 2 == 0) {
+                System.out.print(number + " ");
+            }
+        }
+
+        System.out.print("\\nOdd: ");
+        for (int number : numbers) {
+            if (number % 2 != 0) {
+                System.out.print(number + " ");
+            }
+        }
+        System.out.println();
+    }
+}''',
+
+'''import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+
+public class SimpleThreadPoolDemo {
+    public static void main(String[] args) throws InterruptedException {
+        ExecutorService executor = Executors.newFixedThreadPool(3);
+
+        for (int i = 1; i <= 6; i++) {
+            final int taskId = i;
+            executor.submit(() -> {
+                String threadName = Thread.currentThread().getName();
+                System.out.println("Task " + taskId + " running on " + threadName);
+            });
+        }
+
+        executor.shutdown();
+        executor.awaitTermination(5, TimeUnit.SECONDS);
+        System.out.println("All tasks completed.");
+    }
+}''',
+
+'''public class CountdownTimer {
+    public static void main(String[] args) throws InterruptedException {
+        int seconds = 5;
+        System.out.println("Countdown started:");
+
+        for (int i = seconds; i >= 1; i--) {
+            System.out.println(i + "...");
+            Thread.sleep(1000);
+        }
+
+        System.out.println("Time is up!");
+    }
+}''',
+
+'''import java.util.Scanner;
+
+public class BmiCalculator {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter weight (kg): ");
+        double weight = scanner.nextDouble();
+        System.out.print("Enter height (m): ");
+        double height = scanner.nextDouble();
+
+        double bmi = weight / (height * height);
+        System.out.printf("Your BMI: %.1f%n", bmi);
+
+        if (bmi < 18.5) {
+            System.out.println("Category: underweight");
+        } else if (bmi < 25) {
+            System.out.println("Category: normal");
+        } else if (bmi < 30) {
+            System.out.println("Category: overweight");
+        } else {
+            System.out.println("Category: obesity");
+        }
+        scanner.close();
+    }
+}''',
+]
+
+
+def main():
+    df = pd.DataFrame({"code": SAMPLES, "label": [1] * len(SAMPLES)})
+    df = df.drop_duplicates(subset=["code"]).reset_index(drop=True)
+    df.to_csv(OUT_PATH, sep=";", index=False, lineterminator="\r\n")
+    print(f"java_ai_generated.csv: {len(df)} примеров ИИ-кода (label=1)")
+
+
+if __name__ == "__main__":
+    main()

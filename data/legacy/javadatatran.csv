@@ -1,0 +1,7014 @@
+code;lable
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Animal;
+
+/**
+ *
+ * @author GIA KINH
+ */
+public class Dog extends Animal{
+
+    public Dog() {
+    }
+
+    public Dog(String name) {
+        super(name);
+    }
+
+    @Override
+    public String toString() {
+        return ""Dog["" + super.toString() +']';
+    } 
+
+    @Override
+    public void greets() {
+        System.out.println(""Woow"");
+    }
+    
+     public void greets(Dog another) {
+        System.out.println(""Woooooow"");
+    }
+    
+}
+";0
+"package Animal;
+
+/**
+ * A dog that woofs, either alone or at another dog.
+ */
+public class Dog extends Animal {
+
+    public Dog() {
+    }
+
+    public Dog(String name) {
+        super(name);
+    }
+
+    @Override
+    public String toString() {
+        return ""Dog["" + super.toString() + ']';
+    }
+
+    @Override
+    public void greets() {
+        System.out.println(""Woow"");
+    }
+
+    public void greets(Dog another) {
+        System.out.println(""Woooooow"");
+    }
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Animal;
+
+/**
+ *
+ * @author GIA KINH
+ */
+public class BigDog extends Dog{
+
+    public BigDog() {
+    }
+
+    public BigDog(String name) {
+        super(name);
+    }
+
+    @Override
+    public String toString() {
+        return ""BigDog["" + super.toString() + ']';
+    }
+   
+    @Override
+    public void greets(Dog another) {
+        System.out.println(""Woooooow"");
+    }
+    
+    public void greets(BigDog another) {
+        System.out.println(""Wooooooooow"");
+    }
+}
+";0
+"package Animal;
+
+/**
+ * A bigger dog with a louder greeting toward other big dogs.
+ */
+public class BigDog extends Dog {
+
+    public BigDog() {
+    }
+
+    public BigDog(String name) {
+        super(name);
+    }
+
+    @Override
+    public String toString() {
+        return ""BigDog["" + super.toString() + ']';
+    }
+
+    @Override
+    public void greets(Dog another) {
+        System.out.println(""Woooooow"");
+    }
+
+    public void greets(BigDog another) {
+        System.out.println(""Wooooooooow"");
+    }
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Animal;
+
+/**
+ *
+ * @author GIA KINH
+ */
+public class TestMain {
+    public static void main(String[] args) {
+         Cat c1 = new Cat(""Niko"");
+        c1.greets();
+        Dog d1 = new Dog(""Rubi"");
+        d1.greets();
+        BigDog bD1 = new BigDog(""Laiso"");
+        
+        Animal a1 = new Cat(""Niko"");
+        a1.greets();
+        Animal a2 = new Dog(""Top"");
+        a2.greets();
+        Animal a3 = new BigDog(""Ky"");
+        a3.greets();
+        
+        Dog d2 = (Dog) a2;
+        BigDog bD2 = (BigDog) a3;
+        Dog d3 = (Dog) a3;
+        
+        d2.greets(d3);
+        d3.greets(d2);
+        
+        d2.greets(bD2);
+        bD2.greets(d2);
+        
+        bD2.greets(bD1);
+        bD1.greets(bD2);
+    }
+}
+";0
+"package Animal;
+
+public class TestMain {
+    public static void main(String[] args) {
+        Cat c1 = new Cat(""Niko"");
+        c1.greets();
+        Dog d1 = new Dog(""Rubi"");
+        d1.greets();
+        BigDog bD1 = new BigDog(""Laiso"");
+
+        Animal a1 = new Cat(""Niko"");
+        a1.greets();
+        Animal a2 = new Dog(""Top"");
+        a2.greets();
+        Animal a3 = new BigDog(""Ky"");
+        a3.greets();
+
+        Dog d2 = (Dog) a2;
+        BigDog bD2 = (BigDog) a3;
+        Dog d3 = (Dog) a3;
+
+        d2.greets(d3);
+        d3.greets(d2);
+
+        d2.greets(bD2);
+        bD2.greets(d2);
+
+        bD2.greets(bD1);
+        bD1.greets(bD2);
+    }
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package AnimalAbstract;
+
+import Animal.*;
+
+/**
+ *
+ * @author GIA KINH
+ */
+abstract public class Animal {
+    public abstract void greeting();
+    
+}
+";0
+"package AnimalAbstract;
+
+import Animal.*;
+
+/**
+ * An abstract animal that must define how it greets.
+ */
+public abstract class Animal {
+    public abstract void greeting();
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package AnimalAbstract;
+
+import Animal.*;
+
+/**
+ *
+ * @author GIA KINH
+ */
+public class Cat extends Animal {
+
+    public Cat() {
+    }
+
+    @Override
+    public String toString() {
+        return ""Cat["" + super.toString() + ']';
+    }
+
+    @Override
+    public void greeting() {
+        System.out.println(""Meow!"");
+    }
+
+}
+";0
+"package AnimalAbstract;
+
+import Animal.*;
+
+/**
+ * A cat that meows.
+ */
+public class Cat extends Animal {
+
+    public Cat() {
+    }
+
+    @Override
+    public String toString() {
+        return ""Cat["" + super.toString() + ']';
+    }
+
+    @Override
+    public void greeting() {
+        System.out.println(""Meow!"");
+    }
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package AnimalAbstract;
+
+import Animal.*;
+
+/**
+ *
+ * @author GIA KINH
+ */
+public class Dog extends Animal {
+
+    public Dog() {
+    }
+
+    @Override
+    public String toString() {
+        return ""Dog["" + super.toString() + ']';
+    }
+
+    @Override
+    public void greeting() {
+        System.out.println(""Woof!"");
+    }
+
+    public void greeting(Dog another) {
+        System.out.println(""Woooooooooof!"");
+    }
+
+}
+";0
+"package AnimalAbstract;
+
+import Animal.*;
+
+/**
+ * A dog that woofs, either alone or at another dog.
+ */
+public class Dog extends Animal {
+
+    public Dog() {
+    }
+
+    @Override
+    public String toString() {
+        return ""Dog["" + super.toString() + ']';
+    }
+
+    @Override
+    public void greeting() {
+        System.out.println(""Woof!"");
+    }
+
+    public void greeting(Dog another) {
+        System.out.println(""Woooooooooof!"");
+    }
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package AnimalAbstract;
+
+import Animal.*;
+
+/**
+ *
+ * @author GIA KINH
+ */
+public class BigDog extends Dog {
+
+    public BigDog() {
+    }
+
+    @Override
+    public String toString() {
+        return ""BigDog["" + super.toString() + ']';
+    }
+
+    @Override
+    public void greeting() {
+        System.out.println(""Woow!"");
+    }
+
+    @Override
+    public void greeting(Dog another) {
+        System.out.println(""Woooooowwwww!"");
+    }
+}
+";0
+"package AnimalAbstract;
+
+import Animal.*;
+
+/**
+ * A bigger dog with a louder greeting.
+ */
+public class BigDog extends Dog {
+
+    public BigDog() {
+    }
+
+    @Override
+    public String toString() {
+        return ""BigDog["" + super.toString() + ']';
+    }
+
+    @Override
+    public void greeting() {
+        System.out.println(""Woow!"");
+    }
+
+    @Override
+    public void greeting(Dog another) {
+        System.out.println(""Woooooowwwww!"");
+    }
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package AnimalAbstract;
+
+import Animal.*;
+
+/**
+ *
+ * @author GIA KINH
+ */
+public class TestMain {
+
+    public static void main(String[] args) {
+        // Using the subclasses
+        Cat cat1 = new Cat();
+        cat1.greeting();
+        Dog dog1 = new Dog();
+        dog1.greeting();
+        BigDog bigDog1 = new BigDog();
+        bigDog1.greeting();
+
+        // Using Polymorphism
+        Animal animal1 = new Cat();
+        animal1.greeting();
+        Animal animal2 = new Dog();
+        animal2.greeting();
+        Animal animal3 = new BigDog();
+        animal3.greeting();
+        // Animal animal4 = new Animal();   // Error!!! Animal is abstract; cannot be instantiated !
+
+        // Downcast
+        Dog dog2 = (Dog)animal2;
+        BigDog bigDog2 = (BigDog)animal3;
+        Dog dog3 = (Dog)animal3;
+        // Cat cat2 = (Cat)animal2;        // Error!!! Dog cannot be cast to Cat !
+
+        dog2.greeting(dog3);
+        dog3.greeting(dog2);
+        dog2.greeting(bigDog2);
+        bigDog2.greeting(dog2);
+        bigDog2.greeting(bigDog1);
+
+        bigDog1.greeting(bigDog2);
+    }
+}
+";0
+"package AnimalAbstract;
+
+import Animal.*;
+
+public class TestMain {
+
+    public static void main(String[] args) {
+        Cat cat1 = new Cat();
+        cat1.greeting();
+        Dog dog1 = new Dog();
+        dog1.greeting();
+        BigDog bigDog1 = new BigDog();
+        bigDog1.greeting();
+
+        Animal animal1 = new Cat();
+        animal1.greeting();
+        Animal animal2 = new Dog();
+        animal2.greeting();
+        Animal animal3 = new BigDog();
+        animal3.greeting();
+
+        Dog dog2 = (Dog) animal2;
+        BigDog bigDog2 = (BigDog) animal3;
+        Dog dog3 = (Dog) animal3;
+
+        dog2.greeting(dog3);
+        dog3.greeting(dog2);
+        dog2.greeting(bigDog2);
+        bigDog2.greeting(dog2);
+        bigDog2.greeting(bigDog1);
+
+        bigDog1.greeting(bigDog2);
+    }
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package GeometricObject;
+
+/**
+ *
+ * @author GIA KINH
+ */
+public interface GeometricObject {
+    public double getArea();
+    public double getPerimeter();
+}
+";0
+"package GeometricObject;
+
+/**
+ * Contract for any shape that can report area and perimeter.
+ */
+public interface GeometricObject {
+    double getArea();
+
+    double getPerimeter();
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package GeometricObject;
+
+/**
+ *
+ * @author GIA KINH
+ */
+public class Circle implements GeometricObject{
+
+    private double radius;
+
+    public Circle(double radius) {
+        this.radius = radius;
+    }
+
+    public Circle() {
+    }
+
+    public double getRadius() {
+        return radius;
+    }
+
+    public void setRadius(double radius) {
+        this.radius = radius;
+    }
+
+    @Override
+    public String toString() {
+        return ""Circle["" + ""radius="" + radius + ']';
+    }
+    
+    
+    
+    @Override
+    public double getArea() {
+        return radius*radius*Math.PI;
+    }
+
+    @Override
+    public double getPerimeter() {
+        return radius*2*Math.PI;
+    }
+    
+}
+";0
+"package GeometricObject;
+
+/**
+ * A circle implementing GeometricObject.
+ */
+public class Circle implements GeometricObject {
+
+    private double radius;
+
+    public Circle(double radius) {
+        this.radius = radius;
+    }
+
+    public Circle() {
+    }
+
+    public double getRadius() {
+        return radius;
+    }
+
+    public void setRadius(double radius) {
+        this.radius = radius;
+    }
+
+    @Override
+    public String toString() {
+        return ""Circle[radius="" + radius + ']';
+    }
+
+    @Override
+    public double getArea() {
+        return Math.PI * radius * radius;
+    }
+
+    @Override
+    public double getPerimeter() {
+        return 2 * Math.PI * radius;
+    }
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package GeometricObject;
+
+/**
+ *
+ * @author GIA KINH
+ */
+public class Rectangle implements GeometricObject{
+    private double width;
+    private double length;
+
+    public Rectangle() {
+    }
+
+    public Rectangle(double width, double length) {
+        this.width = width;
+        this.length = length;
+    }
+
+    public double getWidth() {
+        return width;
+    }
+
+    public void setWidth(double width) {
+        this.width = width;
+    }
+
+    public double getLength() {
+        return length;
+    }
+
+    public void setLength(double length) {
+        this.length = length;
+    }
+
+    @Override
+    public String toString() {
+        return ""Rectangle["" + ""width="" + width + "",length="" + length + ']';
+    }
+
+    @Override
+    public double getArea() {
+        return length*width;
+    }
+
+    @Override
+    public double getPerimeter() {
+        return (width+length)*2;
+    }
+    
+    
+}
+";0
+"package GeometricObject;
+
+/**
+ * A rectangle implementing GeometricObject.
+ */
+public class Rectangle implements GeometricObject {
+    private double width;
+    private double length;
+
+    public Rectangle() {
+    }
+
+    public Rectangle(double width, double length) {
+        this.width = width;
+        this.length = length;
+    }
+
+    public double getWidth() {
+        return width;
+    }
+
+    public void setWidth(double width) {
+        this.width = width;
+    }
+
+    public double getLength() {
+        return length;
+    }
+
+    public void setLength(double length) {
+        this.length = length;
+    }
+
+    @Override
+    public String toString() {
+        return ""Rectangle[width="" + width + "",length="" + length + ']';
+    }
+
+    @Override
+    public double getArea() {
+        return length * width;
+    }
+
+    @Override
+    public double getPerimeter() {
+        return (width + length) * 2;
+    }
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package GeometricObject;
+
+/**
+ *
+ * @author GIA KINH
+ */
+public class TestMain {
+    public static void main(String[] args) {
+        GeometricObject c1;
+        c1 = new Circle(1);
+        System.out.println(c1);
+        
+        GeometricObject c2;
+        c2 = new Circle(2);
+        System.out.println(c2);
+        System.out.println(""Area: "" + c2.getArea());
+        System.out.println(""Perimeter: "" + c2.getPerimeter());
+        
+        GeometricObject r1;
+        r1 = new Rectangle(1, 2);
+        System.out.println(r1);
+        GeometricObject r2;
+        r2 = new Rectangle(3, 4);
+        System.out.println(r2);
+        System.out.println(""Area: "" + r2.getArea());
+        System.out.println(""Perimeter: "" + r2.getPerimeter());
+    }
+}
+";0
+"package GeometricObject;
+
+public class TestMain {
+    public static void main(String[] args) {
+        GeometricObject c1;
+        c1 = new Circle(1);
+        System.out.println(c1);
+
+        GeometricObject c2;
+        c2 = new Circle(2);
+        System.out.println(c2);
+        System.out.println(""Area: "" + c2.getArea());
+        System.out.println(""Perimeter: "" + c2.getPerimeter());
+
+        GeometricObject r1;
+        r1 = new Rectangle(1, 2);
+        System.out.println(r1);
+        GeometricObject r2;
+        r2 = new Rectangle(3, 4);
+        System.out.println(r2);
+        System.out.println(""Area: "" + r2.getArea());
+        System.out.println(""Perimeter: "" + r2.getPerimeter());
+    }
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package MovableCircle;
+
+import MovablePoint.*;
+
+/**
+ *
+ * @author GIA KINH
+ */
+public interface Movable {
+    public abstract void moveUp();
+    public abstract void moveDown();
+    public abstract void moveLeft();
+    public abstract void moveRight();
+}
+";0
+"package MovableCircle;
+
+import MovablePoint.*;
+
+/**
+ * Contract for anything that can move in 4 directions.
+ */
+public interface Movable {
+    void moveUp();
+
+    void moveDown();
+
+    void moveLeft();
+
+    void moveRight();
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package MovableCircle;
+
+import MovablePoint.*;
+
+/**
+ *
+ * @author GIA KINH
+ */
+public class MovablePoint implements Movable{
+    private int x;
+    private int y;
+    private int xSpeed;
+    private int ySpeed;
+
+    public MovablePoint() {
+    }
+
+    public MovablePoint(int x, int y, int xSpeed, int ySpeed) {
+        this.x = x;
+        this.y = y;
+        this.xSpeed = xSpeed;
+        this.ySpeed = ySpeed;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public int getxSpeed() {
+        return xSpeed;
+    }
+
+    public void setxSpeed(int xSpeed) {
+        this.xSpeed = xSpeed;
+    }
+
+    public int getySpeed() {
+        return ySpeed;
+    }
+
+    public void setySpeed(int ySpeed) {
+        this.ySpeed = ySpeed;
+    }
+
+    @Override
+    public String toString() {
+        return ""("" + x + "","" + y + "") speed="" + xSpeed + "","" + ySpeed + ')';
+    }
+
+    @Override
+    public void moveUp() {
+       this.y-=this.ySpeed;
+    }
+
+    @Override
+    public void moveDown() {
+        this.y+=this.ySpeed;
+    }
+
+    @Override
+    public void moveLeft() {
+        this.x-=this.xSpeed;
+    }
+
+    @Override
+    public void moveRight() {
+        this.x+=this.xSpeed;
+    }
+}
+";0
+"package MovableCircle;
+
+import MovablePoint.*;
+
+/**
+ * A point with velocity that implements Movable.
+ */
+public class MovablePoint implements Movable {
+    private int x;
+    private int y;
+    private int xSpeed;
+    private int ySpeed;
+
+    public MovablePoint() {
+    }
+
+    public MovablePoint(int x, int y, int xSpeed, int ySpeed) {
+        this.x = x;
+        this.y = y;
+        this.xSpeed = xSpeed;
+        this.ySpeed = ySpeed;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public int getxSpeed() {
+        return xSpeed;
+    }
+
+    public void setxSpeed(int xSpeed) {
+        this.xSpeed = xSpeed;
+    }
+
+    public int getySpeed() {
+        return ySpeed;
+    }
+
+    public void setySpeed(int ySpeed) {
+        this.ySpeed = ySpeed;
+    }
+
+    @Override
+    public String toString() {
+        // mirrors the original's mismatched-parens formatting
+        return ""("" + x + "","" + y + "") speed="" + xSpeed + "","" + ySpeed + ')';
+    }
+
+    @Override
+    public void moveUp() {
+        y -= ySpeed;
+    }
+
+    @Override
+    public void moveDown() {
+        y += ySpeed;
+    }
+
+    @Override
+    public void moveLeft() {
+        x -= xSpeed;
+    }
+
+    @Override
+    public void moveRight() {
+        x += xSpeed;
+    }
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package MovableCircle;
+
+/**
+ *
+ * @author GIA KINH
+ */
+public class MovableCircle implements Movable{
+    private int radius;
+    private MovablePoint center;
+
+    public MovableCircle() {
+    }
+
+    public MovableCircle(int radius, MovablePoint center) {
+        this.radius = radius;
+        this.center = center;
+    }
+    
+    public MovableCircle(int x, int y, int xSpeed, int ySpeed,int radius) {
+        this.radius = radius;
+        this.center = new MovablePoint(x, y, xSpeed, ySpeed);
+    }
+
+    public int getRadius() {
+        return radius;
+    }
+
+    public void setRadius(int radius) {
+        this.radius = radius;
+    }
+
+    public MovablePoint getCenter() {
+        return center;
+    }
+
+    public void setCenter(MovablePoint center) {
+        this.center = center;
+    }
+
+    @Override
+    public String toString() {
+        return  center + "",radius="" + radius;
+    }
+
+    @Override
+    public void moveUp() {
+       this.center.setY(this.center.getY()-this.center.getySpeed());
+    }
+
+    @Override
+    public void moveDown() {
+        this.center.setY(this.center.getY()+this.center.getySpeed());
+    }
+
+    @Override
+    public void moveLeft() {
+        this.center.setX(this.center.getX()-this.center.getxSpeed());
+    }
+
+    @Override
+    public void moveRight() {
+        this.center.setX(this.center.getX()+this.center.getxSpeed());
+    } 
+}
+";0
+"package MovableCircle;
+
+/**
+ * A circle whose center is a MovablePoint, implementing Movable.
+ */
+public class MovableCircle implements Movable {
+    private int radius;
+    private MovablePoint center;
+
+    public MovableCircle() {
+    }
+
+    public MovableCircle(int radius, MovablePoint center) {
+        this.radius = radius;
+        this.center = center;
+    }
+
+    public MovableCircle(int x, int y, int xSpeed, int ySpeed, int radius) {
+        this.radius = radius;
+        this.center = new MovablePoint(x, y, xSpeed, ySpeed);
+    }
+
+    public int getRadius() {
+        return radius;
+    }
+
+    public void setRadius(int radius) {
+        this.radius = radius;
+    }
+
+    public MovablePoint getCenter() {
+        return center;
+    }
+
+    public void setCenter(MovablePoint center) {
+        this.center = center;
+    }
+
+    @Override
+    public String toString() {
+        return center + "",radius="" + radius;
+    }
+
+    @Override
+    public void moveUp() {
+        center.setY(center.getY() - center.getySpeed());
+    }
+
+    @Override
+    public void moveDown() {
+        center.setY(center.getY() + center.getySpeed());
+    }
+
+    @Override
+    public void moveLeft() {
+        center.setX(center.getX() - center.getxSpeed());
+    }
+
+    @Override
+    public void moveRight() {
+        center.setX(center.getX() + center.getxSpeed());
+    }
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package MovableCircle;
+
+/**
+ *
+ * @author GIA KINH
+ */
+public class TestMain {
+
+    public static void main(String[] args) {
+        Movable m1 = new MovablePoint(5, 6, 10, 15);     // upcast
+        System.out.println(m1);
+        m1.moveLeft();
+        System.out.println(m1);
+
+        Movable m2 = new MovableCircle(1, 2, 3, 4, 20);  // upcast
+        System.out.println(m2);
+        m2.moveRight();
+        System.out.println(m2);
+    }
+}
+";0
+"package MovableCircle;
+
+public class TestMain {
+
+    public static void main(String[] args) {
+        Movable m1 = new MovablePoint(5, 6, 10, 15);
+        System.out.println(m1);
+        m1.moveLeft();
+        System.out.println(m1);
+
+        Movable m2 = new MovableCircle(1, 2, 3, 4, 20);
+        System.out.println(m2);
+        m2.moveRight();
+        System.out.println(m2);
+    }
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package MovablePoint;
+
+/**
+ *
+ * @author GIA KINH
+ */
+public interface Movable {
+    public abstract void moveUp();
+    public abstract void moveDown();
+    public abstract void moveLeft();
+    public abstract void moveRight();
+}
+";0
+"package MovablePoint;
+
+/**
+ * Contract for anything that can move in 4 directions.
+ */
+public interface Movable {
+    void moveUp();
+
+    void moveDown();
+
+    void moveLeft();
+
+    void moveRight();
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package MovablePoint;
+
+/**
+ *
+ * @author GIA KINH
+ */
+public class MovablePoint implements Movable{
+    private int x;
+    private int y;
+    private int xSpeed;
+    private int ySpeed;
+
+    public MovablePoint() {
+    }
+
+    public MovablePoint(int x, int y, int xSpeed, int ySpeed) {
+        this.x = x;
+        this.y = y;
+        this.xSpeed = xSpeed;
+        this.ySpeed = ySpeed;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public int getxSpeed() {
+        return xSpeed;
+    }
+
+    public void setxSpeed(int xSpeed) {
+        this.xSpeed = xSpeed;
+    }
+
+    public int getySpeed() {
+        return ySpeed;
+    }
+
+    public void setySpeed(int ySpeed) {
+        this.ySpeed = ySpeed;
+    }
+
+    @Override
+    public String toString() {
+        return ""("" + x + "","" + y + "") speed="" + xSpeed + "","" + ySpeed + ')';
+    }
+
+    @Override
+    public void moveUp() {
+       this.y-=this.ySpeed;
+    }
+
+    @Override
+    public void moveDown() {
+        this.y+=this.ySpeed;
+    }
+
+    @Override
+    public void moveLeft() {
+        this.x-=this.xSpeed;
+    }
+
+    @Override
+    public void moveRight() {
+        this.x+=this.xSpeed;
+    }
+}
+";0
+"package MovablePoint;
+
+/**
+ * A point with velocity that implements Movable.
+ */
+public class MovablePoint implements Movable {
+    private int x;
+    private int y;
+    private int xSpeed;
+    private int ySpeed;
+
+    public MovablePoint() {
+    }
+
+    public MovablePoint(int x, int y, int xSpeed, int ySpeed) {
+        this.x = x;
+        this.y = y;
+        this.xSpeed = xSpeed;
+        this.ySpeed = ySpeed;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public int getxSpeed() {
+        return xSpeed;
+    }
+
+    public void setxSpeed(int xSpeed) {
+        this.xSpeed = xSpeed;
+    }
+
+    public int getySpeed() {
+        return ySpeed;
+    }
+
+    public void setySpeed(int ySpeed) {
+        this.ySpeed = ySpeed;
+    }
+
+    @Override
+    public String toString() {
+        return ""("" + x + "","" + y + "") speed="" + xSpeed + "","" + ySpeed + ')';
+    }
+
+    @Override
+    public void moveUp() {
+        y -= ySpeed;
+    }
+
+    @Override
+    public void moveDown() {
+        y += ySpeed;
+    }
+
+    @Override
+    public void moveLeft() {
+        x -= xSpeed;
+    }
+
+    @Override
+    public void moveRight() {
+        x += xSpeed;
+    }
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package MovablePoint;
+
+/**
+ *
+ * @author GIA KINH
+ */
+public class TestMain {
+    public static void main(String[] args) {
+        
+    }
+}
+";0
+"package MovablePoint;
+
+public class TestMain {
+    public static void main(String[] args) {
+    }
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package MovableRectangle;
+
+import MovableCircle.*;
+import MovablePoint.*;
+
+/**
+ *
+ * @author GIA KINH
+ */
+public interface Movable {
+    public abstract void moveUp();
+    public abstract void moveDown();
+    public abstract void moveLeft();
+    public abstract void moveRight();
+}
+";0
+"package MovableRectangle;
+
+import MovableCircle.*;
+import MovablePoint.*;
+
+/**
+ * Contract for anything that can move in 4 directions.
+ */
+public interface Movable {
+    void moveUp();
+
+    void moveDown();
+
+    void moveLeft();
+
+    void moveRight();
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package MovableRectangle;
+
+import MovableCircle.*;
+import MovablePoint.*;
+
+/**
+ *
+ * @author GIA KINH
+ */
+public class MovablePoint implements Movable{
+    private int x;
+    private int y;
+    private int xSpeed;
+    private int ySpeed;
+
+    public MovablePoint() {
+    }
+
+    public MovablePoint(int x, int y, int xSpeed, int ySpeed) {
+        this.x = x;
+        this.y = y;
+        this.xSpeed = xSpeed;
+        this.ySpeed = ySpeed;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public int getxSpeed() {
+        return xSpeed;
+    }
+
+    public void setxSpeed(int xSpeed) {
+        this.xSpeed = xSpeed;
+    }
+
+    public int getySpeed() {
+        return ySpeed;
+    }
+
+    public void setySpeed(int ySpeed) {
+        this.ySpeed = ySpeed;
+    }
+
+    @Override
+    public String toString() {
+        return ""("" + x + "","" + y + "") speed="" + xSpeed + "","" + ySpeed + ')';
+    }
+
+    @Override
+    public void moveUp() {
+       this.y-=this.ySpeed;
+    }
+
+    @Override
+    public void moveDown() {
+        this.y+=this.ySpeed;
+    }
+
+    @Override
+    public void moveLeft() {
+        this.x-=this.xSpeed;
+    }
+
+    @Override
+    public void moveRight() {
+        this.x+=this.xSpeed;
+    }
+}
+";0
+"package MovableRectangle;
+
+import MovableCircle.*;
+import MovablePoint.*;
+
+/**
+ * A point with velocity that implements Movable.
+ */
+public class MovablePoint implements Movable {
+    private int x;
+    private int y;
+    private int xSpeed;
+    private int ySpeed;
+
+    public MovablePoint() {
+    }
+
+    public MovablePoint(int x, int y, int xSpeed, int ySpeed) {
+        this.x = x;
+        this.y = y;
+        this.xSpeed = xSpeed;
+        this.ySpeed = ySpeed;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public int getxSpeed() {
+        return xSpeed;
+    }
+
+    public void setxSpeed(int xSpeed) {
+        this.xSpeed = xSpeed;
+    }
+
+    public int getySpeed() {
+        return ySpeed;
+    }
+
+    public void setySpeed(int ySpeed) {
+        this.ySpeed = ySpeed;
+    }
+
+    @Override
+    public String toString() {
+        return ""("" + x + "","" + y + "") speed="" + xSpeed + "","" + ySpeed + ')';
+    }
+
+    @Override
+    public void moveUp() {
+        y -= ySpeed;
+    }
+
+    @Override
+    public void moveDown() {
+        y += ySpeed;
+    }
+
+    @Override
+    public void moveLeft() {
+        x -= xSpeed;
+    }
+
+    @Override
+    public void moveRight() {
+        x += xSpeed;
+    }
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package MovableRectangle;
+
+/**
+ *
+ * @author GIA KINH
+ */
+public class MovableRectangle implements Movable {
+
+    private MovablePoint topLeft;
+    private MovablePoint bottomRight;
+
+    public MovableRectangle() {
+    }
+
+    public MovableRectangle(MovablePoint topLeft, MovablePoint bottomRight) {
+        this.topLeft = topLeft;
+        this.bottomRight = bottomRight;
+    }
+
+    public MovablePoint getTopLeft() {
+        return topLeft;
+    }
+
+    public void setTopLeft(MovablePoint topLeft) {
+        this.topLeft = topLeft;
+    }
+
+    public MovablePoint getBottomRight() {
+        return bottomRight;
+    }
+
+    public void setBottomRight(MovablePoint bottomRight) {
+        this.bottomRight = bottomRight;
+    }
+
+    @Override
+    public String toString() {
+        return ""MovableRectangle["" + ""topLeft="" + topLeft + "",bottomRight="" + bottomRight + ']';
+    }
+
+    @Override
+    public void moveUp() {
+        this.topLeft.setY(this.topLeft.getY() - this.topLeft.getySpeed());
+        this.bottomRight.setY(this.bottomRight.getY() - this.bottomRight.getySpeed());
+    }
+
+    @Override
+    public void moveDown() {
+        this.topLeft.setY(this.topLeft.getY() + this.topLeft.getySpeed());
+        this.bottomRight.setY(this.bottomRight.getY() + this.bottomRight.getySpeed());
+    }
+
+    @Override
+    public void moveLeft() {
+        this.topLeft.setX(this.topLeft.getX() - this.topLeft.getxSpeed());
+        this.bottomRight.setX(this.bottomRight.getX() - this.bottomRight.getxSpeed());
+    }
+
+    @Override
+    public void moveRight() {
+        this.topLeft.setX(this.topLeft.getX() + this.topLeft.getxSpeed());
+        this.bottomRight.setX(this.bottomRight.getX() + this.bottomRight.getxSpeed());
+    }
+
+}
+";0
+"package MovableRectangle;
+
+/**
+ * A rectangle whose two corners are MovablePoints, implementing Movable.
+ */
+public class MovableRectangle implements Movable {
+
+    private MovablePoint topLeft;
+    private MovablePoint bottomRight;
+
+    public MovableRectangle() {
+    }
+
+    public MovableRectangle(MovablePoint topLeft, MovablePoint bottomRight) {
+        this.topLeft = topLeft;
+        this.bottomRight = bottomRight;
+    }
+
+    public MovablePoint getTopLeft() {
+        return topLeft;
+    }
+
+    public void setTopLeft(MovablePoint topLeft) {
+        this.topLeft = topLeft;
+    }
+
+    public MovablePoint getBottomRight() {
+        return bottomRight;
+    }
+
+    public void setBottomRight(MovablePoint bottomRight) {
+        this.bottomRight = bottomRight;
+    }
+
+    @Override
+    public String toString() {
+        return ""MovableRectangle[topLeft="" + topLeft + "",bottomRight="" + bottomRight + ']';
+    }
+
+    @Override
+    public void moveUp() {
+        topLeft.setY(topLeft.getY() - topLeft.getySpeed());
+        bottomRight.setY(bottomRight.getY() - bottomRight.getySpeed());
+    }
+
+    @Override
+    public void moveDown() {
+        topLeft.setY(topLeft.getY() + topLeft.getySpeed());
+        bottomRight.setY(bottomRight.getY() + bottomRight.getySpeed());
+    }
+
+    @Override
+    public void moveLeft() {
+        topLeft.setX(topLeft.getX() - topLeft.getxSpeed());
+        bottomRight.setX(bottomRight.getX() - bottomRight.getxSpeed());
+    }
+
+    @Override
+    public void moveRight() {
+        topLeft.setX(topLeft.getX() + topLeft.getxSpeed());
+        bottomRight.setX(bottomRight.getX() + bottomRight.getxSpeed());
+    }
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package MovableRectangle;
+
+import MovableCircle.*;
+
+/**
+ *
+ * @author GIA KINH
+ */
+public class TestMain {
+
+    public static void main(String[] args) {
+        
+    }
+}
+";0
+"package MovableRectangle;
+
+import MovableCircle.*;
+
+public class TestMain {
+
+    public static void main(String[] args) {
+    }
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Resizable;
+
+import GeometricObject.*;
+
+/**
+ *
+ * @author GIA KINH
+ */
+public interface GeometricObject {
+    public double getArea();
+    public double getPerimeter();
+}
+";0
+"package Resizable;
+
+import GeometricObject.*;
+
+/**
+ * Contract for any shape that can report area and perimeter.
+ */
+public interface GeometricObject {
+    double getArea();
+
+    double getPerimeter();
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Resizable;
+
+/**
+ *
+ * @author GIA KINH
+ */
+public interface Resizable {
+    public abstract void resize(int percent);
+}
+";0
+"package Resizable;
+
+/**
+ * Contract for anything that can be resized by a percentage.
+ */
+public interface Resizable {
+    void resize(int percent);
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Resizable;
+
+import GeometricObject.*;
+
+/**
+ *
+ * @author GIA KINH
+ */
+public class Circle implements GeometricObject{
+
+    protected double radius;
+
+    public Circle(double radius) {
+        this.radius = radius;
+    }
+
+    public Circle() {
+    }
+
+    public double getRadius() {
+        return radius;
+    }
+
+    public void setRadius(double radius) {
+        this.radius = radius;
+    }
+
+    @Override
+    public String toString() {
+        return ""Circle["" + ""radius="" + radius + ']';
+    }
+    
+    
+    
+    @Override
+    public double getArea() {
+        return radius*radius*Math.PI;
+    }
+
+    @Override
+    public double getPerimeter() {
+        return radius*2*Math.PI;
+    }
+    
+}
+";0
+"package Resizable;
+
+import GeometricObject.*;
+
+/**
+ * A circle implementing GeometricObject.
+ */
+public class Circle implements GeometricObject {
+
+    protected double radius;
+
+    public Circle(double radius) {
+        this.radius = radius;
+    }
+
+    public Circle() {
+    }
+
+    public double getRadius() {
+        return radius;
+    }
+
+    public void setRadius(double radius) {
+        this.radius = radius;
+    }
+
+    @Override
+    public String toString() {
+        return ""Circle[radius="" + radius + ']';
+    }
+
+    @Override
+    public double getArea() {
+        return Math.PI * radius * radius;
+    }
+
+    @Override
+    public double getPerimeter() {
+        return 2 * Math.PI * radius;
+    }
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Resizable;
+
+/**
+ *
+ * @author GIA KINH
+ */
+public class ResizableCircle extends Circle implements Resizable{
+
+    public ResizableCircle(double radius) {
+        super(radius);
+    }
+
+    public ResizableCircle() {
+    }
+
+    @Override
+    public String toString() {
+        return ""ResizableCircle["" + super.toString() +']';
+    }
+
+    
+    
+    @Override
+    public void resize(int percent) {
+        radius *= percent/100;
+    }
+    
+}
+";0
+"package Resizable;
+
+/**
+ * A circle that can be resized by a percentage.
+ */
+public class ResizableCircle extends Circle implements Resizable {
+
+    public ResizableCircle(double radius) {
+        super(radius);
+    }
+
+    public ResizableCircle() {
+    }
+
+    @Override
+    public String toString() {
+        return ""ResizableCircle["" + super.toString() + ']';
+    }
+
+    @Override
+    public void resize(int percent) {
+        // mirrors the original's integer-division bug: percent/100 truncates to 0
+        radius *= percent / 100;
+    }
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Resizable;
+
+/**
+ *
+ * @author GIA KINH
+ */
+public class TestMain {
+    public static void main(String[] args) {
+         GeometricObject g1 = new Circle(1.2);
+        System.out.println(g1);
+        System.out.println(""Perimeter = ""+g1.getPerimeter());
+        System.out.println(""Area = ""+ g1.getArea());
+
+        Resizable g2 = new ResizableCircle(3.4);
+        System.out.println(g2);
+        g2.resize(56);
+        System.out.println(g2);
+        
+
+        GeometricObject g3 = (GeometricObject) g2;
+        System.out.println(g3);
+        System.out.println(""Perimeter = ""+g3.getPerimeter());
+        System.out.println(""Area = ""+g3.getArea());
+    }
+}
+";0
+"package Resizable;
+
+public class TestMain {
+    public static void main(String[] args) {
+        GeometricObject g1 = new Circle(1.2);
+        System.out.println(g1);
+        System.out.println(""Perimeter = "" + g1.getPerimeter());
+        System.out.println(""Area = "" + g1.getArea());
+
+        Resizable g2 = new ResizableCircle(3.4);
+        System.out.println(g2);
+        g2.resize(56);
+        System.out.println(g2);
+
+        GeometricObject g3 = (GeometricObject) g2;
+        System.out.println(g3);
+        System.out.println(""Perimeter = "" + g3.getPerimeter());
+        System.out.println(""Area = "" + g3.getArea());
+    }
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Shape;
+
+/**
+ *
+ * @author GIA KINH
+ */
+public abstract class Shape {
+
+    protected String color = ""red"";
+    protected boolean filled = true;
+
+    public Shape() {
+    }
+
+    public Shape(String color, boolean filled) {
+        this.color = color;
+        this.filled = filled;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public boolean isFilled() {
+        return filled;
+    }
+
+    public void setFilled(boolean filled) {
+        this.filled = filled;
+    }
+
+    public abstract double getArea();
+    
+    public abstract double getPerimeter();
+    
+    
+    @Override
+    public String toString() {
+        return ""Shape["" + ""color="" + color + "",filled="" + filled + ']';
+    }
+}
+";0
+"package Shape;
+
+/**
+ * Abstract base shape: a color and whether it is filled.
+ */
+public abstract class Shape {
+
+    protected String color = ""red"";
+    protected boolean filled = true;
+
+    public Shape() {
+    }
+
+    public Shape(String color, boolean filled) {
+        this.color = color;
+        this.filled = filled;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public boolean isFilled() {
+        return filled;
+    }
+
+    public void setFilled(boolean filled) {
+        this.filled = filled;
+    }
+
+    public abstract double getArea();
+
+    public abstract double getPerimeter();
+
+    @Override
+    public String toString() {
+        return ""Shape[color="" + color + "",filled="" + filled + ']';
+    }
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Shape;
+
+/**
+ *
+ * @author GIA KINH
+ */
+public class Circle extends Shape{
+    protected double radius=1.0;
+
+    public Circle() {
+    }
+    
+    public Circle(double radius) {
+        this.radius = radius;
+    }
+
+    public Circle(double radius, String color, boolean filled) {
+        super(color, filled);
+        this.radius = radius;
+    }
+    
+    public double getArea(){
+        return this.radius*this.radius*Math.PI;
+    }
+    
+    public double getPerimeter(){
+        return this.radius*2*Math.PI;
+    }
+
+    @Override
+    public String toString() {
+        return ""Circle[""+ super.toString() + "",radius="" + radius + ']';
+    }
+
+    public void setRadius(int radius) {
+         this.radius = radius;//To change body of generated methods, choose Tools | Templates.
+    }
+}
+";0
+"package Shape;
+
+/**
+ * A circle shape.
+ */
+public class Circle extends Shape {
+    protected double radius = 1.0;
+
+    public Circle() {
+    }
+
+    public Circle(double radius) {
+        this.radius = radius;
+    }
+
+    public Circle(double radius, String color, boolean filled) {
+        super(color, filled);
+        this.radius = radius;
+    }
+
+    public double getArea() {
+        return Math.PI * radius * radius;
+    }
+
+    public double getPerimeter() {
+        return 2 * Math.PI * radius;
+    }
+
+    @Override
+    public String toString() {
+        return ""Circle["" + super.toString() + "",radius="" + radius + ']';
+    }
+
+    public void setRadius(int radius) {
+        this.radius = radius;
+    }
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Shape;
+
+/**
+ *
+ * @author GIA KINH
+ */
+public class Rectangle extends Shape{
+    protected double width;
+    protected double length;
+
+    public Rectangle() {
+    }
+
+    public Rectangle(double width, double length) {
+        this.width = width;
+        this.length = length;
+    }
+
+    public Rectangle(double width, double length, String color, boolean filled) {
+        super(color, filled);
+        this.width = width;
+        this.length = length;
+    }
+
+    public double getWidth() {
+        return width;
+    }
+
+    public void setWidth(double width) {
+        this.width = width;
+    }
+
+    public double getLength() {
+        return length;
+    }
+
+    public void setLength(double length) {
+        this.length = length;
+    }
+    
+    public double getArea(){
+        return this.length*this.width;
+    }
+    
+    public double getPerimeter(){
+        return (this.length+this.width)*2;
+    }
+
+    @Override
+    public String toString() {
+        return ""Rectangle[""+ super.toString() + "",width="" + width + "", length="" + length + ']';
+    }
+    
+    
+}
+";0
+"package Shape;
+
+/**
+ * A rectangle shape.
+ */
+public class Rectangle extends Shape {
+    protected double width;
+    protected double length;
+
+    public Rectangle() {
+    }
+
+    public Rectangle(double width, double length) {
+        this.width = width;
+        this.length = length;
+    }
+
+    public Rectangle(double width, double length, String color, boolean filled) {
+        super(color, filled);
+        this.width = width;
+        this.length = length;
+    }
+
+    public double getWidth() {
+        return width;
+    }
+
+    public void setWidth(double width) {
+        this.width = width;
+    }
+
+    public double getLength() {
+        return length;
+    }
+
+    public void setLength(double length) {
+        this.length = length;
+    }
+
+    public double getArea() {
+        return length * width;
+    }
+
+    public double getPerimeter() {
+        return (length + width) * 2;
+    }
+
+    @Override
+    public String toString() {
+        return ""Rectangle["" + super.toString() + "",width="" + width + "", length="" + length + ']';
+    }
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Shape;
+
+/**
+ *
+ * @author GIA KINH
+ */
+public class Square extends Rectangle{
+
+    public Square() {
+    }
+
+    public Square(double side) {
+        super(side, side);
+    }
+
+    public Square(double side, String color, boolean filled) {
+        super(side, side, color, filled);
+    }
+    
+    public double getSide(){
+        return this.getLength();
+    }
+    
+    public void setWidth(double side){
+        super.setWidth(side);
+        super.setLength(side);
+    }
+    
+    public void setLength(double side){
+        super.setWidth(side);
+        super.setLength(side);
+    }
+    
+    @Override
+    public String toString(){
+        return ""Square[""+super.toString()+""]"";
+    }
+}
+";0
+"package Shape;
+
+/**
+ * A square, implemented as a Rectangle with equal sides.
+ */
+public class Square extends Rectangle {
+
+    public Square() {
+    }
+
+    public Square(double side) {
+        super(side, side);
+    }
+
+    public Square(double side, String color, boolean filled) {
+        super(side, side, color, filled);
+    }
+
+    public double getSide() {
+        return getLength();
+    }
+
+    public void setWidth(double side) {
+        super.setWidth(side);
+        super.setLength(side);
+    }
+
+    public void setLength(double side) {
+        super.setWidth(side);
+        super.setLength(side);
+    }
+
+    @Override
+    public String toString() {
+        return ""Square["" + super.toString() + ""]"";
+    }
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Shape;
+
+/**
+ *
+ * @author GIA KINH
+ */
+public class TestMain {
+
+    public static void main(String[] args) {
+        Circle c1 = new Circle();
+        System.out.println(c1);
+        Circle c2 = new Circle(1);
+        System.out.println(c2);
+        Circle c3 = new Circle(2, ""black"", true);
+        System.out.println(c3);
+
+        c1.setColor(""yellow"");
+        c1.setFilled(false);
+        c1.setRadius(3);
+        System.out.println(c1);
+        System.out.println(""Area: "" + c1.getArea());
+        System.out.println(""Perimeter: "" + c1.getPerimeter());
+
+        Rectangle r1 = new Rectangle();
+        System.out.println(r1);
+        Rectangle r2 = new Rectangle(1, 2);
+        System.out.println(r2);
+        Rectangle r3 = new Rectangle(3, 4, ""black"", true);
+        System.out.println(r3);
+
+        r1.setColor(""yellow"");
+        r1.setFilled(false);
+        r1.setLength(5);
+        r1.setWidth(6);
+        System.out.println(r1);
+        System.out.println(""Area: "" + r1.getArea());
+        System.out.println(""Perimeter: "" + r1.getPerimeter());
+
+        Square s1 = new Square();
+        System.out.println(s1);
+        Square s2 = new Square(1);
+        System.out.println(s2);
+        Square s3 = new Square(3, ""black"", true);
+        System.out.println(s3);
+
+        s1.setColor(""yellow"");
+        s1.setFilled(false);
+        s1.setLength(5);
+        System.out.println(s1);
+        System.out.println(""Area: "" + s1.getArea());
+        System.out.println(""Perimeter: "" + s1.getPerimeter());
+    }
+}
+";0
+"package Shape;
+
+public class TestMain {
+
+    public static void main(String[] args) {
+        Circle c1 = new Circle();
+        System.out.println(c1);
+        Circle c2 = new Circle(1);
+        System.out.println(c2);
+        Circle c3 = new Circle(2, ""black"", true);
+        System.out.println(c3);
+
+        c1.setColor(""yellow"");
+        c1.setFilled(false);
+        c1.setRadius(3);
+        System.out.println(c1);
+        System.out.println(""Area: "" + c1.getArea());
+        System.out.println(""Perimeter: "" + c1.getPerimeter());
+
+        Rectangle r1 = new Rectangle();
+        System.out.println(r1);
+        Rectangle r2 = new Rectangle(1, 2);
+        System.out.println(r2);
+        Rectangle r3 = new Rectangle(3, 4, ""black"", true);
+        System.out.println(r3);
+
+        r1.setColor(""yellow"");
+        r1.setFilled(false);
+        r1.setLength(5);
+        r1.setWidth(6);
+        System.out.println(r1);
+        System.out.println(""Area: "" + r1.getArea());
+        System.out.println(""Perimeter: "" + r1.getPerimeter());
+
+        Square s1 = new Square();
+        System.out.println(s1);
+        Square s2 = new Square(1);
+        System.out.println(s2);
+        Square s3 = new Square(3, ""black"", true);
+        System.out.println(s3);
+
+        s1.setColor(""yellow"");
+        s1.setFilled(false);
+        s1.setLength(5);
+        System.out.println(s1);
+        System.out.println(""Area: "" + s1.getArea());
+        System.out.println(""Perimeter: "" + s1.getPerimeter());
+    }
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Exchange_money;
+
+/**
+ *
+ * @author GIA KINH
+ */
+public class Rate {
+    private String CODE1;
+    private String CODE2;
+    private double rate;
+
+    public Rate(String CODE1, String CODE2, double rate) {
+        this.CODE1 = CODE1;
+        this.CODE2 = CODE2;
+        this.rate = rate;
+    }
+
+    public Rate() {
+    }
+
+    public String getCODE1() {
+        return CODE1;
+    }
+
+    public void setCODE1(String CODE1) {
+        this.CODE1 = CODE1;
+    }
+
+    public String getCODE2() {
+        return CODE2;
+    }
+
+    public void setCODE2(String CODE2) {
+        this.CODE2 = CODE2;
+    }
+
+    public double getRate() {
+        return rate;
+    }
+
+    public void setRate(double rate) {
+        this.rate = rate;
+    }
+
+    @Override
+    public String toString() {
+        return ""Rate{"" + ""CODE1="" + CODE1 + "", CODE2="" + CODE2 + "", rate="" + rate + '}';
+    }
+    
+}
+";0
+"package Exchange_money;
+
+/**
+ * A currency pair with an amount/rate value.
+ */
+public class Rate {
+    private String code1;
+    private String code2;
+    private double rate;
+
+    public Rate(String code1, String code2, double rate) {
+        this.code1 = code1;
+        this.code2 = code2;
+        this.rate = rate;
+    }
+
+    public Rate() {
+    }
+
+    public String getCODE1() {
+        return code1;
+    }
+
+    public void setCODE1(String code1) {
+        this.code1 = code1;
+    }
+
+    public String getCODE2() {
+        return code2;
+    }
+
+    public void setCODE2(String code2) {
+        this.code2 = code2;
+    }
+
+    public double getRate() {
+        return rate;
+    }
+
+    public void setRate(double rate) {
+        this.rate = rate;
+    }
+
+    @Override
+    public String toString() {
+        return ""Rate{CODE1="" + code1 + "", CODE2="" + code2 + "", rate="" + rate + '}';
+    }
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Exchange_money;
+
+import java.util.ArrayList;
+import java.util.StringTokenizer;
+
+/**
+ *
+ * @author GIA KINH
+ */
+public class Exchange extends ArrayList<String>{
+    public Exchange() {
+        this.add(""USD;VND;17000"");
+        this.add(""EUR;USD;1.2"");
+        this.add(""USD;IDN;15789"");
+        this.add(""USD;EUR;0.83"");
+        this.add(""CAD;IDN;16869"");
+    }
+
+    public double convert(Rate rate) {
+        for (String rateString : this) {
+            StringTokenizer tokenizer = new StringTokenizer(rateString, "";"");
+            String tokenizer_code1 = tokenizer.nextToken();
+            String tokenizer_code2 = tokenizer.nextToken();
+            Double tokenizer_amount = Double.parseDouble(tokenizer.nextToken());
+            if (rate.getCODE1().toLowerCase().equals(tokenizer_code1.toLowerCase()) && rate.getCODE2().toLowerCase().equals(tokenizer_code2.toLowerCase())) {
+                return tokenizer_amount * rate.getRate();
+            }
+        }
+        System.out.println(""Can not found code!!!!"");
+        return rate.getRate();
+    }
+}
+";0
+"package Exchange_money;
+
+import java.util.ArrayList;
+import java.util.StringTokenizer;
+
+/**
+ * A list of known ""code1;code2;rate"" exchange entries.
+ */
+public class Exchange extends ArrayList<String> {
+    public Exchange() {
+        add(""USD;VND;17000"");
+        add(""EUR;USD;1.2"");
+        add(""USD;IDN;15789"");
+        add(""USD;EUR;0.83"");
+        add(""CAD;IDN;16869"");
+    }
+
+    public double convert(Rate rate) {
+        for (String entry : this) {
+            StringTokenizer tokenizer = new StringTokenizer(entry, "";"");
+            String fromCode = tokenizer.nextToken();
+            String toCode = tokenizer.nextToken();
+            double knownRate = Double.parseDouble(tokenizer.nextToken());
+            boolean matches = rate.getCODE1().equalsIgnoreCase(fromCode) && rate.getCODE2().equalsIgnoreCase(toCode);
+            if (matches) {
+                return knownRate * rate.getRate();
+            }
+        }
+        System.out.println(""Can not found code!!!!"");
+        return rate.getRate();
+    }
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Exchange_money;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+
+/**
+ *
+ * @author GIA KINH
+ */
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print(""Enter the first currency code: "");
+        String code1 = scanner.nextLine();
+        System.out.print(""Enter the second currency code: "");
+        String code2 = scanner.nextLine();
+        System.out.print(""Enter the amount of first currency: "");
+        double amount = scanner.nextDouble();
+        Rate rate = new Rate(code1, code2, amount);
+        Exchange exchange = new Exchange();
+        System.out.println(""The amount after converted: "" + exchange.convert(rate));
+    }
+}
+";0
+"package Exchange_money;
+
+import java.util.Scanner;
+
+/**
+ * Reads a currency conversion request and prints the converted amount.
+ */
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print(""Enter the first currency code: "");
+        String code1 = scanner.nextLine();
+        System.out.print(""Enter the second currency code: "");
+        String code2 = scanner.nextLine();
+        System.out.print(""Enter the amount of first currency: "");
+        double amount = scanner.nextDouble();
+        Rate rate = new Rate(code1, code2, amount);
+        Exchange exchange = new Exchange();
+        System.out.println(""The amount after converted: "" + exchange.convert(rate));
+    }
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package WordCount;
+
+import java.util.Enumeration;
+import java.util.HashSet;
+import java.util.Hashtable;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+
+/**
+ *
+ * @author giaki
+ */
+public class WordCount {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print(""Enter a string: "");
+        String str = scanner.nextLine().trim();
+        StringTokenizer token = new StringTokenizer(str,"" "");
+        Hashtable<String, Integer> hashWords = new Hashtable<String, Integer>(100,0.2f);
+        while(token.hasMoreTokens()){
+            String word = token.nextToken().toLowerCase();
+            hashWords.put(word, hashWords.containsKey(word.toLowerCase())? hashWords.get(word)+1 :1);
+        }
+//        Enumeration<String> enumeration = hashWords.keys();
+//        while (enumeration.hasMoreElements()) {
+//            String key = enumeration.nextElement();
+//            System.out.println(key + "" "" + hashWords.get(key));
+//        }
+        hashWords.forEach((key,value)-> System.out.println(key + "" ""+ value));
+    }
+}
+";0
+"package WordCount;
+
+import java.util.Hashtable;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+
+/**
+ * Counts occurrences of each lowercase word in a line of input.
+ */
+public class WordCount {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print(""Enter a string: "");
+        String line = scanner.nextLine().trim();
+        StringTokenizer tokenizer = new StringTokenizer(line, "" "");
+        Hashtable<String, Integer> counts = new Hashtable<>(100, 0.2f);
+        while (tokenizer.hasMoreTokens()) {
+            String word = tokenizer.nextToken().toLowerCase();
+            int newCount = counts.containsKey(word) ? counts.get(word) + 1 : 1;
+            counts.put(word, newCount);
+        }
+        counts.forEach((key, value) -> System.out.println(key + "" "" + value));
+    }
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Workshop1;
+
+import java.util.Scanner;
+
+/**
+ *
+ * @author giaki
+ */
+public class Part1 {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print(""Enter number of rows: "");
+        int rows = scanner.nextInt();
+        System.out.print(""Enter number of cols: "");
+        int cols = scanner.nextInt();
+        int matrix[][] = new int[rows][cols];
+        System.out.println(""Enter the matrix"");
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                System.out.print(""matrix["" + i + ""]["" + j + ""]= "");
+                matrix[i][j] = scanner.nextInt();
+            }
+        }
+        System.out.println(""Matrix inputted: "");
+        int  sum=0;
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                System.out.print(matrix[i][j] + "" "");
+                sum+=matrix[i][j];
+            }
+            System.out.println();
+        }
+        System.out.println(""Sum: ""+sum);
+        System.out.println(""Average: "" +(float)sum/(rows*cols));
+    }
+}
+";0
+"package Workshop1;
+
+import java.util.Scanner;
+
+/**
+ * Reads a matrix, prints it, and reports its sum and average.
+ */
+public class Part1 {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print(""Enter number of rows: "");
+        int rows = scanner.nextInt();
+        System.out.print(""Enter number of cols: "");
+        int cols = scanner.nextInt();
+        int[][] matrix = new int[rows][cols];
+        System.out.println(""Enter the matrix"");
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                System.out.print(""matrix["" + i + ""]["" + j + ""]= "");
+                matrix[i][j] = scanner.nextInt();
+            }
+        }
+        System.out.println(""Matrix inputted: "");
+        int sum = 0;
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                System.out.print(matrix[i][j] + "" "");
+                sum += matrix[i][j];
+            }
+            System.out.println();
+        }
+        System.out.println(""Sum: "" + sum);
+        System.out.println(""Average: "" + (float) sum / (rows * cols));
+    }
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Workshop1;
+
+import java.util.Scanner;
+
+/**
+ *
+ * @author giaki
+ */
+public class Part2 {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print(""Input number 1: "");
+        double number1 = scanner.nextDouble();
+        System.out.print(""Input number 2: "");
+        double number2 = scanner.nextDouble();
+        scanner.nextLine();
+        System.out.print(""Enter the operator(+-*/): "");
+        char op = scanner.nextLine().charAt(0);
+        switch (op) {
+            case '+':
+                System.out.println(""The result of: "" + number1 + op + number2 + ""="" + (number1 + number2));
+                break;
+            case '-':
+                System.out.println(""The result of: "" + number1 + op + number2 + ""="" + (number1 - number2));
+                break;
+            case '*':
+                System.out.println(""The result of: "" + number1 + op + number2 + ""="" + (number1 * number2));
+                break;
+            case '/':
+                System.out.println(""The result of: "" + number1 + op + number2 + ""="" + (number1 / number2));
+                break;
+            default:
+                System.out.println(""Please enter operator"");
+                break;
+        }
+    }
+}
+";0
+"package Workshop1;
+
+import java.util.Scanner;
+
+/**
+ * A simple two-number calculator driven by an operator character.
+ */
+public class Part2 {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print(""Input number 1: "");
+        double a = scanner.nextDouble();
+        System.out.print(""Input number 2: "");
+        double b = scanner.nextDouble();
+        scanner.nextLine();
+        System.out.print(""Enter the operator(+-*/): "");
+        char op = scanner.nextLine().charAt(0);
+        switch (op) {
+            case '+':
+                System.out.println(""The result of: "" + a + op + b + ""="" + (a + b));
+                break;
+            case '-':
+                System.out.println(""The result of: "" + a + op + b + ""="" + (a - b));
+                break;
+            case '*':
+                System.out.println(""The result of: "" + a + op + b + ""="" + (a * b));
+                break;
+            case '/':
+                System.out.println(""The result of: "" + a + op + b + ""="" + (a / b));
+                break;
+            default:
+                System.out.println(""Please enter operator"");
+                break;
+        }
+    }
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Workshop1;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+
+/**
+ *
+ * @author giaki
+ */
+
+class Student{
+    private String name;
+
+    public Student() {
+    }
+
+    public Student(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return  name;
+    }
+}
+
+public class Part3 {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        ArrayList<Student> listStudents = new ArrayList<Student>();
+        System.out.print(""Enter number student: "");
+        int n=scanner.nextInt();
+        scanner.nextLine();
+        for(int i=0 ; i<n;i++){
+            System.out.print(""Enter name student "" + (i+1) + "": "");
+            String name=scanner.nextLine();
+            name=name.trim().replaceAll(""\\s+"", "" "");
+            StringTokenizer token = new StringTokenizer(name, "" "");
+            name="""";
+            while(token.hasMoreTokens()){
+                String newName =token.nextToken();
+                name+=newName.substring(0,1).toUpperCase() + newName.substring(1) + "" "";
+            }
+            Student student = new Student(name.trim());
+            listStudents.add(student);
+        }
+        for (Student student : listStudents) {
+            System.out.println(student.toString());
+        }
+    }
+}";0
+"package Workshop1;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+
+class Student {
+    private String name;
+
+    public Student() {
+    }
+
+    public Student(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return name;
+    }
+}
+
+/**
+ * Reads student names and title-cases each word before storing them.
+ */
+public class Part3 {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        ArrayList<Student> students = new ArrayList<>();
+        System.out.print(""Enter number student: "");
+        int n = scanner.nextInt();
+        scanner.nextLine();
+        for (int i = 0; i < n; i++) {
+            System.out.print(""Enter name student "" + (i + 1) + "": "");
+            String rawName = scanner.nextLine();
+            rawName = rawName.trim().replaceAll(""\\s+"", "" "");
+            StringTokenizer tokenizer = new StringTokenizer(rawName, "" "");
+            StringBuilder titled = new StringBuilder();
+            while (tokenizer.hasMoreTokens()) {
+                String part = tokenizer.nextToken();
+                titled.append(part.substring(0, 1).toUpperCase()).append(part.substring(1)).append("" "");
+            }
+            students.add(new Student(titled.toString().trim()));
+        }
+        for (Student student : students) {
+            System.out.println(student.toString());
+        }
+    }
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Workshop2;
+
+import java.util.Scanner;
+
+/**
+ *
+ * @author giaki
+ */
+public class Part1 {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int number=0;
+        do {
+            System.out.print(""Enter the number: "");
+            try {
+                number = Integer.parseInt(scanner.nextLine());
+                if (number < 1) {
+                    throw new Exception();
+                }
+                System.out.println(""The number is "" + number);
+                break;
+            } catch (Exception e) {
+                System.out.println(""The number is invaild"");
+            }
+        } while (true);
+    }
+}
+";0
+"package Workshop2;
+
+import java.util.Scanner;
+
+/**
+ * Keeps asking for a positive integer until one is given.
+ */
+public class Part1 {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            System.out.print(""Enter the number: "");
+            try {
+                int number = Integer.parseInt(scanner.nextLine());
+                if (number < 1) {
+                    throw new Exception();
+                }
+                System.out.println(""The number is "" + number);
+                break;
+            } catch (Exception e) {
+                System.out.println(""The number is invaild"");
+            }
+        }
+    }
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Workshop2;
+
+import java.util.Scanner;
+import java.util.regex.Pattern;
+
+/**
+ *
+ * @author giaki
+ */
+public class Part2 {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        do {
+            try {
+                System.out.print(""Enter the string: "");
+                String str = scanner.nextLine();
+                if (!Pattern.matches(""SE\\d+"", str)) {
+                    throw new Exception();
+                }
+                System.out.println(""The string is "" + str);
+                break;
+            } catch (Exception e) {
+                System.out.println(""The string is invaild"");
+            }
+        } while (true);
+
+    }
+}
+";0
+"package Workshop2;
+
+import java.util.Scanner;
+import java.util.regex.Pattern;
+
+/**
+ * Keeps asking for a string matching ""SE<digits>"" until valid.
+ */
+public class Part2 {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            try {
+                System.out.print(""Enter the string: "");
+                String input = scanner.nextLine();
+                if (!Pattern.matches(""SE\\d+"", input)) {
+                    throw new Exception();
+                }
+                System.out.println(""The string is "" + input);
+                break;
+            } catch (Exception e) {
+                System.out.println(""The string is invaild"");
+            }
+        }
+    }
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Workshop2;
+
+import java.util.Scanner;
+import java.util.regex.Pattern;
+
+/**
+ *
+ * @author giaki
+ */
+public class Part2_2 {
+
+    public String inputString() throws Exception {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print(""Enter the string: "");
+        String str = scanner.nextLine();
+        if (!Pattern.matches(""SE\\d+"", str)) {
+            throw new Exception();
+        }
+        return str;
+    }
+
+    public static void main(String[] args) {
+        do {
+            try {
+                Part2_2 part2 = new Part2_2();
+                String str = part2.inputString();
+                System.out.println(""The string is "" + str);
+                break;
+            } catch (Exception e) {
+                System.out.println(""The string is invaild"");
+            }
+        } while (true);
+    }
+}
+";0
+"package Workshop2;
+
+import java.util.Scanner;
+import java.util.regex.Pattern;
+
+/**
+ * Same as Part2 but with the reading logic extracted into a method.
+ */
+public class Part2_2 {
+
+    public String inputString() throws Exception {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print(""Enter the string: "");
+        String input = scanner.nextLine();
+        if (!Pattern.matches(""SE\\d+"", input)) {
+            throw new Exception();
+        }
+        return input;
+    }
+
+    public static void main(String[] args) {
+        while (true) {
+            try {
+                Part2_2 reader = new Part2_2();
+                String input = reader.inputString();
+                System.out.println(""The string is "" + input);
+                break;
+            } catch (Exception e) {
+                System.out.println(""The string is invaild"");
+            }
+        }
+    }
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Workshop3.CarManager;
+
+/**
+ *
+ * @author giaki
+ */
+public class Car {
+    private String colour;
+    private int enginePower;
+    private boolean convertible;
+    private boolean parkingBrake;
+
+    public Car() {
+    }
+
+    public Car(String colour, int enginePower, boolean convertible, boolean parkingBrake) {
+        this.colour = colour;
+        this.enginePower = enginePower;
+        this.convertible = convertible;
+        this.parkingBrake = parkingBrake;
+    }
+
+    public String getColour() {
+        return colour;
+    }
+
+    public void setColour(String colour) {
+        this.colour = colour;
+    }
+
+    public int getEnginePower() {
+        return enginePower;
+    }
+
+    public void setEnginePower(int enginePower) {
+        this.enginePower = enginePower;
+    }
+
+    public boolean isConvertible() {
+        return convertible;
+    }
+
+    public void setConvertible(boolean convertible) {
+        this.convertible = convertible;
+    }
+
+    public boolean isParkingBrake() {
+        return parkingBrake;
+    }
+
+    public void setParkingBrake(boolean parkingBrake) {
+        this.parkingBrake = parkingBrake;
+    }
+    
+    public void pressStartButton(){
+        System.out.println(""You have pressed the start button"");
+    }
+    
+    public void pressAcceleratorButton(){
+        System.out.println(""You have pressed the accelerator button"");
+    }
+    
+    public void output(){
+        System.out.println(""Colour: ""+ colour);
+        System.out.println(""EnginePower: ""+ enginePower);
+        System.out.println(""Convertible: ""+ enginePower);
+        System.out.println(""ParkingBrake: ""+ parkingBrake);
+    }
+
+    @Override
+    public String toString() {
+        return ""Car{"" + ""colour="" + colour + "", enginePower="" + enginePower + "", convertible="" + convertible + "", parkingBrake="" + parkingBrake + '}';
+    }
+}
+";0
+"package Workshop3.CarManager;
+
+/**
+ * A simple car model.
+ */
+public class Car {
+    private String colour;
+    private int enginePower;
+    private boolean convertible;
+    private boolean parkingBrake;
+
+    public Car() {
+    }
+
+    public Car(String colour, int enginePower, boolean convertible, boolean parkingBrake) {
+        this.colour = colour;
+        this.enginePower = enginePower;
+        this.convertible = convertible;
+        this.parkingBrake = parkingBrake;
+    }
+
+    public String getColour() {
+        return colour;
+    }
+
+    public void setColour(String colour) {
+        this.colour = colour;
+    }
+
+    public int getEnginePower() {
+        return enginePower;
+    }
+
+    public void setEnginePower(int enginePower) {
+        this.enginePower = enginePower;
+    }
+
+    public boolean isConvertible() {
+        return convertible;
+    }
+
+    public void setConvertible(boolean convertible) {
+        this.convertible = convertible;
+    }
+
+    public boolean isParkingBrake() {
+        return parkingBrake;
+    }
+
+    public void setParkingBrake(boolean parkingBrake) {
+        this.parkingBrake = parkingBrake;
+    }
+
+    public void pressStartButton() {
+        System.out.println(""You have pressed the start button"");
+    }
+
+    public void pressAcceleratorButton() {
+        System.out.println(""You have pressed the accelerator button"");
+    }
+
+    public void output() {
+        System.out.println(""Colour: "" + colour);
+        System.out.println(""EnginePower: "" + enginePower);
+        // mirrors the original's bug: prints enginePower instead of convertible
+        System.out.println(""Convertible: "" + enginePower);
+        System.out.println(""ParkingBrake: "" + parkingBrake);
+    }
+
+    @Override
+    public String toString() {
+        return ""Car{colour="" + colour + "", enginePower="" + enginePower + "", convertible="" + convertible + "", parkingBrake="" + parkingBrake + '}';
+    }
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Workshop3.CarManager;
+
+/**
+ *
+ * @author giaki
+ */
+public class Tester {
+
+    public static void main(String[] args) {
+        Car c = new Car();
+        c.pressStartButton();
+        c.pressAcceleratorButton();
+        c.output();
+
+        Car c2 = new Car(""red"", 100, true, true);
+        c2.pressAcceleratorButton();
+        c2.setColour(""black"");
+        System.out.println(""Colour of c3:"" + c2.getColour());
+        c2.output();
+
+    }
+}
+";0
+"package Workshop3.CarManager;
+
+public class Tester {
+
+    public static void main(String[] args) {
+        Car c = new Car();
+        c.pressStartButton();
+        c.pressAcceleratorButton();
+        c.output();
+
+        Car c2 = new Car(""red"", 100, true, true);
+        c2.pressAcceleratorButton();
+        c2.setColour(""black"");
+        System.out.println(""Colour of c3:"" + c2.getColour());
+        c2.output();
+    }
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Workshop3.Guitar;
+
+/**
+ *
+ * @author giaki
+ */
+public class Guitar implements Comparable<Guitar> {
+
+    private String serialNumber;
+    private double price;
+    private String builder;
+    private String model;
+    private String backWood;
+    private String topWood;
+
+    public Guitar() {
+    }
+
+    public Guitar(String serialNumber, double price, String builder, String model, String backWood, String topWood) {
+        this.serialNumber = serialNumber;
+        this.price = price;
+        this.builder = builder;
+        this.model = model;
+        this.backWood = backWood;
+        this.topWood = topWood;
+    }
+
+    public String getSerialNumber() {
+        return serialNumber;
+    }
+
+    public void setSerialNumber(String serialNumber) {
+        if (!serialNumber.isEmpty()) {
+            this.serialNumber = serialNumber;
+        }
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public String getBuilder() {
+        return builder;
+    }
+
+    public void setBuilder(String builder) {
+        this.builder = builder;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public String getBackWood() {
+        return backWood;
+    }
+
+    public void setBackWood(String backWood) {
+        this.backWood = backWood;
+    }
+
+    public String getTopWood() {
+        return topWood;
+    }
+
+    public void setTopWood(String topWood) {
+        this.topWood = topWood;
+    }
+
+    public void createSound() {
+        System.out.println(""serialNumber: "" + getSerialNumber());
+        System.out.println(""Price: "" + getPrice());
+        System.out.println(""Builder: "" + getBuilder());
+        System.out.println(""Model: "" + getModel());
+        System.out.println(""BackWood: "" + getBackWood());
+        System.out.println(""TopWood: "" + getTopWood());
+    }
+
+    @Override
+    public String toString() {
+        return ""Guitar{"" + ""serialNumber="" + serialNumber + "", price="" + price + "", builder="" + builder + "", model="" + model + "", backWood="" + backWood + "", topWood="" + topWood + '}';
+    }
+
+    @Override
+    public int compareTo(Guitar t) {
+        if (this.getPrice() > t.getPrice()) {
+            return 1;
+        } else if(this.getPrice() < t.getPrice()){
+            return -1;
+        }else return this.getSerialNumber().compareTo(t.getSerialNumber());
+    }
+}
+";0
+"package Workshop3.Guitar;
+
+/**
+ * A guitar, comparable by price then serial number.
+ */
+public class Guitar implements Comparable<Guitar> {
+
+    private String serialNumber;
+    private double price;
+    private String builder;
+    private String model;
+    private String backWood;
+    private String topWood;
+
+    public Guitar() {
+    }
+
+    public Guitar(String serialNumber, double price, String builder, String model, String backWood, String topWood) {
+        this.serialNumber = serialNumber;
+        this.price = price;
+        this.builder = builder;
+        this.model = model;
+        this.backWood = backWood;
+        this.topWood = topWood;
+    }
+
+    public String getSerialNumber() {
+        return serialNumber;
+    }
+
+    public void setSerialNumber(String serialNumber) {
+        if (!serialNumber.isEmpty()) {
+            this.serialNumber = serialNumber;
+        }
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public String getBuilder() {
+        return builder;
+    }
+
+    public void setBuilder(String builder) {
+        this.builder = builder;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public String getBackWood() {
+        return backWood;
+    }
+
+    public void setBackWood(String backWood) {
+        this.backWood = backWood;
+    }
+
+    public String getTopWood() {
+        return topWood;
+    }
+
+    public void setTopWood(String topWood) {
+        this.topWood = topWood;
+    }
+
+    public void createSound() {
+        System.out.println(""serialNumber: "" + getSerialNumber());
+        System.out.println(""Price: "" + getPrice());
+        System.out.println(""Builder: "" + getBuilder());
+        System.out.println(""Model: "" + getModel());
+        System.out.println(""BackWood: "" + getBackWood());
+        System.out.println(""TopWood: "" + getTopWood());
+    }
+
+    @Override
+    public String toString() {
+        return ""Guitar{serialNumber="" + serialNumber + "", price="" + price + "", builder="" + builder + "", model="" + model + "", backWood="" + backWood + "", topWood="" + topWood + '}';
+    }
+
+    @Override
+    public int compareTo(Guitar other) {
+        if (price > other.getPrice()) {
+            return 1;
+        } else if (price < other.getPrice()) {
+            return -1;
+        } else {
+            return serialNumber.compareTo(other.getSerialNumber());
+        }
+    }
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Workshop3.Guitar;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Random;
+
+/**
+ *
+ * @author giaki
+ */
+public class Tester {
+
+    public static void main(String[] args) {
+        ArrayList<Guitar> listGuitars = new ArrayList<Guitar>();
+        Random random = new Random();
+        for (int i = 0; i < 10; i++) {
+            Guitar guitar = new Guitar(""G12"" + random.nextInt(10 + 1), random.nextInt((9000 - 1000) + 1) + 1000, ""Sony"" + i, ""Mode"" + i, ""hardWood"" + i, ""softWood"" + i);
+            listGuitars.add(guitar);
+        }
+        Collections.sort(listGuitars, new Comparator<Guitar>() {
+            @Override
+            public int compare(Guitar t, Guitar t1) {
+                return t.getSerialNumber().compareTo(t1.getSerialNumber());
+            }
+        });
+        for (Guitar guitar : listGuitars) {
+            System.out.println(guitar.toString());
+        }
+
+        Guitar obj1 = new Guitar();
+        Guitar obj2 = new Guitar(""G123"", 2000, ""Sony"", ""Model123"", ""hardWood"", ""softWood"");
+        System.out.println(""State of obj1:"");
+        obj1.createSound();
+        System.out.println(""State of obj2:"");
+        obj2.createSound();
+
+        System.out.println(""set price = 3000 of obj1"");
+        obj1.setPrice(3000);
+        System.out.println(""get price of obj1:"" + obj1.getPrice());
+
+    }
+}
+";0
+"package Workshop3.Guitar;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Random;
+
+public class Tester {
+
+    public static void main(String[] args) {
+        ArrayList<Guitar> guitars = new ArrayList<>();
+        Random random = new Random();
+        for (int i = 0; i < 10; i++) {
+            Guitar guitar = new Guitar(""G12"" + random.nextInt(10 + 1), random.nextInt((9000 - 1000) + 1) + 1000, ""Sony"" + i, ""Mode"" + i, ""hardWood"" + i, ""softWood"" + i);
+            guitars.add(guitar);
+        }
+        Collections.sort(guitars, new Comparator<Guitar>() {
+            @Override
+            public int compare(Guitar a, Guitar b) {
+                return a.getSerialNumber().compareTo(b.getSerialNumber());
+            }
+        });
+        for (Guitar guitar : guitars) {
+            System.out.println(guitar.toString());
+        }
+
+        Guitar obj1 = new Guitar();
+        Guitar obj2 = new Guitar(""G123"", 2000, ""Sony"", ""Model123"", ""hardWood"", ""softWood"");
+        System.out.println(""State of obj1:"");
+        obj1.createSound();
+        System.out.println(""State of obj2:"");
+        obj2.createSound();
+
+        System.out.println(""set price = 3000 of obj1"");
+        obj1.setPrice(3000);
+        System.out.println(""get price of obj1:"" + obj1.getPrice());
+    }
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Workshop5.OrganizationManager.DTO;
+
+/**
+ *
+ * @author giaki
+ */
+public abstract class Organization {
+    private int size;
+
+    public Organization() {
+    }
+
+    public Organization(int size) {
+        this.size = size;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+    
+    public abstract void communicateByTool();
+
+    @Override
+    public String toString() {
+        return ""The organization’s size is "" + size;
+    }
+    
+    
+}
+";0
+"package Workshop5.OrganizationManager.DTO;
+
+/**
+ * Abstract base for organizations with a size.
+ */
+public abstract class Organization {
+    private int size;
+
+    public Organization() {
+    }
+
+    public Organization(int size) {
+        this.size = size;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+
+    public abstract void communicateByTool();
+
+    @Override
+    public String toString() {
+        return ""The organization’s size is "" + size;
+    }
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Workshop5.OrganizationManager.DTO;
+
+/**
+ *
+ * @author giaki
+ */
+public class Colony extends Organization{
+    private String place;
+
+    public Colony() {
+    }
+    
+    public Colony(String place) {
+        this.place = place;
+    }
+
+    public Colony(int size, String place) {
+        super(size);
+        this.place = place;
+    }
+
+    public String getPlace() {
+        return place;
+    }
+
+    public void setPlace(String place) {
+        this.place = place;
+    }
+
+    public void grow(){
+        System.out.println(""An annual cycle of growth that begins in spring"");
+    }
+    
+    public void reproduce(){
+        System.out.println(""Colony can reproduce itself through a process"");
+    }
+    @Override
+    public void communicateByTool() {
+        System.out.println(""The colony communicate by sound"");
+    }
+
+    @Override
+    public String toString() {
+        return ""The colony size is "" + super.getSize() + "", the colony’s place is "" + place;
+    }
+}
+";0
+"package Workshop5.OrganizationManager.DTO;
+
+/**
+ * A colony organization located at a place.
+ */
+public class Colony extends Organization {
+    private String place;
+
+    public Colony() {
+    }
+
+    public Colony(String place) {
+        this.place = place;
+    }
+
+    public Colony(int size, String place) {
+        super(size);
+        this.place = place;
+    }
+
+    public String getPlace() {
+        return place;
+    }
+
+    public void setPlace(String place) {
+        this.place = place;
+    }
+
+    public void grow() {
+        System.out.println(""An annual cycle of growth that begins in spring"");
+    }
+
+    public void reproduce() {
+        System.out.println(""Colony can reproduce itself through a process"");
+    }
+
+    @Override
+    public void communicateByTool() {
+        System.out.println(""The colony communicate by sound"");
+    }
+
+    @Override
+    public String toString() {
+        return ""The colony size is "" + getSize() + "", the colony’s place is "" + place;
+    }
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Workshop5.OrganizationManager.DTO;
+
+/**
+ *
+ * @author giaki
+ */
+public class BeeColony extends Colony implements Role{
+
+    private String type;
+
+    public BeeColony() {
+    }
+    
+    public BeeColony(String type) {
+        this.type = type;
+    }
+
+    public BeeColony(String place,String type) {
+        super(place);
+        this.type = type;
+    }
+
+    public BeeColony(int size,String place, String type) {
+        super(size,place);
+        this.type = type;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+    
+    @Override
+    public void createWorker() {
+        System.out.println(""Worker bees perform all the work of the bees"");
+    }
+
+    @Override
+    public String toString() {
+        return ""The colony’s type is "" + type + "", size is about ""+super.getSize()+"", and the place is ""+super.getPlace();
+    }
+}
+";0
+"package Workshop5.OrganizationManager.DTO;
+
+/**
+ * A colony of bees with a type.
+ */
+public class BeeColony extends Colony implements Role {
+
+    private String type;
+
+    public BeeColony() {
+    }
+
+    public BeeColony(String type) {
+        this.type = type;
+    }
+
+    public BeeColony(String place, String type) {
+        super(place);
+        this.type = type;
+    }
+
+    public BeeColony(int size, String place, String type) {
+        super(size, place);
+        this.type = type;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    @Override
+    public void createWorker() {
+        System.out.println(""Worker bees perform all the work of the bees"");
+    }
+
+    @Override
+    public String toString() {
+        return ""The colony’s type is "" + type + "", size is about "" + getSize() + "", and the place is "" + getPlace();
+    }
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Workshop5.OrganizationManager.DTO;
+
+/**
+ *
+ * @author giaki
+ */
+public class University extends Organization{
+      private String name;
+
+    public University() {
+    }
+
+    public University(String name) {
+        this.name = name;
+    }
+
+    public University(int size, String name) {
+        super(size);
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+    public void  enroll(){
+        System.out.println(""The registration for enrollment is only valid when the University has received all enrollment documents and enrollment fees"");
+    }
+    
+    public void educate(){
+        System.out.println(""Provide education at university standard"");
+    }
+    
+    @Override
+    public void communicateByTool() {
+        System.out.println(""In the university, people communicate by voice"");
+    }
+
+    @Override
+    public String toString() {
+        return ""Encourage the advancement and development of knowledge"";
+    }
+}
+";0
+"package Workshop5.OrganizationManager.DTO;
+
+/**
+ * A university organization with a name.
+ */
+public class University extends Organization {
+    private String name;
+
+    public University() {
+    }
+
+    public University(String name) {
+        this.name = name;
+    }
+
+    public University(int size, String name) {
+        super(size);
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void enroll() {
+        System.out.println(""The registration for enrollment is only valid when the University has received all enrollment documents and enrollment fees"");
+    }
+
+    public void educate() {
+        System.out.println(""Provide education at university standard"");
+    }
+
+    @Override
+    public void communicateByTool() {
+        System.out.println(""In the university, people communicate by voice"");
+    }
+
+    @Override
+    public String toString() {
+        return ""Encourage the advancement and development of knowledge"";
+    }
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Workshop5.OrganizationManager.DTO;
+
+/**
+ *
+ * @author giaki
+ */
+public class FPTUniversity extends University implements Role{
+
+    private String address;
+
+    public FPTUniversity(String address) {
+        this.address = address;
+    }
+
+    public FPTUniversity(String name,String address) {
+        super(name);
+        this.address = address;
+    }
+
+    public FPTUniversity(int size, String name,String address) {
+        super(size, name);
+        this.address = address;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+    
+    @Override
+    public void createWorker() {
+        System.out.println(""Providing human resources"");
+    }
+
+    @Override
+    public String toString() {
+        return ""FPTU has four campuses Hanoi, HCM, DaNang, CanTho, QuyNhon"";
+    }  
+   
+}
+";0
+"package Workshop5.OrganizationManager.DTO;
+
+/**
+ * A specific university with a campus address.
+ */
+public class FPTUniversity extends University implements Role {
+
+    private String address;
+
+    public FPTUniversity(String address) {
+        this.address = address;
+    }
+
+    public FPTUniversity(String name, String address) {
+        super(name);
+        this.address = address;
+    }
+
+    public FPTUniversity(int size, String name, String address) {
+        super(size, name);
+        this.address = address;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    @Override
+    public void createWorker() {
+        System.out.println(""Providing human resources"");
+    }
+
+    @Override
+    public String toString() {
+        return ""FPTU has four campuses Hanoi, HCM, DaNang, CanTho, QuyNhon"";
+    }
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Workshop5.OrganizationManager.DTO;
+
+/**
+ *
+ * @author giaki
+ */
+public interface Role {
+    public void createWorker();
+}
+";0
+"package Workshop5.OrganizationManager.DTO;
+
+/**
+ * Contract for organizations that create workers.
+ */
+public interface Role {
+    void createWorker();
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Workshop5.OrganizationManager.GUI;
+
+import Workshop5.OrganizationManager.DTO.BeeColony;
+import Workshop5.OrganizationManager.DTO.Colony;
+import Workshop5.OrganizationManager.DTO.FPTUniversity;
+import Workshop5.OrganizationManager.DTO.Role;
+import Workshop5.OrganizationManager.DTO.University;
+
+/**
+ *
+ * @author giaki
+ */
+public class Tester {
+
+    public static void main(String[] args) {
+        Colony obj1 = new BeeColony(2000, ""honey"", ""land"");
+        System.out.println(obj1);
+        obj1.grow();
+        obj1.reproduce();
+
+        University obj2 = new FPTUniversity(100000, ""FPT"", ""Cantho"");
+        System.out.println(obj2);
+        obj2.enroll();
+        obj2.educate();
+
+        Role df = new BeeColony(3000, ""wasp"", ""land"");
+        System.out.println(df);
+        df.createWorker();
+
+        df = new FPTUniversity(100000, ""FPT"", ""Hanoi"");
+        System.out.println(df);
+        df.createWorker();
+
+    }
+}
+";0
+"package Workshop5.OrganizationManager.GUI;
+
+import Workshop5.OrganizationManager.DTO.BeeColony;
+import Workshop5.OrganizationManager.DTO.Colony;
+import Workshop5.OrganizationManager.DTO.FPTUniversity;
+import Workshop5.OrganizationManager.DTO.Role;
+import Workshop5.OrganizationManager.DTO.University;
+
+public class Tester {
+
+    public static void main(String[] args) {
+        Colony obj1 = new BeeColony(2000, ""honey"", ""land"");
+        System.out.println(obj1);
+        obj1.grow();
+        obj1.reproduce();
+
+        University obj2 = new FPTUniversity(100000, ""FPT"", ""Cantho"");
+        System.out.println(obj2);
+        obj2.enroll();
+        obj2.educate();
+
+        Role df = new BeeColony(3000, ""wasp"", ""land"");
+        System.out.println(df);
+        df.createWorker();
+
+        df = new FPTUniversity(100000, ""FPT"", ""Hanoi"");
+        System.out.println(df);
+        df.createWorker();
+    }
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package player;
+
+/**
+ *
+ * @author GIA KINH
+ */
+public abstract class Player {
+    private String name;
+
+    public Player() {
+    }
+
+    public Player(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return ""Player["" + ""name="" + name + ']';
+    }
+    
+    abstract public void displayDetails();
+}
+";0
+"package player;
+
+/**
+ * Abstract base for players.
+ */
+public abstract class Player {
+    private String name;
+
+    public Player() {
+    }
+
+    public Player(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return ""Player[name="" + name + ']';
+    }
+
+    public abstract void displayDetails();
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package player;
+
+/**
+ *
+ * @author GIA KINH
+ */
+public interface GradeBonus {
+    public static final int GRADE_A_BONUS_PERCENT = 100;
+    public static final int GRADE_B_BONUS_PERCENT = 50;
+    public static final int GRADE_C_BONUS_PERCENT = 30;
+    public static final int GRADE_D_BONUS_PERCENT = 10;
+    public abstract double calculateGradeBonus();
+}
+";0
+"package player;
+
+/**
+ * Bonus percentages by grade, and the contract to compute one.
+ */
+public interface GradeBonus {
+    int GRADE_A_BONUS_PERCENT = 100;
+    int GRADE_B_BONUS_PERCENT = 50;
+    int GRADE_C_BONUS_PERCENT = 30;
+    int GRADE_D_BONUS_PERCENT = 10;
+
+    double calculateGradeBonus();
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package player;
+
+/**
+ *
+ * @author GIA KINH
+ */
+public interface Tax {
+    public abstract double calculateTax();
+}
+";0
+"package player;
+
+/**
+ * Contract for anything that owes tax.
+ */
+public interface Tax {
+    double calculateTax();
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package player;
+
+/**
+ *
+ * @author GIA KINH
+ */
+public class PlayerIncome extends Player implements Tax{
+
+    private double income;
+
+    public PlayerIncome(double income) {
+        this.income = income;
+    }
+
+    public PlayerIncome(double income, String name) {
+        super(name);
+        this.income = income;
+    }
+    
+    public PlayerIncome() {
+    }
+
+    public double getIncome() {
+        return income;
+    }
+
+    public void setIncome(double income) {
+        this.income = income;
+    }
+    
+    
+    
+    
+    @Override
+    public void displayDetails() {
+        System.out.println(""Name player: ""+super.getName());
+        System.out.println(""Salary: "" + (this.income - this.calculateTax())+ ""$"");
+        System.out.println(""Tax: "" + this.calculateTax()+""$"");
+    }
+
+    @Override
+    public double calculateTax() {
+        if(this.income<=10000){
+            return this.income*15/100;
+        }else if(this.income <=20000){
+            return this.income * 20 / 100;
+        }else{
+            return this.income * 30 / 100;
+        }
+    }
+    
+}
+";0
+"package player;
+
+/**
+ * A player with income subject to a tiered tax.
+ */
+public class PlayerIncome extends Player implements Tax {
+
+    private double income;
+
+    public PlayerIncome(double income) {
+        this.income = income;
+    }
+
+    public PlayerIncome(double income, String name) {
+        super(name);
+        this.income = income;
+    }
+
+    public PlayerIncome() {
+    }
+
+    public double getIncome() {
+        return income;
+    }
+
+    public void setIncome(double income) {
+        this.income = income;
+    }
+
+    @Override
+    public void displayDetails() {
+        System.out.println(""Name player: "" + getName());
+        System.out.println(""Salary: "" + (income - calculateTax()) + ""$"");
+        System.out.println(""Tax: "" + calculateTax() + ""$"");
+    }
+
+    @Override
+    public double calculateTax() {
+        if (income <= 10000) {
+            return income * 15 / 100;
+        } else if (income <= 20000) {
+            return income * 20 / 100;
+        } else {
+            return income * 30 / 100;
+        }
+    }
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package player;
+
+/**
+ *
+ * @author GIA KINH
+ */
+public class TournamentIncome extends Player implements GradeBonus {
+
+    private int totalMatches;
+    private int battle;
+    private double[] points;
+    private double income;
+
+    public TournamentIncome(int totalMatches, int battle, double[] points, double income) {
+        this.income = income;
+        this.totalMatches = totalMatches;
+        this.battle = battle;
+        this.points = points;
+    }
+
+    public TournamentIncome(int totalMatches, int battle, double[] points, double income, String name) {
+        super(name);
+        this.income = income;
+        this.totalMatches = totalMatches;
+        this.battle = battle;
+        this.points = points;
+    }
+
+    public TournamentIncome(int totalMatches, int battle, double[] points) {
+        this.totalMatches = totalMatches;
+        this.battle = battle;
+        this.points = points;
+    }
+
+    public TournamentIncome(double income, String name) {
+        super(name);
+        this.income = income;
+    }
+
+    public TournamentIncome() {
+    }
+
+    public int getTotalMatches() {
+        return totalMatches;
+    }
+
+    public void setTotalMatches(int totalMatches) {
+        this.totalMatches = totalMatches;
+    }
+
+    public int getBattle() {
+        return battle;
+    }
+
+    public void setBattle(int battle) {
+        this.battle = battle;
+    }
+
+    public double[] getPoints() {
+        return points;
+    }
+
+    public void setPoints(double[] points) {
+        this.points = points;
+    }
+
+    public double getIncome() {
+        return income;
+    }
+
+    public void setIncome(double income) {
+        this.income = income;
+    }
+
+    @Override
+    public void displayDetails() {
+        System.out.println(""Name player: "" + super.getName());
+        System.out.println(""Grade bonus: "" + this.calculateGradeBonus() + ""%"");
+        System.out.println(""Income: "" + this.income + ""$"");
+    }
+
+    @Override
+    public double calculateGradeBonus() {
+        double totalPoint = 0;
+        double money = 1000000;
+        if (points != null) {
+            for (double i : points) {
+                totalPoint += i;
+            }
+        }else{
+            System.out.println(""Please enter points"");
+            return 0;
+        }
+        if (totalPoint < this.totalMatches * 100 * 0.3) {
+            return GRADE_D_BONUS_PERCENT*money/100;
+        } else if (totalPoint < this.totalMatches * 100 * 0.4) {
+            return GRADE_C_BONUS_PERCENT*money/100;
+        } else if (totalPoint < this.totalMatches * 100 * 0.5) {
+            return GRADE_B_BONUS_PERCENT*money/100;
+        } else {
+            return GRADE_A_BONUS_PERCENT*money/100;
+        }
+    }
+
+}
+";0
+"package player;
+
+/**
+ * A player's tournament performance and resulting grade bonus.
+ */
+public class TournamentIncome extends Player implements GradeBonus {
+
+    private int totalMatches;
+    private int battle;
+    private double[] points;
+    private double income;
+
+    public TournamentIncome(int totalMatches, int battle, double[] points, double income) {
+        this.income = income;
+        this.totalMatches = totalMatches;
+        this.battle = battle;
+        this.points = points;
+    }
+
+    public TournamentIncome(int totalMatches, int battle, double[] points, double income, String name) {
+        super(name);
+        this.income = income;
+        this.totalMatches = totalMatches;
+        this.battle = battle;
+        this.points = points;
+    }
+
+    public TournamentIncome(int totalMatches, int battle, double[] points) {
+        this.totalMatches = totalMatches;
+        this.battle = battle;
+        this.points = points;
+    }
+
+    public TournamentIncome(double income, String name) {
+        super(name);
+        this.income = income;
+    }
+
+    public TournamentIncome() {
+    }
+
+    public int getTotalMatches() {
+        return totalMatches;
+    }
+
+    public void setTotalMatches(int totalMatches) {
+        this.totalMatches = totalMatches;
+    }
+
+    public int getBattle() {
+        return battle;
+    }
+
+    public void setBattle(int battle) {
+        this.battle = battle;
+    }
+
+    public double[] getPoints() {
+        return points;
+    }
+
+    public void setPoints(double[] points) {
+        this.points = points;
+    }
+
+    public double getIncome() {
+        return income;
+    }
+
+    public void setIncome(double income) {
+        this.income = income;
+    }
+
+    @Override
+    public void displayDetails() {
+        System.out.println(""Name player: "" + getName());
+        System.out.println(""Grade bonus: "" + calculateGradeBonus() + ""%"");
+        System.out.println(""Income: "" + income + ""$"");
+    }
+
+    @Override
+    public double calculateGradeBonus() {
+        double totalPoint = 0;
+        double money = 1000000;
+        if (points == null) {
+            System.out.println(""Please enter points"");
+            return 0;
+        }
+        for (double point : points) {
+            totalPoint += point;
+        }
+        if (totalPoint < totalMatches * 100 * 0.3) {
+            return GRADE_D_BONUS_PERCENT * money / 100;
+        } else if (totalPoint < totalMatches * 100 * 0.4) {
+            return GRADE_C_BONUS_PERCENT * money / 100;
+        } else if (totalPoint < totalMatches * 100 * 0.5) {
+            return GRADE_B_BONUS_PERCENT * money / 100;
+        } else {
+            return GRADE_A_BONUS_PERCENT * money / 100;
+        }
+    }
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package player;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Scanner;
+
+/**
+ *
+ * @author GIA KINH
+ */
+public class PlayerTest {
+
+    public static Scanner scanner = new Scanner(System.in);
+    public static int choose;
+    public static ArrayList<PlayerIncome> players = new ArrayList<PlayerIncome>();
+    public static ArrayList<TournamentIncome> tournamentIncomes = new ArrayList<TournamentIncome>();
+
+    public static void menu() {
+        System.out.println(""1.Nhap thong tin cau thu moi"");
+        System.out.println(""2.Tinh thu nhap chua co thuong"");
+        System.out.println(""3.Cap nhat diem thi dau cua cau thu"");
+        System.out.println(""4.Tinh tien thuong"");
+        System.out.println(""5.Thoat"");
+        System.out.print(""Enter number: "");
+        choose = scanner.nextInt();
+        scanner.nextLine();
+    }
+
+    public static void enterPlayer() {
+        System.out.print(""Enter name: "");
+        String name = scanner.nextLine();
+        System.out.print(""Enter income: "");
+        double income = scanner.nextDouble();
+        PlayerIncome playerIncome = new PlayerIncome(income, name);
+        players.add(playerIncome);
+        TournamentIncome tournamentIncome = new TournamentIncome(playerIncome.getIncome(), playerIncome.getName());
+        tournamentIncomes.add(tournamentIncome);
+    }
+
+    public static void cacularIncome() {
+        for (PlayerIncome playerIncome : players) {
+            playerIncome.displayDetails();
+        }
+    }
+
+    public static void enterPointPlayer() {
+        boolean isPlayer = false;
+        String name;
+        int vt=0;
+        do {
+            System.out.print(""Enter name player: "");
+            name = scanner.nextLine();
+            int d=0;
+            for(PlayerIncome playerIncome: players){
+                if(playerIncome.getName().equals(name)){
+                    vt=d;
+                    isPlayer = true;
+                    break;
+                }
+                d++;
+            }
+        } while (isPlayer==false);
+        System.out.print(""Enter total matches: "");
+        int totalMatches = scanner.nextInt();
+        System.out.print(""Enter battle: "");
+        int battle = scanner.nextInt();
+        double point[] = new double[battle];
+        for (int i = 0; i < battle; i++) {
+            System.out.print(""Enter point in battle "" + (i+1) +"": "");
+            point[i] = scanner.nextDouble();
+        }
+        TournamentIncome tournamentIncome = new TournamentIncome(totalMatches, battle, point, players.get(vt).getIncome(), players.get(vt).getName());
+        tournamentIncomes.set(vt, tournamentIncome);
+    }
+    
+    public static void cacularTournamentIncome() {
+        for (TournamentIncome tournamentIncome : tournamentIncomes) {
+            tournamentIncome.displayDetails();
+        }
+    }
+
+    public static void main(String[] args) {
+        do {
+            menu();
+            switch (choose) {
+                case 1:
+                    enterPlayer();
+                    break;
+                case 2:
+                    cacularIncome();
+                    break;
+                case 3:
+                    enterPointPlayer();
+                    break;
+                case 4:
+                    cacularTournamentIncome();
+                    break;
+                case 5:
+                    break;
+            }
+        } while (choose != 5);
+
+    }
+}
+";0
+"package player;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+/**
+ * Console menu for managing players and their tournament income.
+ */
+public class PlayerTest {
+
+    public static Scanner scanner = new Scanner(System.in);
+    public static int choose;
+    public static ArrayList<PlayerIncome> players = new ArrayList<>();
+    public static ArrayList<TournamentIncome> tournamentIncomes = new ArrayList<>();
+
+    public static void menu() {
+        System.out.println(""1.Nhap thong tin cau thu moi"");
+        System.out.println(""2.Tinh thu nhap chua co thuong"");
+        System.out.println(""3.Cap nhat diem thi dau cua cau thu"");
+        System.out.println(""4.Tinh tien thuong"");
+        System.out.println(""5.Thoat"");
+        System.out.print(""Enter number: "");
+        choose = scanner.nextInt();
+        scanner.nextLine();
+    }
+
+    public static void enterPlayer() {
+        System.out.print(""Enter name: "");
+        String name = scanner.nextLine();
+        System.out.print(""Enter income: "");
+        double income = scanner.nextDouble();
+        PlayerIncome playerIncome = new PlayerIncome(income, name);
+        players.add(playerIncome);
+        TournamentIncome tournamentIncome = new TournamentIncome(playerIncome.getIncome(), playerIncome.getName());
+        tournamentIncomes.add(tournamentIncome);
+    }
+
+    public static void cacularIncome() {
+        for (PlayerIncome playerIncome : players) {
+            playerIncome.displayDetails();
+        }
+    }
+
+    public static void enterPointPlayer() {
+        boolean found = false;
+        String name;
+        int index = 0;
+        do {
+            System.out.print(""Enter name player: "");
+            name = scanner.nextLine();
+            int i = 0;
+            for (PlayerIncome playerIncome : players) {
+                if (playerIncome.getName().equals(name)) {
+                    index = i;
+                    found = true;
+                    break;
+                }
+                i++;
+            }
+        } while (!found);
+        System.out.print(""Enter total matches: "");
+        int totalMatches = scanner.nextInt();
+        System.out.print(""Enter battle: "");
+        int battle = scanner.nextInt();
+        double[] points = new double[battle];
+        for (int i = 0; i < battle; i++) {
+            System.out.print(""Enter point in battle "" + (i + 1) + "": "");
+            points[i] = scanner.nextDouble();
+        }
+        TournamentIncome tournamentIncome = new TournamentIncome(totalMatches, battle, points, players.get(index).getIncome(), players.get(index).getName());
+        tournamentIncomes.set(index, tournamentIncome);
+    }
+
+    public static void cacularTournamentIncome() {
+        for (TournamentIncome tournamentIncome : tournamentIncomes) {
+            tournamentIncome.displayDetails();
+        }
+    }
+
+    public static void main(String[] args) {
+        do {
+            menu();
+            switch (choose) {
+                case 1:
+                    enterPlayer();
+                    break;
+                case 2:
+                    cacularIncome();
+                    break;
+                case 3:
+                    enterPointPlayer();
+                    break;
+                case 4:
+                    cacularTournamentIncome();
+                    break;
+                case 5:
+                    break;
+            }
+        } while (choose != 5);
+    }
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package workshop6;
+
+/**
+ *
+ * @author giaki
+ */
+public class Student implements Comparable<Student>{
+    String code;
+    String name;
+    int mark;
+    
+    public Student() {
+        code="""";
+        name="""";
+        mark=0;
+    }
+    
+    
+    public Student(String code, String name, int mark) {
+        this.code = code.toUpperCase();
+        this.name = name.toUpperCase();
+        this.mark = (mark>=0 && mark<=10)? mark : 0;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+       if(name.length()>0){
+            this.name = name.trim().toUpperCase();
+       }
+    }
+
+    public int getMark() {
+        return mark;
+    }
+
+    public void setMark(int mark) {
+        this.mark = (mark>=0 && mark<=10)? mark : 0;
+    }
+
+    @Override
+    public String toString() {
+        return code +"", ""+name+"", ""+mark;
+    }
+
+    @Override
+    public int compareTo(Student t) {
+        return -(this.getMark() - t.getMark());
+    }   
+}
+";0
+"package workshop6;
+
+/**
+ * A student record comparable by mark (descending).
+ */
+public class Student implements Comparable<Student> {
+    String code;
+    String name;
+    int mark;
+
+    public Student() {
+        code = """";
+        name = """";
+        mark = 0;
+    }
+
+    public Student(String code, String name, int mark) {
+        this.code = code.toUpperCase();
+        this.name = name.toUpperCase();
+        this.mark = (mark >= 0 && mark <= 10) ? mark : 0;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        if (name.length() > 0) {
+            this.name = name.trim().toUpperCase();
+        }
+    }
+
+    public int getMark() {
+        return mark;
+    }
+
+    public void setMark(int mark) {
+        this.mark = (mark >= 0 && mark <= 10) ? mark : 0;
+    }
+
+    @Override
+    public String toString() {
+        return code + "", "" + name + "", "" + mark;
+    }
+
+    @Override
+    public int compareTo(Student other) {
+        return -(mark - other.getMark());
+    }
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package workshop6;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+
+/**
+ *
+ * @author giaki
+ */
+public class StudentList extends ArrayList<Student> {
+
+    public StudentList() {
+        super();
+    }
+
+    public Student search(String code) {
+        code = code.trim().toUpperCase();
+        for (int i = 0; i < this.size(); i++) {
+            if (this.get(i).getCode().equals(code)) {
+                return this.get(i);
+            }
+        };
+        return null;
+    }
+
+    private boolean isCodeDuplicated(String code) {
+        code = code.trim().toUpperCase();
+        return this.search(code) != null;
+    }
+
+    public void addStudent() {
+        String newCode, newName;
+        int newMark;
+        boolean codeDuplicated = false;
+        do {
+            newCode = Inputter.inputPattern(""St. code S000: "", ""[sS][\\d]{3}"");
+            codeDuplicated = isCodeDuplicated(newCode);
+            if (codeDuplicated) {
+                System.out.println(""Code is duplicated"");
+            }
+        } while (codeDuplicated);
+        newName = Inputter.inputNonBlankStr(""Name of new student: "").toUpperCase();
+        newMark = Inputter.inputInt(""Mark: "", 0, 10);
+        Student student = new Student(newCode, newName, newMark);
+        this.add(student);
+        System.out.println(""Student "" + newCode + "" has been added"");
+    }
+
+    public void searchStudent() {
+        if (this.isEmpty()) {
+            System.out.println(""Empty list. No search can be performend!"");
+        } else {
+            String sCode = Inputter.inputStr(""Input student code for search: "");
+            Student student = this.search(sCode);
+            if (student == null) {
+                System.out.println(""Student "" + sCode + "" doesn't existed!"");
+            } else {
+                System.out.println(""Founđ: "" + student);
+            }
+        }
+    }
+
+    public void updateStudent() {
+        if (this.isEmpty()) {
+            System.out.println(""Empty list. No update can be performend!"");
+        } else {
+            String sCode = Inputter.inputStr(""Input code of update student: "");
+            Student student = this.search(sCode);
+            if (student == null) {
+                System.out.println(""Student "" + sCode + "" doesn't existed!"");
+            } else {
+                String newName = Inputter.inputNonBlankStr(""Old name: "" + student.getName() + "", new name: "");
+                student.setName(newName);
+                int newMark = Inputter.inputInt(""Old mark: "" + student.getMark() + "", new mark: "", 0, 10);
+                student.setMark(newMark);
+                System.out.println(""Student "" + sCode + "" has bean updated."");
+            }
+        }
+    }
+
+    public void removeStudent() {
+        if (this.isEmpty()) {
+            System.out.println(""Empty list. No remove can be performend!"");
+        } else {
+            String sCode = Inputter.inputStr(""Input code of remove student: "");
+            Student student = this.search(sCode);
+            if (student == null) {
+                System.out.println(""Student "" + sCode + "" doesn't existed!"");
+            } else {
+                this.remove(student);
+                System.out.println(""Student "" + sCode + "" has been removed."");
+            }
+        }
+    }
+
+    public void printAll() {
+        if (this.isEmpty()) {
+            System.out.println(""Empty list!"");
+        } else {
+            System.out.println(""Student list:"");
+            for (Student student : this) {
+                System.out.println(student);
+            }
+            System.out.println(""Total: "" + this.size() + "" student(s)."");
+        }
+    }
+
+    public void sortByMarkDecresing() {
+        Collections.sort(this);
+    }
+
+    public void sortByMarkInCresing() {
+        Collections.sort(this, new Comparator<Student>() {
+            @Override
+            public int compare(Student t, Student t1) {
+                return t.getMark() > t1.getMark() ? 1 : ( t.getMark() == t1.getMark() ? t.getName().compareTo(t1.getName()): -1);
+            }
+        });
+    }
+}
+";0
+"package workshop6;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
+/**
+ * A managed list of students with CRUD and sorting operations.
+ */
+public class StudentList extends ArrayList<Student> {
+
+    public StudentList() {
+        super();
+    }
+
+    public Student search(String code) {
+        String target = code.trim().toUpperCase();
+        for (int i = 0; i < size(); i++) {
+            if (get(i).getCode().equals(target)) {
+                return get(i);
+            }
+        }
+        return null;
+    }
+
+    private boolean isCodeDuplicated(String code) {
+        return search(code.trim().toUpperCase()) != null;
+    }
+
+    public void addStudent() {
+        String newCode;
+        boolean codeDuplicated;
+        do {
+            newCode = Inputter.inputPattern(""St. code S000: "", ""[sS][\\d]{3}"");
+            codeDuplicated = isCodeDuplicated(newCode);
+            if (codeDuplicated) {
+                System.out.println(""Code is duplicated"");
+            }
+        } while (codeDuplicated);
+        String newName = Inputter.inputNonBlankStr(""Name of new student: "").toUpperCase();
+        int newMark = Inputter.inputInt(""Mark: "", 0, 10);
+        add(new Student(newCode, newName, newMark));
+        System.out.println(""Student "" + newCode + "" has been added"");
+    }
+
+    public void searchStudent() {
+        if (isEmpty()) {
+            System.out.println(""Empty list. No search can be performend!"");
+            return;
+        }
+        String code = Inputter.inputStr(""Input student code for search: "");
+        Student student = search(code);
+        if (student == null) {
+            System.out.println(""Student "" + code + "" doesn't existed!"");
+        } else {
+            System.out.println(""Founđ: "" + student);
+        }
+    }
+
+    public void updateStudent() {
+        if (isEmpty()) {
+            System.out.println(""Empty list. No update can be performend!"");
+            return;
+        }
+        String code = Inputter.inputStr(""Input code of update student: "");
+        Student student = search(code);
+        if (student == null) {
+            System.out.println(""Student "" + code + "" doesn't existed!"");
+            return;
+        }
+        String newName = Inputter.inputNonBlankStr(""Old name: "" + student.getName() + "", new name: "");
+        student.setName(newName);
+        int newMark = Inputter.inputInt(""Old mark: "" + student.getMark() + "", new mark: "", 0, 10);
+        student.setMark(newMark);
+        System.out.println(""Student "" + code + "" has bean updated."");
+    }
+
+    public void removeStudent() {
+        if (isEmpty()) {
+            System.out.println(""Empty list. No remove can be performend!"");
+            return;
+        }
+        String code = Inputter.inputStr(""Input code of remove student: "");
+        Student student = search(code);
+        if (student == null) {
+            System.out.println(""Student "" + code + "" doesn't existed!"");
+        } else {
+            remove(student);
+            System.out.println(""Student "" + code + "" has been removed."");
+        }
+    }
+
+    public void printAll() {
+        if (isEmpty()) {
+            System.out.println(""Empty list!"");
+            return;
+        }
+        System.out.println(""Student list:"");
+        for (Student student : this) {
+            System.out.println(student);
+        }
+        System.out.println(""Total: "" + size() + "" student(s)."");
+    }
+
+    public void sortByMarkDecresing() {
+        Collections.sort(this);
+    }
+
+    public void sortByMarkInCresing() {
+        Collections.sort(this, new Comparator<Student>() {
+            @Override
+            public int compare(Student a, Student b) {
+                if (a.getMark() > b.getMark()) {
+                    return 1;
+                }
+                return a.getMark() == b.getMark() ? a.getName().compareTo(b.getName()) : -1;
+            }
+        });
+    }
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package workshop6;
+
+import java.util.Scanner;
+import java.util.regex.Pattern;
+
+/**
+ *
+ * @author giaki
+ */
+public class Inputter {
+
+    public static Scanner scanner = new Scanner(System.in);
+
+    public static int inputInt(String msg, int min, int max) {
+        if (min > max) {
+            int z = min;
+            min = max;
+            max = z;
+        }
+        int data;
+        do {
+            System.out.print(msg);
+            data = Integer.parseInt(scanner.nextLine());
+        } while (data < min || data > max);
+        return data;
+    }
+
+    public static String inputStr(String msg) {
+        System.out.print(msg);
+        String data = scanner.nextLine().trim();
+        return data;
+    }
+
+    public static String inputNonBlankStr(String msg) {
+        String data = null;
+        do {
+            System.out.print(msg);
+            data = scanner.nextLine().trim();
+        } while (data.length() == 0 || data == null);
+        return data;
+    }
+
+    public static String inputPattern(String msg, String pattern) {
+        String data = null;
+        do {
+            System.out.print(msg);
+            data = scanner.nextLine().trim();
+        } while (!data.matches(pattern));
+        return data;
+    }
+}
+";0
+"package workshop6;
+
+import java.util.Scanner;
+
+/**
+ * Console input helpers with validation loops.
+ */
+public class Inputter {
+
+    public static Scanner scanner = new Scanner(System.in);
+
+    public static int inputInt(String msg, int min, int max) {
+        if (min > max) {
+            int tmp = min;
+            min = max;
+            max = tmp;
+        }
+        int data;
+        do {
+            System.out.print(msg);
+            data = Integer.parseInt(scanner.nextLine());
+        } while (data < min || data > max);
+        return data;
+    }
+
+    public static String inputStr(String msg) {
+        System.out.print(msg);
+        return scanner.nextLine().trim();
+    }
+
+    public static String inputNonBlankStr(String msg) {
+        String data;
+        do {
+            System.out.print(msg);
+            data = scanner.nextLine().trim();
+        } while (data.length() == 0);
+        return data;
+    }
+
+    public static String inputPattern(String msg, String pattern) {
+        String data;
+        do {
+            System.out.print(msg);
+            data = scanner.nextLine().trim();
+        } while (!data.matches(pattern));
+        return data;
+    }
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package workshop6;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+/**
+ *
+ * @author giaki
+ */
+public class Menu {
+    public static int getChoice(ArrayList<String> options){
+        int i=1;
+        for (String option : options) {
+            System.out.println(i+""-""+option);
+            i++;
+        }
+        System.out.print(""Choose 1.."" + options.size()+"": "");
+        Scanner scanner = new Scanner(System.in);
+        return Integer.parseInt(scanner.nextLine());
+    }
+    
+    public static int getChoice(Object[] options){
+        int i=1;
+        for (Object option : options) {
+            System.out.println(i+""-""+option.toString());
+            i++;
+        }
+        System.out.print(""Choose 1.."" + options.length+"": "");
+        Scanner scanner = new Scanner(System.in);
+        return Integer.parseInt(scanner.nextLine());
+    }
+}
+";0
+"package workshop6;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+/**
+ * Prints a numbered menu and reads the chosen index.
+ */
+public class Menu {
+    public static int getChoice(ArrayList<String> options) {
+        int i = 1;
+        for (String option : options) {
+            System.out.println(i + ""-"" + option);
+            i++;
+        }
+        System.out.print(""Choose 1.."" + options.size() + "": "");
+        Scanner scanner = new Scanner(System.in);
+        return Integer.parseInt(scanner.nextLine());
+    }
+
+    public static int getChoice(Object[] options) {
+        int i = 1;
+        for (Object option : options) {
+            System.out.println(i + ""-"" + option.toString());
+            i++;
+        }
+        System.out.print(""Choose 1.."" + options.length + "": "");
+        Scanner scanner = new Scanner(System.in);
+        return Integer.parseInt(scanner.nextLine());
+    }
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package workshop6;
+
+/**
+ *
+ * @author giaki
+ */
+public class StudentManager {
+    public static void main(String[] args) {
+        String[] options= {""Adđ new student"", ""Search a student"", ""Update name and mark"", ""Remove a student"", ""List all"",""Sort All Student by mark (descending) and display using Compable"",""Sort All Student by mark (Ascending), if mark equals sort by Name and display using Comprator"", ""Quit""};
+        int choice = 0;
+        StudentList list = new StudentList();
+        do{
+            System.out.println(""Student managing program."");
+            choice = Menu.getChoice(options);
+            switch(choice){
+                case 1: 
+                    list.addStudent();
+                    break;
+                case 2:
+                    list.searchStudent();
+                    break;
+                case 3:
+                    list.updateStudent();
+                    break;
+                case 4:
+                    list.removeStudent();
+                    break;
+                case 5:
+                    list.printAll();
+                    break;
+                case 6:
+                    list.sortByMarkDecresing();
+                    break;
+                case 7:
+                    list.sortByMarkInCresing();
+                    break;
+                default:
+                    System.out.println(""Bye"");
+                    break;
+            }
+        }while(choice>0 && choice<options.length);
+    }
+}
+";0
+"package workshop6;
+
+/**
+ * Console-driven student management program.
+ */
+public class StudentManager {
+    public static void main(String[] args) {
+        String[] options = {""Adđ new student"", ""Search a student"", ""Update name and mark"", ""Remove a student"", ""List all"", ""Sort All Student by mark (descending) and display using Compable"", ""Sort All Student by mark (Ascending), if mark equals sort by Name and display using Comprator"", ""Quit""};
+        int choice;
+        StudentList list = new StudentList();
+        do {
+            System.out.println(""Student managing program."");
+            choice = Menu.getChoice(options);
+            switch (choice) {
+                case 1:
+                    list.addStudent();
+                    break;
+                case 2:
+                    list.searchStudent();
+                    break;
+                case 3:
+                    list.updateStudent();
+                    break;
+                case 4:
+                    list.removeStudent();
+                    break;
+                case 5:
+                    list.printAll();
+                    break;
+                case 6:
+                    list.sortByMarkDecresing();
+                    break;
+                case 7:
+                    list.sortByMarkInCresing();
+                    break;
+                default:
+                    System.out.println(""Bye"");
+                    break;
+            }
+        } while (choice > 0 && choice < options.length);
+    }
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Person;
+
+/**
+ *
+ * @author GIA KINH
+ */
+public abstract class Person {
+    private String name;
+
+    public Person(String name) {
+        this.name = name;
+    }
+
+    public Person() {
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+    public void display(){
+        System.out.println(""Name: ""+ this.name);
+    }
+
+    @Override
+    public String toString() {
+        return ""Person{"" + ""name="" + name + '}';
+    }
+    
+    public abstract double getSalary();
+    
+}
+";0
+"package Person;
+
+/**
+ * Abstract base for employees with a computed salary.
+ */
+public abstract class Person {
+    private String name;
+
+    public Person(String name) {
+        this.name = name;
+    }
+
+    public Person() {
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void display() {
+        System.out.println(""Name: "" + name);
+    }
+
+    @Override
+    public String toString() {
+        return ""Person{name="" + name + '}';
+    }
+
+    public abstract double getSalary();
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Person;
+
+/**
+ *
+ * @author GIA KINH
+ */
+public class Officer extends Person{
+    
+    private double bSalary;
+
+    public Officer(String name, double bSalary) {
+        super(name);
+        this.bSalary = bSalary;
+    }
+
+    public Officer(double bSalary) {
+        this.bSalary = bSalary;
+    }
+
+    public Officer() {
+    }
+
+    @Override
+    public void display() {
+        super.display(); //To change body of generated methods, choose Tools | Templates.
+        System.out.println(""Salary: ""+this.bSalary);
+    }
+    
+    @Override
+    public double getSalary() {
+       return this.bSalary;
+    }
+    
+}
+";0
+"package Person;
+
+/**
+ * An officer with a fixed base salary.
+ */
+public class Officer extends Person {
+
+    private double bSalary;
+
+    public Officer(String name, double bSalary) {
+        super(name);
+        this.bSalary = bSalary;
+    }
+
+    public Officer(double bSalary) {
+        this.bSalary = bSalary;
+    }
+
+    public Officer() {
+    }
+
+    @Override
+    public void display() {
+        super.display();
+        System.out.println(""Salary: "" + bSalary);
+    }
+
+    @Override
+    public double getSalary() {
+        return bSalary;
+    }
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Person;
+
+/**
+ *
+ * @author GIA KINH
+ */
+public class Worker extends Person{
+
+    private double hrs;
+    final double RATE=5.5;
+
+    public Worker(String name, double hrs) {
+        super(name);
+        this.hrs = hrs;
+    }
+
+    public Worker(double hrs) {
+        this.hrs = hrs;
+    }
+
+    public Worker() {
+    }    
+
+    @Override
+    public void display() {
+        super.display(); //To change body of generated methods, choose Tools | Templates.
+        System.out.println(""Hourse: "" + this.hrs);
+        System.out.println(""RATE: ""+this.RATE);
+        System.out.println(""Salary: ""+ this.getSalary());
+    }
+    
+    @Override
+    public double getSalary() {
+       return hrs*RATE;
+    }
+    
+}
+";0
+"package Person;
+
+/**
+ * A worker paid hourly at a fixed rate.
+ */
+public class Worker extends Person {
+
+    private double hrs;
+    final double RATE = 5.5;
+
+    public Worker(String name, double hrs) {
+        super(name);
+        this.hrs = hrs;
+    }
+
+    public Worker(double hrs) {
+        this.hrs = hrs;
+    }
+
+    public Worker() {
+    }
+
+    @Override
+    public void display() {
+        super.display();
+        System.out.println(""Hourse: "" + hrs);
+        System.out.println(""RATE: "" + RATE);
+        System.out.println(""Salary: "" + getSalary());
+    }
+
+    @Override
+    public double getSalary() {
+        return hrs * RATE;
+    }
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Person;
+
+import java.util.Scanner;
+
+/**
+ *
+ * @author GIA KINH
+ */
+public class TestMain {
+    public static void main(String[] args) {
+        Person[] e = new Person[10];
+        int n = 0, c = 0;
+        do {
+            System.out.println(""Worker (1); Officer(2): "");
+            Scanner in = new Scanner(System.in);
+            c = in.nextInt();
+            if (c == 1) {
+                //accept information of worker
+                System.out.print(""Enter worker name: "");
+                String name = in.next();
+                System.out.print(""Enter worker working hours: "");
+                int hrs = in.nextInt();
+                e[n] = new Worker(name, hrs);
+                n++;
+            } else if (c == 2) {
+                //accept information of Officer
+                System.out.print(""Enter Officer name: "");
+                String name = in.next();
+                System.out.print(""Enter officer salary: "");
+                double salary = in.nextDouble();
+                e[n] = new Officer(name, salary);
+                n++;
+            }
+        } while (c != 0);
+        //print all objects of e
+        for (int i = 0; i <n; i++) {
+        //print the instance of Worker only
+            if (e[i] instanceof Worker) {
+                e[i].display();
+            }
+        }
+
+    }
+}
+";0
+"package Person;
+
+import java.util.Scanner;
+
+/**
+ * Reads workers/officers until choice 0, then prints only workers.
+ */
+public class TestMain {
+    public static void main(String[] args) {
+        Person[] people = new Person[10];
+        int count = 0;
+        int choice;
+        do {
+            System.out.println(""Worker (1); Officer(2): "");
+            Scanner in = new Scanner(System.in);
+            choice = in.nextInt();
+            if (choice == 1) {
+                System.out.print(""Enter worker name: "");
+                String name = in.next();
+                System.out.print(""Enter worker working hours: "");
+                int hrs = in.nextInt();
+                people[count] = new Worker(name, hrs);
+                count++;
+            } else if (choice == 2) {
+                System.out.print(""Enter Officer name: "");
+                String name = in.next();
+                System.out.print(""Enter officer salary: "");
+                double salary = in.nextDouble();
+                people[count] = new Officer(name, salary);
+                count++;
+            }
+        } while (choice != 0);
+        for (int i = 0; i < count; i++) {
+            if (people[i] instanceof Worker) {
+                people[i].display();
+            }
+        }
+    }
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package PhoneNumber;
+
+/**
+ *
+ * @author GIA KINH
+ */
+public class PhoneNumber {
+    protected int area;
+    protected String number;
+
+    public PhoneNumber(int area, String number) {
+        this.area = area;
+        this.number = number;
+    }
+
+    public PhoneNumber() {
+    }
+    
+     public void display(){
+        if (this.area!=0) {
+            System.out.print(this.area + ""-"");
+        }
+        if(!this.number.isEmpty()){
+            System.out.print(this.number);
+        }
+         System.out.println();
+    }
+
+    public int getArea() {
+        return area;
+    }
+
+    public void setArea(int area) {
+        this.area = area;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+    
+    
+    
+    @Override
+    public String toString() {
+        return ""PhoneNumber{"" + ""area="" + area + "", number="" + number + '}';
+    }
+    
+}
+";0
+"package PhoneNumber;
+
+/**
+ * A local phone number: area code plus number.
+ */
+public class PhoneNumber {
+    protected int area;
+    protected String number;
+
+    public PhoneNumber(int area, String number) {
+        this.area = area;
+        this.number = number;
+    }
+
+    public PhoneNumber() {
+    }
+
+    public void display() {
+        if (area != 0) {
+            System.out.print(area + ""-"");
+        }
+        if (!number.isEmpty()) {
+            System.out.print(number);
+        }
+        System.out.println();
+    }
+
+    public int getArea() {
+        return area;
+    }
+
+    public void setArea(int area) {
+        this.area = area;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+    @Override
+    public String toString() {
+        return ""PhoneNumber{area="" + area + "", number="" + number + '}';
+    }
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package PhoneNumber;
+
+/**
+ *
+ * @author GIA KINH
+ */
+public class IntPhoneNumber extends PhoneNumber{
+    protected String countryCode;
+
+    public IntPhoneNumber() {
+    }
+
+    public IntPhoneNumber(String countryCode, int area, String number) {
+        super(area, number);
+        this.countryCode = countryCode;
+    }
+    
+    @Override
+    public void display(){
+        if (!this.countryCode.isEmpty()) {
+            System.out.print(this.countryCode + ""-"");
+        }
+        if (this.area!=0) {
+            System.out.print(this.area + ""-"");
+        }
+        if(!this.number.isEmpty()){
+            System.out.print(this.number);
+        }
+        System.out.println();
+    }
+}
+";0
+"package PhoneNumber;
+
+/**
+ * An international phone number: country code, area code, and number.
+ */
+public class IntPhoneNumber extends PhoneNumber {
+    protected String countryCode;
+
+    public IntPhoneNumber() {
+    }
+
+    public IntPhoneNumber(String countryCode, int area, String number) {
+        super(area, number);
+        this.countryCode = countryCode;
+    }
+
+    @Override
+    public void display() {
+        if (!countryCode.isEmpty()) {
+            System.out.print(countryCode + ""-"");
+        }
+        if (area != 0) {
+            System.out.print(area + ""-"");
+        }
+        if (!number.isEmpty()) {
+            System.out.print(number);
+        }
+        System.out.println();
+    }
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package PhoneNumber;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+/**
+ *
+ * @author GIA KINH
+ */
+public class TestMain {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println(""Enter list of phone numbers"");
+        System.out.println(""-----------------------------------------"");
+        ArrayList<PhoneNumber> phoneNumbers = new ArrayList<PhoneNumber>();
+        int choose = 0;
+        int area;
+        String number;
+        String codeCountry; 
+        do{
+            System.out.print(""Type of phone number ? (1 – local phone, 2 – Inter phone number, 0 - exit): "");
+            choose = scanner.nextInt();
+            switch(choose){
+                case 1:
+                    System.out.print(""Enter area code: "");
+                    area = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.print(""Enter number: "");
+                    number = scanner.next();
+                    scanner.nextLine();
+                    phoneNumbers.add(new PhoneNumber(area, number));
+                    break;
+                case 2:
+                    System.out.print(""Enter country code: "");
+                    codeCountry = scanner.next();
+                    scanner.nextLine();
+                    System.out.print(""Enter area code: "");
+                    area = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.print(""Enter number: "");
+                    number = scanner.next();
+                    scanner.nextLine();
+                    phoneNumbers.add(new IntPhoneNumber(codeCountry,area, number));
+                    break;
+                case 0:
+                    break;
+                default:
+                    System.out.println(""Please enter [0->2]"");
+                    break;
+            }
+        }while(choose !=0);
+        System.out.println(""List of phone number:"");
+        System.out.println(""----------------------------------------"");
+        for (PhoneNumber phoneNumber: phoneNumbers) {
+            phoneNumber.display();
+        }
+    }
+}
+";0
+"package PhoneNumber;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+/**
+ * Reads a list of local/international phone numbers, then prints them.
+ */
+public class TestMain {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println(""Enter list of phone numbers"");
+        System.out.println(""-----------------------------------------"");
+        ArrayList<PhoneNumber> phoneNumbers = new ArrayList<>();
+        int choice;
+        do {
+            System.out.print(""Type of phone number ? (1 – local phone, 2 – Inter phone number, 0 - exit): "");
+            choice = scanner.nextInt();
+            switch (choice) {
+                case 1: {
+                    System.out.print(""Enter area code: "");
+                    int area = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.print(""Enter number: "");
+                    String number = scanner.next();
+                    scanner.nextLine();
+                    phoneNumbers.add(new PhoneNumber(area, number));
+                    break;
+                }
+                case 2: {
+                    System.out.print(""Enter country code: "");
+                    String countryCode = scanner.next();
+                    scanner.nextLine();
+                    System.out.print(""Enter area code: "");
+                    int area = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.print(""Enter number: "");
+                    String number = scanner.next();
+                    scanner.nextLine();
+                    phoneNumbers.add(new IntPhoneNumber(countryCode, area, number));
+                    break;
+                }
+                case 0:
+                    break;
+                default:
+                    System.out.println(""Please enter [0->2]"");
+                    break;
+            }
+        } while (choice != 0);
+        System.out.println(""List of phone number:"");
+        System.out.println(""----------------------------------------"");
+        for (PhoneNumber phoneNumber : phoneNumbers) {
+            phoneNumber.display();
+        }
+    }
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Dictionary;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+/**
+ *
+ * @author GIA KINH
+ */
+public class Dictionary {
+
+    public static ArrayList<String> listwords = new ArrayList<String>();
+
+    public static void readDataFormFile() {
+        File file = new File(""D:\\FPT UNIVERSITY\\STUDY\\KY 2\\PRO\\BIN\\STRING WORK SHOP\\String_workshop\\src\\Dictionary\\en-vi.txt"");
+        try {
+            if (file.exists()) {
+                Scanner scanner = new Scanner(file);
+                while(scanner.hasNextLine()){
+                    String data = scanner.nextLine();
+                    listwords.add(data.trim().replaceAll(""\\s+"", "" ""));
+                }
+            }else{
+                try {
+                    file.createNewFile();
+                } catch (IOException ex) {
+                    System.out.println(""Can not create file"");
+                }
+            }
+        } catch (FileNotFoundException ex) {
+            System.out.println(""File data not found"");
+        }
+    }
+
+    public Dictionary() {
+        readDataFormFile();
+    }
+    
+
+    public String lookup(String word) {
+        for (String wordString : listwords) {
+            StringTokenizer tokenizer = new StringTokenizer(wordString, "":"");
+            String english = tokenizer.nextToken().toLowerCase().trim();
+            String vietname = tokenizer.nextToken().toLowerCase().trim();
+            if (word.toLowerCase().equals(english)) {
+                return vietname;
+            }
+        }
+        return ""not found"";
+    }
+}
+";0
+"package Dictionary;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+
+/**
+ * An English-Vietnamese dictionary backed by a text file.
+ */
+public class Dictionary {
+
+    public static ArrayList<String> listwords = new ArrayList<>();
+
+    public static void readDataFormFile() {
+        File file = new File(""D:\\FPT UNIVERSITY\\STUDY\\KY 2\\PRO\\BIN\\STRING WORK SHOP\\String_workshop\\src\\Dictionary\\en-vi.txt"");
+        try {
+            if (file.exists()) {
+                Scanner scanner = new Scanner(file);
+                while (scanner.hasNextLine()) {
+                    String line = scanner.nextLine();
+                    listwords.add(line.trim().replaceAll(""\\s+"", "" ""));
+                }
+            } else {
+                try {
+                    file.createNewFile();
+                } catch (IOException ex) {
+                    System.out.println(""Can not create file"");
+                }
+            }
+        } catch (FileNotFoundException ex) {
+            System.out.println(""File data not found"");
+        }
+    }
+
+    public Dictionary() {
+        readDataFormFile();
+    }
+
+    public String lookup(String word) {
+        for (String entry : listwords) {
+            StringTokenizer tokenizer = new StringTokenizer(entry, "":"");
+            String english = tokenizer.nextToken().toLowerCase().trim();
+            String vietnamese = tokenizer.nextToken().toLowerCase().trim();
+            if (word.equalsIgnoreCase(english)) {
+                return vietnamese;
+            }
+        }
+        return ""not found"";
+    }
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Dictionary;
+
+import java.util.Scanner;
+
+/**
+ *
+ * @author GIA KINH
+ */
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Dictionary dictionary = new Dictionary();
+        String word;
+        do{
+            System.out.print(""Enter the word: "");
+            word = scanner.nextLine();
+            if (word.isEmpty()) {
+                break;
+            }else{
+                System.out.println(""Meaning: "" + dictionary.lookup(word));
+            }
+        }while(true);
+    }
+}
+";0
+"package Dictionary;
+
+import java.util.Scanner;
+
+/**
+ * Repeatedly looks up words until an empty line is entered.
+ */
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Dictionary dictionary = new Dictionary();
+        while (true) {
+            System.out.print(""Enter the word: "");
+            String word = scanner.nextLine();
+            if (word.isEmpty()) {
+                break;
+            }
+            System.out.println(""Meaning: "" + dictionary.lookup(word));
+        }
+    }
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Exchange_money;
+
+/**
+ *
+ * @author GIA KINH
+ */
+public class Rate {
+    private String CODE1;
+    private String CODE2;
+    private double rate;
+
+    public Rate(String CODE1, String CODE2, double rate) {
+        this.CODE1 = CODE1;
+        this.CODE2 = CODE2;
+        this.rate = rate;
+    }
+
+    public Rate() {
+    }
+
+    public String getCODE1() {
+        return CODE1;
+    }
+
+    public void setCODE1(String CODE1) {
+        this.CODE1 = CODE1;
+    }
+
+    public String getCODE2() {
+        return CODE2;
+    }
+
+    public void setCODE2(String CODE2) {
+        this.CODE2 = CODE2;
+    }
+
+    public double getRate() {
+        return rate;
+    }
+
+    public void setRate(double rate) {
+        this.rate = rate;
+    }
+
+    @Override
+    public String toString() {
+        return ""Rate{"" + ""CODE1="" + CODE1 + "", CODE2="" + CODE2 + "", rate="" + rate + '}';
+    }
+    
+}
+";0
+"package Exchange_money;
+
+/**
+ * A currency pair with an amount/rate value.
+ */
+public class Rate {
+    private String code1;
+    private String code2;
+    private double rate;
+
+    public Rate(String code1, String code2, double rate) {
+        this.code1 = code1;
+        this.code2 = code2;
+        this.rate = rate;
+    }
+
+    public Rate() {
+    }
+
+    public String getCODE1() {
+        return code1;
+    }
+
+    public void setCODE1(String code1) {
+        this.code1 = code1;
+    }
+
+    public String getCODE2() {
+        return code2;
+    }
+
+    public void setCODE2(String code2) {
+        this.code2 = code2;
+    }
+
+    public double getRate() {
+        return rate;
+    }
+
+    public void setRate(double rate) {
+        this.rate = rate;
+    }
+
+    @Override
+    public String toString() {
+        return ""Rate{CODE1="" + code1 + "", CODE2="" + code2 + "", rate="" + rate + '}';
+    }
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Exchange_money;
+
+import java.util.ArrayList;
+import java.util.StringTokenizer;
+
+/**
+ *
+ * @author GIA KINH
+ */
+public class Exchange {
+
+    public static ArrayList<String> listRates = new ArrayList<String>();
+
+    public static void createRete() {
+        listRates.add(""USD;VND;17000"");
+        listRates.add(""EUR;USD;1.2"");
+        listRates.add(""USD;IDN;15789"");
+        listRates.add(""USD;EUR;0.83"");
+        listRates.add(""CAD;IDN;16869"");
+    }
+
+    public double convert(String code1, String code2, double amount) {
+        createRete();
+        for (String rateString : listRates) {
+            StringTokenizer tokenizer = new StringTokenizer(rateString, "";"");
+            String tokenizer_code1 = tokenizer.nextToken();
+            String tokenizer_code2 = tokenizer.nextToken();
+            Double tokenizer_amount = Double.parseDouble(tokenizer.nextToken());
+            if (code1.toLowerCase().equals(tokenizer_code1.toLowerCase()) && code2.toLowerCase().equals(tokenizer_code2.toLowerCase())) {
+                return tokenizer_amount * amount;
+            }
+        }
+        System.out.println(""Can not found code!!!!"");
+        return amount;
+    }
+}
+";0
+"package Exchange_money;
+
+import java.util.ArrayList;
+import java.util.StringTokenizer;
+
+/**
+ * Looks up a known ""code1;code2;rate"" entry and converts an amount.
+ */
+public class Exchange {
+
+    public static ArrayList<String> listRates = new ArrayList<>();
+
+    public static void createRete() {
+        listRates.add(""USD;VND;17000"");
+        listRates.add(""EUR;USD;1.2"");
+        listRates.add(""USD;IDN;15789"");
+        listRates.add(""USD;EUR;0.83"");
+        listRates.add(""CAD;IDN;16869"");
+    }
+
+    public double convert(String code1, String code2, double amount) {
+        createRete();
+        for (String entry : listRates) {
+            StringTokenizer tokenizer = new StringTokenizer(entry, "";"");
+            String fromCode = tokenizer.nextToken();
+            String toCode = tokenizer.nextToken();
+            double knownRate = Double.parseDouble(tokenizer.nextToken());
+            if (code1.equalsIgnoreCase(fromCode) && code2.equalsIgnoreCase(toCode)) {
+                return knownRate * amount;
+            }
+        }
+        System.out.println(""Can not found code!!!!"");
+        return amount;
+    }
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Exchange_money;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+
+/**
+ *
+ * @author GIA KINH
+ */
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print(""Enter the first currency code: "");
+        String code1 = scanner.nextLine();
+        System.out.print(""Enter the second currency code: "");
+        String code2 = scanner.nextLine();
+        System.out.print(""Enter the amount of first currency: "");
+        double amount = scanner.nextDouble();
+        Rate rate = new Rate(code1, code2, amount);
+        Exchange exchange = new Exchange();
+        System.out.println(""The amount after converted: "" + exchange.convert(rate.getCODE1(), rate.getCODE2(), rate.getRate()));
+
+    }
+}
+";0
+"package Exchange_money;
+
+import java.util.Scanner;
+
+/**
+ * Reads a currency conversion request and prints the converted amount.
+ */
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print(""Enter the first currency code: "");
+        String code1 = scanner.nextLine();
+        System.out.print(""Enter the second currency code: "");
+        String code2 = scanner.nextLine();
+        System.out.print(""Enter the amount of first currency: "");
+        double amount = scanner.nextDouble();
+        Rate rate = new Rate(code1, code2, amount);
+        Exchange exchange = new Exchange();
+        System.out.println(""The amount after converted: "" + exchange.convert(rate.getCODE1(), rate.getCODE2(), rate.getRate()));
+    }
+}
+";1
+"/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Workshop6;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+
+/**
+ *
+ * @author GIA KINH
+ */
+public class Number_String {
+    
+    public static void menu(){
+        System.out.println(""1. search words \""me\"", \""why\"", \""well\"""");
+        System.out.println(""2. \""you\"" word appear in @str how many times?"");
+        System.out.println(""3. Replace the first character of each word by its UPPER CASE"");
+        System.out.println(""4. Replace the first character of each word by its LOWER CASE, and the last character of each word by its UPPER CASE"");
+        System.out.println(""5. Extract @str string to an array of words, then display those words by increasing order."");
+        System.out.println(""6. Give a character named c, remove from @str the first character which is equals to c. "");
+        System.out.println(""7. Count how many words in @str, display “empty string” if @str is an empty string."");
+        System.out.println(""8. Print all letters of @str only."");
+        System.out.println(""9. Reserve @str."");
+        System.out.println(""10. Replace all letter ‘a’ by ‘A’ and ‘b’ by ‘B’."");
+        System.out.println(""11. How many upper letters in @str?"");
+        System.out.println(""12. Show menu"");
+        System.out.println(""0. exit"");
+    }
+    
+    public static boolean checkMeWhyWell(String string){
+        if (string.toLowerCase().contains(""me"") && string.toLowerCase().contains(""why"") && string.toLowerCase().contains(""well"")) {
+            return true;
+        }
+        return false;
+    }
+    
+    public static int countWordYou(String string){
+        StringTokenizer tokenizer = new StringTokenizer(string, "" "");
+        int count=0;
+        while(tokenizer.hasMoreTokens()){
+            if (tokenizer.nextToken().toLowerCase().equals(""you"")) {
+                count++;
+            }
+        }
+        return count;
+    }
+    
+    public static String upperFisrtCharWord(String string){
+        StringTokenizer tokenizer = new StringTokenizer(string, "" "");
+        String newString = """";
+        while(tokenizer.hasMoreTokens()){
+            String str = tokenizer.nextToken();
+            newString+= str.substring(0, 1).toUpperCase() + str.substring(1).toLowerCase() + "" "";
+        }
+        return newString.trim();
+    }
+    
+    public static String upperLastCharWord(String string){
+        StringTokenizer tokenizer = new StringTokenizer(string, "" "");
+        String newString = """";
+        while(tokenizer.hasMoreTokens()){
+            String str = tokenizer.nextToken();
+            newString+= str.substring(0, str.length()-1).toLowerCase()+ str.substring(str.length()-1).toUpperCase() + "" "";
+        }
+        return newString.trim();
+    }
+    
+    public static void sortWord(String string){
+        String[] listStrings = string.trim().replaceAll(""\\s+"", "" "").split("" "");
+        ArrayList<String> list = new ArrayList<String>(Arrays.asList(listStrings));
+        Collections.sort(list);
+        System.out.println(""After string sort word: "" + list.toString());
+    }
+    
+    public static String removeCharString(String string, char c){
+        StringBuilder stringBuilder = new StringBuilder(string);
+        if (string.indexOf(c)!=-1) {
+            stringBuilder.deleteCharAt(string.indexOf(c));
+            return stringBuilder.toString();
+        }
+        System.out.println(""Can not found character"");
+        return string;
+    }
+    
+    
+    public static int countWords(String string){
+        if(!string.isEmpty()){
+            String[] listStrings = string.trim().split(""\\s+""); 
+            return listStrings.length;
+        }else{
+            System.out.println(""Empty String"");
+            return 0;
+        }
+    }
+    
+    public static void showAllLetters(String string){
+        char[] listChars = string.replaceAll(""[^a-zA-Z]"", """").toCharArray();
+        ArrayList<Character> list = new ArrayList<>();
+        for(char c: listChars){
+            if (!list.contains(c)) {
+                list.add(c);
+            }
+        }
+        System.out.println(""All letters: "" + Arrays.toString(list.toArray()));
+    }
+    
+    
+    public static String reserveString(String string){
+        StringBuilder stringBuilder = new StringBuilder(string);
+        return stringBuilder.reverse().toString();
+    }
+    
+    public static String replaceLetterAandB(String string){
+        return string.replaceAll(""a"", ""A"").replaceAll(""b"", ""B"");
+    }
+    
+    public static int countUpperLetter(String string){
+       String[] liStrings = string.trim().replaceAll(""[^A-Z]"", "" "").replaceAll(""\\s+"", "" "").split("" "");
+       return  liStrings.length;
+    }
+    
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print(""Enter a string: "");
+        String string = scanner.nextLine();
+        menu();
+        do {
+            System.out.print(""Select option: "");
+            int choose = scanner.nextInt();
+            switch(choose){
+                case 1:
+                    System.out.println(""String have contains \""me\"", \""why\"", \""well\""? "" +checkMeWhyWell(string));
+                    break;
+                case 2:
+                    System.out.println(""Have ""+ countWordYou(string) +"" word \""you\"" in string"");
+                    break;
+                case 3:
+                    string = upperFisrtCharWord(string);
+                    System.out.println(""After String: "" + string);
+                    break;
+                case 4:
+                    string = upperLastCharWord(string);
+                    System.out.println(""After String: "" + string);
+                    break;
+                case 5:
+                    sortWord(string);
+                    break;
+                case 6:
+                    System.out.print(""Enter char: "");
+                    char c = scanner.next().charAt(0);
+                    string = removeCharString(string, c);
+                    System.out.println(""After string remove char: ""+ string);
+                    break;
+                case 7:
+                    int count = countWords(string);
+                    if (count > 0) {
+                        System.out.println(""Words in string: "" + count);
+                    }
+                    break;
+                case 8:
+                    showAllLetters(string);
+                    break;
+                case 9:
+                    System.out.println(""Reserve string: "" + reserveString(string));
+                    break;
+                case 10:
+                    string = replaceLetterAandB(string);
+                    System.out.println(""After string: ""+string);
+                    break;
+                case 11:
+                    System.out.println(""Have upper letter: ""+countUpperLetter(string));
+                    break;
+                case 12:
+                    menu();
+                    break;
+                case 0:
+                    break;
+                default:
+                    System.out.println(""Please enter [0->12]"");
+                    break;
+            }
+            if (choose==0) {
+                break;
+            }
+        } while (true);
+    }
+}
+";0
+"package Workshop6;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+
+/**
+ * A menu of string-processing exercises applied to one input string.
+ */
+public class Number_String {
+
+    public static void menu() {
+        System.out.println(""1. search words \""me\"", \""why\"", \""well\"""");
+        System.out.println(""2. \""you\"" word appear in @str how many times?"");
+        System.out.println(""3. Replace the first character of each word by its UPPER CASE"");
+        System.out.println(""4. Replace the first character of each word by its LOWER CASE, and the last character of each word by its UPPER CASE"");
+        System.out.println(""5. Extract @str string to an array of words, then display those words by increasing order."");
+        System.out.println(""6. Give a character named c, remove from @str the first character which is equals to c. "");
+        System.out.println(""7. Count how many words in @str, display “empty string” if @str is an empty string."");
+        System.out.println(""8. Print all letters of @str only."");
+        System.out.println(""9. Reserve @str."");
+        System.out.println(""10. Replace all letter ‘a’ by ‘A’ and ‘b’ by ‘B’."");
+        System.out.println(""11. How many upper letters in @str?"");
+        System.out.println(""12. Show menu"");
+        System.out.println(""0. exit"");
+    }
+
+    public static boolean checkMeWhyWell(String string) {
+        String lower = string.toLowerCase();
+        return lower.contains(""me"") && lower.contains(""why"") && lower.contains(""well"");
+    }
+
+    public static int countWordYou(String string) {
+        StringTokenizer tokenizer = new StringTokenizer(string, "" "");
+        int count = 0;
+        while (tokenizer.hasMoreTokens()) {
+            if (tokenizer.nextToken().equalsIgnoreCase(""you"")) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public static String upperFisrtCharWord(String string) {
+        StringTokenizer tokenizer = new StringTokenizer(string, "" "");
+        StringBuilder result = new StringBuilder();
+        while (tokenizer.hasMoreTokens()) {
+            String word = tokenizer.nextToken();
+            result.append(word.substring(0, 1).toUpperCase()).append(word.substring(1).toLowerCase()).append("" "");
+        }
+        return result.toString().trim();
+    }
+
+    public static String upperLastCharWord(String string) {
+        StringTokenizer tokenizer = new StringTokenizer(string, "" "");
+        StringBuilder result = new StringBuilder();
+        while (tokenizer.hasMoreTokens()) {
+            String word = tokenizer.nextToken();
+            result.append(word.substring(0, word.length() - 1).toLowerCase())
+                    .append(word.substring(word.length() - 1).toUpperCase())
+                    .append("" "");
+        }
+        return result.toString().trim();
+    }
+
+    public static void sortWord(String string) {
+        String[] words = string.trim().replaceAll(""\\s+"", "" "").split("" "");
+        ArrayList<String> list = new ArrayList<>(Arrays.asList(words));
+        Collections.sort(list);
+        System.out.println(""After string sort word: "" + list.toString());
+    }
+
+    public static String removeCharString(String string, char c) {
+        StringBuilder builder = new StringBuilder(string);
+        int index = string.indexOf(c);
+        if (index != -1) {
+            builder.deleteCharAt(index);
+            return builder.toString();
+        }
+        System.out.println(""Can not found character"");
+        return string;
+    }
+
+    public static int countWords(String string) {
+        if (string.isEmpty()) {
+            System.out.println(""Empty String"");
+            return 0;
+        }
+        return string.trim().split(""\\s+"").length;
+    }
+
+    public static void showAllLetters(String string) {
+        char[] chars = string.replaceAll(""[^a-zA-Z]"", """").toCharArray();
+        ArrayList<Character> seen = new ArrayList<>();
+        for (char c : chars) {
+            if (!seen.contains(c)) {
+                seen.add(c);
+            }
+        }
+        System.out.println(""All letters: "" + Arrays.toString(seen.toArray()));
+    }
+
+    public static String reserveString(String string) {
+        return new StringBuilder(string).reverse().toString();
+    }
+
+    public static String replaceLetterAandB(String string) {
+        return string.replaceAll(""a"", ""A"").replaceAll(""b"", ""B"");
+    }
+
+    public static int countUpperLetter(String string) {
+        String[] parts = string.trim().replaceAll(""[^A-Z]"", "" "").replaceAll(""\\s+"", "" "").split("" "");
+        return parts.length;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print(""Enter a string: "");
+        String string = scanner.nextLine();
+        menu();
+        while (true) {
+            System.out.print(""Select option: "");
+            int choice = scanner.nextInt();
+            switch (choice) {
+                case 1:
+                    System.out.println(""String have contains \""me\"", \""why\"", \""well\""? "" + checkMeWhyWell(string));
+                    break;
+                case 2:
+                    System.out.println(""Have "" + countWordYou(string) + "" word \""you\"" in string"");
+                    break;
+                case 3:
+                    string = upperFisrtCharWord(string);
+                    System.out.println(""After String: "" + string);
+                    break;
+                case 4:
+                    string = upperLastCharWord(string);
+                    System.out.println(""After String: "" + string);
+                    break;
+                case 5:
+                    sortWord(string);
+                    break;
+                case 6:
+                    System.out.print(""Enter char: "");
+                    char c = scanner.next().charAt(0);
+                    string = removeCharString(string, c);
+                    System.out.println(""After string remove char: "" + string);
+                    break;
+                case 7:
+                    int count = countWords(string);
+                    if (count > 0) {
+                        System.out.println(""Words in string: "" + count);
+                    }
+                    break;
+                case 8:
+                    showAllLetters(string);
+                    break;
+                case 9:
+                    System.out.println(""Reserve string: "" + reserveString(string));
+                    break;
+                case 10:
+                    string = replaceLetterAandB(string);
+                    System.out.println(""After string: "" + string);
+                    break;
+                case 11:
+                    System.out.println(""Have upper letter: "" + countUpperLetter(string));
+                    break;
+                case 12:
+                    menu();
+                    break;
+                case 0:
+                    break;
+                default:
+                    System.out.println(""Please enter [0->12]"");
+                    break;
+            }
+            if (choice == 0) {
+                break;
+            }
+        }
+    }
+}
+";1

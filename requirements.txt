@@ -1,0 +1,14 @@
+# torch ставится отдельно в Dockerfile — из индекса PyTorch под нужную версию CUDA.
+# Локально без Docker: pip install torch==2.13.0 --index-url https://download.pytorch.org/whl/cu126
+numpy==2.5.1
+pandas==3.0.3
+scikit-learn==1.9.0
+transformers==5.13.0
+tokenizers==0.22.2
+safetensors==0.8.0
+huggingface-hub==1.22.0
+# терминальное приложение src/cpp_checker.py
+textual==8.2.8
+tree-sitter==0.26.0
+tree-sitter-c==0.24.2
+tree-sitter-cpp==0.23.4

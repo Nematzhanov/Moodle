@@ -1,0 +1,9 @@
+# Контекст сборки web.Dockerfile: только сервер, сайт и модель C++
+*
+!src/server.py
+!src/cpp_model.py
+!website/
+!models/cpp/
+!requirements-web.txt
+**/__pycache__
+**/.DS_Store

@@ -1,0 +1,15 @@
+{
+  "language": "C++",
+  "base_model": "microsoft/codebert-base",
+  "best_epoch": 2,
+  "val_accuracy": 0.9855,
+  "val_macro_f1": 0.9818,
+  "test_accuracy": 0.9626,
+  "test_macro_f1": 0.9626,
+  "train_size": 1205,
+  "val_size": 138,
+  "test_size": 214,
+  "max_length": 512,
+  "device": "mps",
+  "amp": "выкл"
+}

@@ -1,0 +1,55 @@
+# Сайт с моделью C++:  docker compose up -d --build   → http://localhost:8000
+# Обучение:  docker compose run --rm train                       (C++ и Java)
+#            docker compose run --rm train --lang cpp --epochs 4
+# Проверка:  docker compose run --rm detect                      (интерактивно)
+#            docker compose run --rm detect --lang cpp --file /workspace/solution.cpp
+# Подробно — docs/DOCKER.md
+
+x-gpu: &gpu
+  deploy:
+    resources:
+      reservations:
+        devices:
+          - driver: nvidia
+            count: all
+            capabilities: [gpu]
+
+services:
+  # сайт + обученная модель C++ (модель вшита в образ, папка проекта не нужна)
+  web:
+    build:
+      context: .
+      dockerfile: web.Dockerfile
+    image: codecheck-web:cuda
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+    <<: *gpu
+
+  # train и detect — по запросу (docker compose run), «docker compose up» их не запускает
+  train:
+    profiles: ["tools"]
+    build: .
+    image: codecheck:cuda
+    entrypoint: ["python", "/app/src/train.py"]
+    user: "${LOCAL_UID:-1000}:${LOCAL_GID:-1000}"
+    volumes:
+      - ./:/workspace
+      - hf-cache:/cache/huggingface
+    shm_size: "2gb"   # общая память для процессов-воркеров DataLoader
+    <<: *gpu
+
+  detect:
+    profiles: ["tools"]
+    build: .
+    image: codecheck:cuda
+    entrypoint: ["python", "/app/src/detect.py"]
+    user: "${LOCAL_UID:-1000}:${LOCAL_GID:-1000}"
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./:/workspace:ro
+    <<: *gpu
+
+volumes:
+  hf-cache:

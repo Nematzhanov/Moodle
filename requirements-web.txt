@@ -1,0 +1,6 @@
+# Зависимости образа «сайт + модель C++» (web.Dockerfile). torch ставится отдельно — под CUDA.
+numpy==2.5.1
+transformers==5.13.0
+tokenizers==0.22.2
+safetensors==0.8.0
+huggingface-hub==1.22.0
