@@ -1,0 +1,50 @@
+
+Устройство: mps
+==================================================
+  ЗАГРУЗКА ДАННЫХ Java
+==================================================
+  Java обучение: 5996 примеров, {1: np.int64(2998), 0: np.int64(2998)}
+  Java тест:     808 примеров, {0: np.int64(404), 1: np.int64(404)}
+  Java OOD-тест: 396 примеров, {0: np.int64(198), 1: np.int64(198)}
+
+==================================================
+  ОБУЧЕНИЕ МОДЕЛИ: Java
+==================================================
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/197 [00:00<?, ?it/s]Loading weights: 100%|██████████| 197/197 [00:00<00:00, 59590.21it/s]
+[transformers] [1mRobertaForSequenceClassification LOAD REPORT[0m from: microsoft/codebert-base
+Key                        | Status     | 
+---------------------------+------------+-
+pooler.dense.weight        | UNEXPECTED | 
+pooler.dense.bias          | UNEXPECTED | 
+classifier.out_proj.weight | MISSING    | 
+classifier.dense.weight    | MISSING    | 
+classifier.out_proj.bias   | MISSING    | 
+classifier.dense.bias      | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+  Устройство: mps, смешанная точность: выкл
+  train 5396 / val 600 / test 808; веса классов: человек 1.00, ИИ 1.00
+
+Начинаем обучение (3 эпохи, батч 2 × аккумуляция 3 = эффективный 6)...
+
+  Эпоха 1/3 | Шаг 0/2698 | Loss: 0.8113 | LR: 0.00e+00
+  Эпоха 1/3 | Шаг 50/2698 | Loss: 0.6651 | LR: 1.26e-06
+  Эпоха 1/3 | Шаг 100/2698 | Loss: 0.8359 | LR: 2.44e-06
+  Эпоха 1/3 | Шаг 150/2698 | Loss: 0.6241 | LR: 3.70e-06
+  Эпоха 1/3 | Шаг 200/2698 | Loss: 0.7411 | LR: 4.96e-06
+  Эпоха 1/3 | Шаг 250/2698 | Loss: 0.5478 | LR: 6.15e-06
+  Эпоха 1/3 | Шаг 300/2698 | Loss: 0.7452 | LR: 7.41e-06
+  Эпоха 1/3 | Шаг 350/2698 | Loss: 0.6319 | LR: 8.67e-06
+  Эпоха 1/3 | Шаг 400/2698 | Loss: 0.6256 | LR: 9.85e-06
+  Эпоха 1/3 | Шаг 450/2698 | Loss: 0.7116 | LR: 1.11e-05
+  Эпоха 1/3 | Шаг 500/2698 | Loss: 0.5876 | LR: 1.24e-05
+  Эпоха 1/3 | Шаг 550/2698 | Loss: 0.7235 | LR: 1.36e-05
+  Эпоха 1/3 | Шаг 600/2698 | Loss: 0.8492 | LR: 1.48e-05
+  Эпоха 1/3 | Шаг 650/2698 | Loss: 0.9846 | LR: 1.61e-05
+  Эпоха 1/3 | Шаг 700/2698 | Loss: 0.8059 | LR: 1.73e-05
+  Эпоха 1/3 | Шаг 750/2698 | Loss: 0.5571 | LR: 1.85e-05
+/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/multiprocessing/resource_tracker.py:475: UserWarning: resource_tracker: There appear to be 1 leaked semaphore objects to clean up at shutdown: {'/loky-92594-ccda74ju'}
+  warnings.warn(

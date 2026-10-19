@@ -4,8 +4,11 @@ __pycache__/
 .DS_Store
 .idea/workspace.xml
 
-# резервные копии датасетов и модели-кандидаты до утверждения
-data/backup_*/
+# модели-кандидаты до утверждения
 models/*_candidate/
-models/*_backup_*/
-logs/
+
+# кэши HyperFrames Studio (пересоздаются сами)
+videos/*/.thumbnails/
+videos/*/.waveform-cache/
+videos/*/.hyperframes/
+node_modules/

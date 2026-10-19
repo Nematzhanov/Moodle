@@ -1,0 +1,15 @@
+{
+  "language": "Java",
+  "base_model": "microsoft/codebert-base",
+  "best_epoch": 1,
+  "val_accuracy": 0.7402,
+  "val_macro_f1": 0.7388,
+  "test_accuracy": 0.9462,
+  "test_macro_f1": 0.9462,
+  "train_size": 2229,
+  "val_size": 254,
+  "test_size": 130,
+  "max_length": 512,
+  "device": "mps",
+  "amp": "выкл"
+}

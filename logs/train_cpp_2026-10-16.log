@@ -1,0 +1,99 @@
+
+Устройство: mps
+==================================================
+  ЗАГРУЗКА ДАННЫХ C++
+==================================================
+  C++ обучение: 1343 примеров, {0: np.int64(935), 1: np.int64(408)}
+  C++ тест:     214 примеров, {0: np.int64(111), 1: np.int64(103)}
+
+==================================================
+  ОБУЧЕНИЕ МОДЕЛИ: C++
+==================================================
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/197 [00:00<?, ?it/s]Loading weights: 100%|██████████| 197/197 [00:00<00:00, 35147.30it/s]
+[transformers] [1mRobertaForSequenceClassification LOAD REPORT[0m from: microsoft/codebert-base
+Key                        | Status     | 
+---------------------------+------------+-
+pooler.dense.bias          | UNEXPECTED | 
+pooler.dense.weight        | UNEXPECTED | 
+classifier.dense.bias      | MISSING    | 
+classifier.out_proj.weight | MISSING    | 
+classifier.dense.weight    | MISSING    | 
+classifier.out_proj.bias   | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+  Устройство: mps, смешанная точность: выкл
+  train 1205 / val 138 / test 214; веса классов: человек 0.72, ИИ 1.63
+
+Начинаем обучение (3 эпохи, батч 2 × аккумуляция 3 = эффективный 6)...
+
+  Эпоха 1/3 | Шаг 0/603 | Loss: 0.7286 | LR: 0.00e+00
+  Эпоха 1/3 | Шаг 50/603 | Loss: 0.5108 | LR: 5.67e-06
+  Эпоха 1/3 | Шаг 100/603 | Loss: 0.5272 | LR: 1.10e-05
+  Эпоха 1/3 | Шаг 150/603 | Loss: 0.4679 | LR: 1.67e-05
+  Эпоха 1/3 | Шаг 200/603 | Loss: 0.6293 | LR: 1.97e-05
+  Эпоха 1/3 | Шаг 250/603 | Loss: 0.0531 | LR: 1.92e-05
+  Эпоха 1/3 | Шаг 300/603 | Loss: 0.1562 | LR: 1.85e-05
+  Эпоха 1/3 | Шаг 350/603 | Loss: 0.0100 | LR: 1.79e-05
+  Эпоха 1/3 | Шаг 400/603 | Loss: 0.1217 | LR: 1.73e-05
+  Эпоха 1/3 | Шаг 450/603 | Loss: 0.0356 | LR: 1.67e-05
+  Эпоха 1/3 | Шаг 500/603 | Loss: 0.0061 | LR: 1.61e-05
+  Эпоха 1/3 | Шаг 550/603 | Loss: 2.9455 | LR: 1.55e-05
+  Эпоха 1/3 | Шаг 600/603 | Loss: 0.0058 | LR: 1.48e-05
+
+✅ Эпоха 1 | Loss: 0.4442 | Валидация: точность 92.8%, macro-F1 0.913, loss 0.2310
+
+  Эпоха 2/3 | Шаг 0/603 | Loss: 0.4640 | LR: 1.48e-05
+  Эпоха 2/3 | Шаг 50/603 | Loss: 0.7189 | LR: 1.42e-05
+  Эпоха 2/3 | Шаг 100/603 | Loss: 0.7000 | LR: 1.36e-05
+  Эпоха 2/3 | Шаг 150/603 | Loss: 0.0013 | LR: 1.30e-05
+  Эпоха 2/3 | Шаг 200/603 | Loss: 0.0109 | LR: 1.23e-05
+  Эпоха 2/3 | Шаг 250/603 | Loss: 0.0014 | LR: 1.17e-05
+  Эпоха 2/3 | Шаг 300/603 | Loss: 0.2387 | LR: 1.11e-05
+  Эпоха 2/3 | Шаг 350/603 | Loss: 0.0019 | LR: 1.05e-05
+  Эпоха 2/3 | Шаг 400/603 | Loss: 0.0031 | LR: 9.91e-06
+  Эпоха 2/3 | Шаг 450/603 | Loss: 0.0004 | LR: 9.28e-06
+  Эпоха 2/3 | Шаг 500/603 | Loss: 0.0006 | LR: 8.66e-06
+  Эпоха 2/3 | Шаг 550/603 | Loss: 0.0004 | LR: 8.07e-06
+  Эпоха 2/3 | Шаг 600/603 | Loss: 0.0018 | LR: 7.44e-06
+
+✅ Эпоха 2 | Loss: 0.0883 | Валидация: точность 98.6%, macro-F1 0.982, loss 0.1070
+
+  Эпоха 3/3 | Шаг 0/603 | Loss: 0.0020 | LR: 7.40e-06
+  Эпоха 3/3 | Шаг 50/603 | Loss: 0.0011 | LR: 6.78e-06
+  Эпоха 3/3 | Шаг 100/603 | Loss: 0.0005 | LR: 6.19e-06
+  Эпоха 3/3 | Шаг 150/603 | Loss: 0.0006 | LR: 5.56e-06
+  Эпоха 3/3 | Шаг 200/603 | Loss: 0.0008 | LR: 4.94e-06
+  Эпоха 3/3 | Шаг 250/603 | Loss: 0.0031 | LR: 4.35e-06
+  Эпоха 3/3 | Шаг 300/603 | Loss: 0.0002 | LR: 3.72e-06
+  Эпоха 3/3 | Шаг 350/603 | Loss: 0.0005 | LR: 3.09e-06
+  Эпоха 3/3 | Шаг 400/603 | Loss: 0.0007 | LR: 2.50e-06
+  Эпоха 3/3 | Шаг 450/603 | Loss: 0.0004 | LR: 1.88e-06
+  Эпоха 3/3 | Шаг 500/603 | Loss: 0.0007 | LR: 1.25e-06
+  Эпоха 3/3 | Шаг 550/603 | Loss: 0.0003 | LR: 6.63e-07
+  Эпоха 3/3 | Шаг 600/603 | Loss: 0.0006 | LR: 3.68e-08
+
+✅ Эпоха 3 | Loss: 0.0253 | Валидация: точность 97.8%, macro-F1 0.973, loss 0.0986
+
+
+─── Финальный отчёт [C++] (эпоха 2, валидация 98.6%, тест 96.3%) ───
+              precision    recall  f1-score   support
+
+     Человек      0.981     0.946     0.963       111
+          ИИ      0.944     0.981     0.962       103
+
+    accuracy                          0.963       214
+   macro avg      0.963     0.963     0.963       214
+weighted avg      0.963     0.963     0.963       214
+
+Сохраняем модель в '/Users/mukhammadzahidnematzhanov/PycharmProjects/Moodletest/models/cpp'...
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [00:00<00:00,  1.29it/s]Writing model shards: 100%|██████████| 1/1 [00:00<00:00,  1.29it/s]
+✅ Модель [C++] сохранена в '/Users/mukhammadzahidnematzhanov/PycharmProjects/Moodletest/models/cpp'!
+
+
+==================================================
+  ВСЁ ГОТОВО!
+  C++: тест 96.3% → /Users/mukhammadzahidnematzhanov/PycharmProjects/Moodletest/models/cpp/
+==================================================

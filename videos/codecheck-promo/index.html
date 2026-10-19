@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1920, height=1080">
+    <title>CodeCheck — промо (60 с, светлая тема)</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Inter"; font-weight: 400; src: url("assets/fonts/inter-latin-400.woff2") format("woff2"); unicode-range: U+0000-00FF, U+2000-206F, U+20AC, U+2122; }
+      @font-face { font-family: "Inter"; font-weight: 400; src: url("assets/fonts/inter-cyrillic-400.woff2") format("woff2"); unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+      @font-face { font-family: "Inter"; font-weight: 500; src: url("assets/fonts/inter-latin-500.woff2") format("woff2"); unicode-range: U+0000-00FF, U+2000-206F, U+20AC, U+2122; }
+      @font-face { font-family: "Inter"; font-weight: 500; src: url("assets/fonts/inter-cyrillic-500.woff2") format("woff2"); unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+      @font-face { font-family: "Inter"; font-weight: 600; src: url("assets/fonts/inter-latin-600.woff2") format("woff2"); unicode-range: U+0000-00FF, U+2000-206F, U+20AC, U+2122; }
+      @font-face { font-family: "Inter"; font-weight: 600; src: url("assets/fonts/inter-cyrillic-600.woff2") format("woff2"); unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+      @font-face { font-family: "Inter"; font-weight: 700; src: url("assets/fonts/inter-latin-700.woff2") format("woff2"); unicode-range: U+0000-00FF, U+2000-206F, U+20AC, U+2122; }
+      @font-face { font-family: "Inter"; font-weight: 700; src: url("assets/fonts/inter-cyrillic-700.woff2") format("woff2"); unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+      @font-face { font-family: "JetBrains Mono"; font-weight: 400; src: url("assets/fonts/jbmono-latin-400.woff2") format("woff2"); unicode-range: U+0000-00FF, U+2000-206F; }
+      @font-face { font-family: "JetBrains Mono"; font-weight: 400; src: url("assets/fonts/jbmono-cyrillic-400.woff2") format("woff2"); unicode-range: U+0400-045F; }
+      @font-face { font-family: "JetBrains Mono"; font-weight: 500; src: url("assets/fonts/jbmono-latin-500.woff2") format("woff2"); unicode-range: U+0000-00FF, U+2000-206F; }
+      @font-face { font-family: "JetBrains Mono"; font-weight: 500; src: url("assets/fonts/jbmono-cyrillic-500.woff2") format("woff2"); unicode-range: U+0400-045F; }
+
+      /* светлая тема сайта: --bg #fff, --bg-soft #f5f5f7, --text #1d1d1f, --accent #0071e3, --accent-2 #7b61ff */
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: #fff; }
+      #root {
+        position: relative; width: 100%; height: 100%; overflow: hidden;
+        background: #fff; color: #1d1d1f; font-family: "Inter", sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* ── общий фон: мягкие свечения (живут весь ролик) ── */
+      #bg { position: absolute; inset: 0; overflow: hidden; }
+      .glow { position: absolute; border-radius: 50%; }
+      #glow-blue { width: 1500px; height: 1500px; left: 220px; top: -260px; opacity: 0;
+        background: radial-gradient(closest-side, rgba(0,113,227,0.11), transparent 70%); }
+      #glow-violet { width: 1200px; height: 1200px; left: 900px; top: 160px; opacity: 0;
+        background: radial-gradient(closest-side, rgba(123,97,255,0.10), transparent 70%); }
+      #glow-red { width: 1300px; height: 1300px; left: 700px; top: -120px; opacity: 0;
+        background: radial-gradient(closest-side, rgba(227,0,43,0.08), transparent 70%); }
+
+      .scene { position: absolute; inset: 0; overflow: hidden; background: transparent; }
+      .cam { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; transform-origin: 0 0; }
+      .grad { background: linear-gradient(100deg, #0071e3 10%, #7b61ff 90%);
+        -webkit-background-clip: text; background-clip: text; color: transparent; }
+      .danger { color: #e3002b; }
+
+      /* курсор macOS и волна клика */
+      .cursor { position: absolute; left: 0; top: 0; width: 44px; height: 54px; }
+      .ripple { position: absolute; width: 90px; height: 90px; border-radius: 50%;
+        border: 3px solid rgba(0,113,227,0.75); opacity: 0; }
+
+      /* ── 1. вопрос ── */
+      #s1-title { position: absolute; left: 0; right: 0; top: 330px; text-align: center; }
+      .line { display: block; font-size: 128px; font-weight: 700; letter-spacing: -0.04em; line-height: 1.08; }
+      .w { display: inline-block; }
+      #s1-eyebrow { position: absolute; left: 0; right: 0; top: 262px; text-align: center;
+        font-size: 30px; font-weight: 600; color: #0071e3; letter-spacing: 0.01em; }
+
+      /* ── 2. проблема в цифрах (широкий холст, камера панорамирует) ── */
+      .pr { position: absolute; top: 0; width: 1600px; height: 1080px; text-align: center; }
+      #pr-a { left: 160px; } #pr-b { left: 2080px; }
+      .pr-kicker { position: absolute; left: 0; right: 0; top: 236px; font-size: 34px; font-weight: 600; color: #0071e3; }
+      .pr-num { position: absolute; left: 0; right: 0; top: 290px; font-size: 290px; font-weight: 700;
+        letter-spacing: -0.06em; line-height: 1; }
+      .pr-text { position: absolute; left: 0; right: 0; top: 620px; font-size: 54px; font-weight: 700; letter-spacing: -0.02em; }
+      .pr-trend { position: absolute; left: 0; right: 0; top: 730px; display: flex; justify-content: center; gap: 18px; }
+      .chip { padding: 12px 28px; border-radius: 999px; background: #f5f5f7; font-size: 28px; font-weight: 600; color: #1d1d1f; }
+      .chip b { color: #0071e3; font-weight: 700; }
+      .pr-src { position: absolute; left: 0; right: 0; top: 850px; font-size: 25px; color: #86868b; }
+      #pr-b .pr-src { top: 740px; }
+
+      /* ── 3. поиск заимствований не видит ИИ-код ── */
+      .p-cap { position: absolute; left: 0; right: 0; top: 150px; text-align: center;
+        font-size: 60px; font-weight: 700; letter-spacing: -0.03em; }
+      #p-cap2 { opacity: 0; }
+      #pl-card { position: absolute; left: 560px; top: 290px; width: 800px; height: 450px; border-radius: 32px;
+        background: #fff; box-shadow: 0 40px 100px -40px rgba(0,0,0,0.25), 0 0 0 1px rgba(0,0,0,0.07); }
+      #pl-head { position: absolute; left: 48px; top: 44px; font-size: 34px; font-weight: 700; letter-spacing: -0.02em; }
+      #pl-file { position: absolute; right: 48px; top: 50px; font: 500 22px "JetBrains Mono", monospace; color: #86868b; }
+      #pl-track { position: absolute; left: 48px; right: 48px; top: 126px; height: 10px; border-radius: 5px; background: #ececf0; overflow: hidden; }
+      #pl-fill { position: absolute; left: 0; top: 0; bottom: 0; width: 100%; border-radius: 5px;
+        background: linear-gradient(90deg, #0071e3, #7b61ff); transform-origin: 0 50%; transform: scaleX(0); }
+      #pl-status { position: absolute; left: 48px; top: 156px; font-size: 22px; color: #86868b; }
+      #pl-big { position: absolute; left: 44px; top: 200px; font-size: 150px; font-weight: 700; letter-spacing: -0.05em;
+        line-height: 1; color: #1f9d55; }
+      #pl-big-l { position: absolute; left: 270px; top: 268px; font-size: 32px; font-weight: 600; }
+      #pl-badge { position: absolute; left: 48px; top: 374px; height: 46px; padding: 0 24px; border-radius: 999px;
+        background: rgba(31,157,85,0.12); color: #1f9d55; font-size: 22px; font-weight: 600; line-height: 46px; }
+      #pl-stamp-wrap { position: absolute; left: 0; right: 0; top: 440px; text-align: center; }
+      #pl-stamp { display: inline-block; padding: 14px 38px; border: 7px solid #e3002b; border-radius: 18px;
+        color: #e3002b; font-size: 66px; font-weight: 700; letter-spacing: 0.02em; background: rgba(255,255,255,0.86); opacity: 0; }
+      #p-sub { position: absolute; left: 0; right: 0; top: 820px; text-align: center; font-size: 34px; color: #6e6e73; }
+
+      /* ── 4. сайт: окно браузера с настоящими снимками (светлая тема) ── */
+      #browser { position: absolute; left: 240px; top: 150px; width: 1440px; height: 842px; border-radius: 22px;
+        overflow: hidden; background: #fff;
+        box-shadow: 0 50px 120px -40px rgba(0,0,0,0.30), 0 0 0 1px rgba(0,0,0,0.09); }
+      #br-bar { position: absolute; left: 0; right: 0; top: 0; height: 52px; background: #f2f2f4;
+        border-bottom: 1px solid rgba(0,0,0,0.07); }
+      .dot { position: absolute; top: 18px; width: 16px; height: 16px; border-radius: 50%; }
+      #br-url { position: absolute; left: 520px; top: 11px; width: 400px; height: 30px; border-radius: 9px;
+        background: #e6e6ea; color: #6e6e73; font-size: 17px; line-height: 30px; text-align: center; }
+      #br-view { position: absolute; left: 0; top: 52px; width: 1440px; height: 790px; overflow: hidden; }
+      #br-nav { position: absolute; left: 0; top: 0; width: 1440px; height: 61px; z-index: 2; }
+      #br-strip { position: absolute; left: 0; top: 61px; width: 1440px; }
+      #br-strip img { display: block; width: 1440px; height: 839px; }
+      .site-cap { position: absolute; left: 0; right: 0; top: 946px; text-align: center; opacity: 0; z-index: 3; }
+      .site-cap span { display: inline-block; padding: 12px 34px; border-radius: 999px;
+        font-size: 44px; font-weight: 700; letter-spacing: -0.02em; color: #1d1d1f;
+        background: rgba(255,255,255,0.86); backdrop-filter: blur(14px);
+        box-shadow: 0 0 0 1px rgba(0,0,0,0.08), 0 20px 50px -20px rgba(0,0,0,0.25); }
+
+      /* ── 5. редактор (тёмный блок кода, как на сайте), сканирование, вердикт ── */
+      #s2-caption, #s2-caption2 { position: absolute; left: 0; right: 0; top: 74px; text-align: center;
+        font-size: 44px; font-weight: 700; letter-spacing: -0.02em; color: #1d1d1f; }
+      #persp { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; perspective: 1800px; }
+      #win {
+        position: absolute; left: 370px; top: 190px; width: 1180px; height: 760px;
+        background: #0f1117; border-radius: 26px; overflow: hidden;
+        box-shadow: 0 50px 120px -30px rgba(0,0,0,0.38), 0 0 0 1px rgba(0,0,0,0.12);
+      }
+      #win-bar { position: absolute; left: 0; right: 0; top: 0; height: 68px; background: #161922;
+        border-bottom: 1px solid rgba(255,255,255,0.06); }
+      #win-bar .dot { top: 25px; }
+      #win-file { position: absolute; left: 116px; top: 22px; font: 500 22px "JetBrains Mono", monospace; color: #8b90a0; }
+      #btn-check { position: absolute; right: 18px; top: 11px; height: 46px; padding: 0 26px;
+        border-radius: 999px; background: #f5f5f7; color: #000; font-size: 22px; font-weight: 600; line-height: 46px; }
+      #code { position: absolute; left: 0; right: 0; top: 68px; bottom: 0; padding: 26px 0; overflow: hidden; }
+      .ln { display: block; height: 44.5px; padding: 0 36px; white-space: pre;
+        font: 400 26px/44.5px "JetBrains Mono", monospace; color: #d4d7de; }
+      .k { color: #ff7ab2; } .t { color: #6bdfff; } .s { color: #fc6a5d; } .c { color: #6c7986; } .p { color: #a167e6; }
+      #scan { position: absolute; left: 0; right: 0; top: 68px; height: 120px; pointer-events: none;
+        background: linear-gradient(to bottom, rgba(41,151,255,0), rgba(41,151,255,0.16) 70%, rgba(41,151,255,0.5));
+        border-bottom: 2px solid #2997ff; opacity: 0; }
+      #res { position: absolute; left: 1150px; top: 250px; width: 600px; height: 580px; opacity: 0; }
+      #ring { position: absolute; left: 110px; top: 0; width: 380px; height: 380px; transform: rotate(-90deg); }
+      .ring-track { fill: none; stroke: rgba(0,0,0,0.08); stroke-width: 16; }
+      #ring-fill { fill: none; stroke: #e3002b; stroke-width: 16; stroke-linecap: round;
+        stroke-dasharray: 1068.14; stroke-dashoffset: 1068.14; }
+      #res-num { position: absolute; left: 110px; top: 0; width: 380px; height: 380px;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 128px; font-weight: 700; letter-spacing: -0.05em; color: #e3002b; }
+      #res-num small { font-size: 56px; font-weight: 600; margin-left: 4px; margin-top: 30px; }
+      #res-cap { position: absolute; left: 0; right: 0; top: 404px; text-align: center; font-size: 26px; color: #86868b; }
+      #res-verdict { position: absolute; left: 0; right: 0; top: 452px; text-align: center;
+        font-size: 44px; font-weight: 700; letter-spacing: -0.02em; color: #e3002b; }
+
+      /* ── 6. как это работает: конвейер из четырёх узлов ── */
+      #pp-title { position: absolute; left: 0; right: 0; top: 112px; text-align: center;
+        font-size: 58px; font-weight: 700; letter-spacing: -0.03em; z-index: 2; }
+      #pp-sub { position: absolute; left: 0; right: 0; top: 880px; text-align: center; z-index: 2; }
+      #pp-sub span { display: inline-block; padding: 14px 36px; border-radius: 999px; background: #f5f5f7;
+        font-size: 34px; font-weight: 600; }
+      .node { position: absolute; top: 400px; width: 400px; height: 320px; border-radius: 32px; background: #fff;
+        box-shadow: 0 30px 80px -30px rgba(0,0,0,0.20), 0 0 0 1px rgba(0,0,0,0.07); }
+      #nd1 { left: 280px; } #nd2 { left: 920px; } #nd3 { left: 1560px; } #nd4 { left: 2200px; }
+      .nd-n { position: absolute; left: 32px; top: 30px; width: 46px; height: 46px; border-radius: 50%;
+        background: #0071e3; color: #fff; font-size: 22px; font-weight: 700; text-align: center; line-height: 46px; }
+      #nd3 .nd-n { background: #7b61ff; } #nd4 .nd-n { background: #e3002b; }
+      .nd-h { position: absolute; left: 32px; top: 96px; font-size: 36px; font-weight: 700; letter-spacing: -0.02em; }
+      .nd-p { position: absolute; left: 32px; right: 28px; top: 146px; font-size: 21px; line-height: 1.35; color: #6e6e73; }
+      .nd-v { position: absolute; left: 32px; right: 32px; top: 222px; height: 72px; }
+      .bar { height: 10px; border-radius: 5px; background: #e5e5ea; margin-bottom: 10px; }
+      .tk { display: inline-block; margin: 0 6px 8px 0; padding: 3px 10px; border-radius: 8px; background: #f0f0f5;
+        font: 500 20px "JetBrains Mono", monospace; color: #1d1d1f; }
+      .tk.kw { color: #d63384; } .tk.ty { color: #0071e3; }
+      .wire { position: absolute; top: 559px; width: 240px; height: 3px; border-radius: 2px; background: #e5e5ea; }
+      #wr1 { left: 680px; } #wr2 { left: 1320px; } #wr3 { left: 1960px; }
+      .pkt { position: absolute; top: -7px; left: 0; width: 17px; height: 17px; border-radius: 50%;
+        background: #0071e3; box-shadow: 0 0 0 6px rgba(0,113,227,0.15); opacity: 0; }
+      #nd4-ring { position: absolute; left: 0; top: -4px; width: 80px; height: 80px; transform: rotate(-90deg); }
+      #nd4-fill { fill: none; stroke: #e3002b; stroke-width: 9; stroke-linecap: round; stroke-dasharray: 201.06; stroke-dashoffset: 201.06; }
+      #nd4-val { position: absolute; left: 104px; top: -2px; font-size: 56px; font-weight: 700; letter-spacing: -0.04em; color: #e3002b; line-height: 1; }
+      #nd4-lab { position: absolute; left: 106px; top: 56px; font-size: 18px; color: #86868b; }
+
+      /* ── 7. цифры качества ── */
+      #stats-title { position: absolute; left: 0; right: 0; top: 190px; text-align: center;
+        font-size: 58px; font-weight: 700; letter-spacing: -0.03em; }
+      .card { position: absolute; top: 330px; width: 520px; height: 400px; border-radius: 32px; background: #f5f5f7; }
+      #card1 { left: 160px; } #card2 { left: 700px; } #card3 { left: 1240px; }
+      .card-num { position: absolute; left: 48px; top: 60px; font-size: 136px; font-weight: 700;
+        letter-spacing: -0.05em; line-height: 1; white-space: nowrap;
+        background: linear-gradient(110deg, #0071e3, #7b61ff); -webkit-background-clip: text;
+        background-clip: text; color: transparent; }
+      .card-label { position: absolute; left: 52px; top: 250px; font-size: 32px; font-weight: 600; }
+      .card-sub { position: absolute; left: 52px; top: 300px; font-size: 24px; color: #86868b; }
+
+      /* ── 8. НовГУ ── */
+      #cr-title { position: absolute; left: 0; right: 0; top: 220px; text-align: center;
+        font-size: 54px; font-weight: 700; letter-spacing: -0.03em; }
+      #cr-logos { position: absolute; left: 0; right: 0; top: 360px; height: 380px;
+        display: flex; align-items: center; justify-content: center; gap: 84px; }
+      #cr-novsu { display: block; height: 206px; width: auto; }
+      #cr-line { width: 1px; height: 260px; background: rgba(0,0,0,0.15); }
+      #cr-emblem { display: block; height: 360px; width: auto; }
+      #cr-sub { position: absolute; left: 0; right: 0; top: 790px; text-align: center; font-size: 30px; color: #6e6e73; }
+
+      /* ── 9. финал ── */
+      #end-row { position: absolute; left: 0; right: 0; top: 300px; height: 128px;
+        display: flex; align-items: center; justify-content: center; gap: 28px; }
+      #end-logo { display: block; width: 120px; height: 120px; }
+      #end-name { font-size: 104px; font-weight: 700; letter-spacing: -0.04em; line-height: 128px; }
+      #end-sub { position: absolute; left: 0; right: 0; top: 468px; text-align: center; font-size: 38px; color: #6e6e73; }
+      #end-btn { position: absolute; left: 790px; top: 586px; width: 340px; height: 92px; border-radius: 999px;
+        background: #1d1d1f; color: #fff; font-size: 34px; font-weight: 600; text-align: center; line-height: 92px; }
+      #end-foot { position: absolute; left: 0; right: 0; top: 960px; text-align: center; font-size: 22px; color: #86868b; }
+    </style>
+  </head>
+  <body>
+    <div data-hf-id="hf-qbnw" id="root" data-composition-id="main" data-start="0" data-duration="60" data-width="1920" data-height="1080">
+
+      <div data-hf-id="hf-2xc0" id="bg">
+        <div data-hf-id="hf-dkwn" id="glow-blue" class="glow"></div>
+        <div data-hf-id="hf-rsa6" id="glow-violet" class="glow"></div>
+        <div data-hf-id="hf-83ro" id="glow-red" class="glow"></div>
+      </div>
+
+      <!-- ── звук: музыка (scripts/make_music.py --cut 60) и звуки интерфейса (scripts/add_audio_60s.py) ── -->
+      <audio data-hf-id="hf-orxv" id="bgm" src="assets/audio/bgm-60s.wav" data-start="0" data-duration="60.0" data-track-index="10" data-volume="0.55"></audio>
+      <audio data-hf-id="hf-804n" id="sfx-01-whoosh" src="assets/sfx/whoosh.mp3" data-start="4.27" data-duration="0.57" data-track-index="11" data-volume="0.45"></audio>
+      <audio data-hf-id="hf-nv9e" id="sfx-02-whoosh-short" src="assets/sfx/whoosh-short.mp3" data-start="4.9" data-duration="0.57" data-track-index="11" data-volume="0.3"></audio>
+      <audio data-hf-id="hf-3kny" id="sfx-03-pop" src="assets/sfx/pop.mp3" data-start="5.25" data-duration="0.72" data-track-index="12" data-volume="0.3"></audio>
+      <audio data-hf-id="hf-lx3v" id="sfx-04-whoosh-short" src="assets/sfx/whoosh-short.mp3" data-start="7.7" data-duration="0.57" data-track-index="11" data-volume="0.3"></audio>
+      <audio data-hf-id="hf-hpte" id="sfx-05-pop" src="assets/sfx/pop.mp3" data-start="8.45" data-duration="0.72" data-track-index="11" data-volume="0.3"></audio>
+      <audio data-hf-id="hf-da3p" id="sfx-06-whoosh" src="assets/sfx/whoosh.mp3" data-start="10.42" data-duration="0.57" data-track-index="11" data-volume="0.42"></audio>
+      <audio data-hf-id="hf-zapr" id="sfx-07-glitch-3" src="assets/sfx/glitch-3.mp3" data-start="11.5" data-duration="3.10" data-track-index="11" data-volume="0.1"></audio>
+      <audio data-hf-id="hf-el5b" id="sfx-08-ping" src="assets/sfx/ping.mp3" data-start="12.85" data-duration="1.32" data-track-index="12" data-volume="0.26"></audio>
+      <audio data-hf-id="hf-4mmm" id="sfx-09-impact-bass-1" src="assets/sfx/impact-bass-1.mp3" data-start="13.9" data-duration="2.12" data-track-index="13" data-volume="0.32"></audio>
+      <audio data-hf-id="hf-2fsg" id="sfx-10-whoosh" src="assets/sfx/whoosh.mp3" data-start="16.42" data-duration="0.57" data-track-index="11" data-volume="0.42"></audio>
+      <audio data-hf-id="hf-grzx" id="sfx-11-whoosh-short" src="assets/sfx/whoosh-short.mp3" data-start="19.65" data-duration="0.57" data-track-index="11" data-volume="0.22"></audio>
+      <audio data-hf-id="hf-hk8k" id="sfx-12-whoosh-short" src="assets/sfx/whoosh-short.mp3" data-start="22.05" data-duration="0.57" data-track-index="11" data-volume="0.22"></audio>
+      <audio data-hf-id="hf-m5p3" id="sfx-13-whoosh-short" src="assets/sfx/whoosh-short.mp3" data-start="24.3" data-duration="0.57" data-track-index="11" data-volume="0.22"></audio>
+      <audio data-hf-id="hf-4qyn" id="sfx-14-whoosh-short" src="assets/sfx/whoosh-short.mp3" data-start="26.4" data-duration="0.57" data-track-index="11" data-volume="0.22"></audio>
+      <audio data-hf-id="hf-h6iq" id="sfx-15-whoosh" src="assets/sfx/whoosh.mp3" data-start="27.5" data-duration="0.57" data-track-index="11" data-volume="0.42"></audio>
+      <audio data-hf-id="hf-09uc" id="sfx-16-typing" src="assets/sfx/typing.mp3" data-start="28.7" data-duration="1.50" data-track-index="11" data-volume="0.22"></audio>
+      <audio data-hf-id="hf-7eez" id="sfx-17-click" src="assets/sfx/click.mp3" data-start="32.0" data-duration="0.37" data-track-index="11" data-volume="0.55"></audio>
+      <audio data-hf-id="hf-ettb" id="sfx-18-glitch-3" src="assets/sfx/glitch-3.mp3" data-start="32.3" data-duration="3.10" data-track-index="12" data-volume="0.18"></audio>
+      <audio data-hf-id="hf-9s5h" id="sfx-19-ping" src="assets/sfx/ping.mp3" data-start="34.2" data-duration="1.32" data-track-index="11" data-volume="0.28"></audio>
+      <audio data-hf-id="hf-552p" id="sfx-20-impact-bass-1" src="assets/sfx/impact-bass-1.mp3" data-start="37.2" data-duration="2.12" data-track-index="11" data-volume="0.35"></audio>
+      <audio data-hf-id="hf-j7hs" id="sfx-21-ping" src="assets/sfx/ping.mp3" data-start="38.55" data-duration="1.32" data-track-index="12" data-volume="0.3"></audio>
+      <audio data-hf-id="hf-0n8s" id="sfx-22-whoosh" src="assets/sfx/whoosh.mp3" data-start="40.12" data-duration="0.57" data-track-index="11" data-volume="0.45"></audio>
+      <audio data-hf-id="hf-i4fq" id="sfx-23-pop" src="assets/sfx/pop.mp3" data-start="40.9" data-duration="0.72" data-track-index="11" data-volume="0.25"></audio>
+      <audio data-hf-id="hf-tz3h" id="sfx-24-pop" src="assets/sfx/pop.mp3" data-start="42.25" data-duration="0.72" data-track-index="11" data-volume="0.25"></audio>
+      <audio data-hf-id="hf-dmkp" id="sfx-25-pop" src="assets/sfx/pop.mp3" data-start="43.65" data-duration="0.72" data-track-index="11" data-volume="0.25"></audio>
+      <audio data-hf-id="hf-evat" id="sfx-26-sparkle" src="assets/sfx/sparkle.mp3" data-start="45.25" data-duration="1.80" data-track-index="11" data-volume="0.2"></audio>
+      <audio data-hf-id="hf-s7ve" id="sfx-27-whoosh-short" src="assets/sfx/whoosh-short.mp3" data-start="46.25" data-duration="0.57" data-track-index="12" data-volume="0.25"></audio>
+      <audio data-hf-id="hf-0mbl" id="sfx-28-whoosh" src="assets/sfx/whoosh.mp3" data-start="47.82" data-duration="0.57" data-track-index="11" data-volume="0.4"></audio>
+      <audio data-hf-id="hf-fa5v" id="sfx-29-pop" src="assets/sfx/pop.mp3" data-start="48.55" data-duration="0.72" data-track-index="11" data-volume="0.3"></audio>
+      <audio data-hf-id="hf-p359" id="sfx-30-pop" src="assets/sfx/pop.mp3" data-start="48.7" data-duration="0.72" data-track-index="12" data-volume="0.3"></audio>
+      <audio data-hf-id="hf-pl6x" id="sfx-31-pop" src="assets/sfx/pop.mp3" data-start="48.85" data-duration="0.72" data-track-index="13" data-volume="0.3"></audio>
+      <audio data-hf-id="hf-seek" id="sfx-32-whoosh-short" src="assets/sfx/whoosh-short.mp3" data-start="52.7" data-duration="0.57" data-track-index="11" data-volume="0.25"></audio>
+      <audio data-hf-id="hf-0bsr" id="sfx-33-sparkle" src="assets/sfx/sparkle.mp3" data-start="53.15" data-duration="1.80" data-track-index="12" data-volume="0.18"></audio>
+      <audio data-hf-id="hf-lyj0" id="sfx-34-impact-bass-1" src="assets/sfx/impact-bass-1.mp3" data-start="56.1" data-duration="2.12" data-track-index="11" data-volume="0.35"></audio>
+      <audio data-hf-id="hf-rs4z" id="sfx-35-sparkle" src="assets/sfx/sparkle.mp3" data-start="56.15" data-duration="1.80" data-track-index="12" data-volume="0.22"></audio>
+      <audio data-hf-id="hf-y7yg" id="sfx-36-click" src="assets/sfx/click.mp3" data-start="58.1" data-duration="0.37" data-track-index="12" data-volume="0.55"></audio>
+
+      <!-- ── 1. Вопрос (0 – 5.0) ── -->
+      <section data-hf-id="hf-7fpu" id="s1" class="clip scene" data-start="0" data-duration="5.0" data-track-index="1">
+        <div data-hf-id="hf-c0h9" id="cam1" class="cam">
+          <div data-hf-id="hf-kfwi" id="s1-inner">
+            <div data-hf-id="hf-fico" id="s1-eyebrow">CodeCheck · детектор ИИ-кода на C++</div>
+            <div data-hf-id="hf-6rtc" id="s1-title">
+              <span data-hf-id="hf-6c9z" class="line"><span data-hf-id="hf-n7ro" class="w">Код</span> <span data-hf-id="hf-c6zs" class="w">написал</span> <span data-hf-id="hf-zbo8" class="w">студент</span></span>
+              <span data-hf-id="hf-tvt3" class="line"><span data-hf-id="hf-1vbh" class="w grad">или нейросеть?</span></span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── 2. Проблема в цифрах (4.9 – 11.1) ── -->
+      <section data-hf-id="hf-fdxm" id="s2p" class="clip scene" data-start="4.9" data-duration="6.2" data-track-index="2">
+        <div data-hf-id="hf-7atg" id="camP" class="cam">
+          <div data-hf-id="hf-mylj" id="sp-inner">
+            <div data-hf-id="hf-v634" id="pr-a" class="pr">
+              <div data-hf-id="hf-d6dv" class="pr-kicker">В 2025 году</div>
+              <div data-hf-id="hf-ekyi" class="pr-num grad"><span data-hf-id="hf-i25u" id="pa-n">0</span>%</div>
+              <div data-hf-id="hf-bv0r" class="pr-text">студенческих работ — с признаками ИИ</div>
+              <div data-hf-id="hf-kt64" class="pr-trend">
+                <div data-hf-id="hf-6ucy" class="chip">2023 · <b data-hf-id="hf-qfls">5,3%</b></div>
+                <div data-hf-id="hf-0kob" class="chip">2024 · <b data-hf-id="hf-g2c8">17,8%</b></div>
+                <div data-hf-id="hf-xbn4" class="chip">2025 · <b data-hf-id="hf-e0n6">24%</b></div>
+              </div>
+              <div data-hf-id="hf-cs3j" class="pr-src">«Антиплагиат»: 2,07 млн работ, январь–сентябрь</div>
+            </div>
+            <div data-hf-id="hf-61kr" id="pr-b" class="pr">
+              <div data-hf-id="hf-kkd2" class="pr-kicker">При этом</div>
+              <div data-hf-id="hf-oiim" class="pr-num grad"><span data-hf-id="hf-q5cn" id="pb-n">0</span>%</div>
+              <div data-hf-id="hf-8syg" class="pr-text">студентов пользуются нейросетями</div>
+              <div data-hf-id="hf-f1x2" class="pr-src">Опрос НИУ ВШЭ — Санкт-Петербург, более 500 студентов</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── 3. Поиск заимствований не видит ИИ-код (10.8 – 17.1) ── -->
+      <section data-hf-id="hf-cwq3" id="s3p" class="clip scene" data-start="10.8" data-duration="6.3" data-track-index="1">
+        <div data-hf-id="hf-82h9" id="camQ" class="cam">
+          <div data-hf-id="hf-f802" id="sq-inner">
+            <div data-hf-id="hf-d8kd" id="p-cap1" class="p-cap">Код уникален — совпадений нет</div>
+            <div data-hf-id="hf-jww1" id="p-cap2" class="p-cap">Но его написала <span data-hf-id="hf-q6a3" class="danger">нейросеть</span></div>
+            <div data-hf-id="hf-65fs" id="pl-card">
+              <div data-hf-id="hf-s5h5" id="pl-head">Проверка на заимствования</div>
+              <div data-hf-id="hf-0pp8" id="pl-file">solution.cpp</div>
+              <div data-hf-id="hf-b8fv" id="pl-track"><div data-hf-id="hf-k3c5" id="pl-fill"></div></div>
+              <div data-hf-id="hf-79iq" id="pl-status">Сравнение с работами других студентов</div>
+              <div data-hf-id="hf-s3vn" id="pl-big">0%</div>
+              <div style="left: 305.433px; top: 268.259px" data-hf-id="hf-axx2" id="pl-big-l">совпадений найдено</div>
+              <div data-hf-id="hf-1uqo" id="pl-badge">✓ Оригинальная работа</div>
+            </div>
+            <div data-hf-id="hf-pkao" id="pl-stamp-wrap"><span data-hf-id="hf-cfy4" id="pl-stamp">КОД ОТ ИИ</span></div>
+            <div data-hf-id="hf-ohox" id="p-sub">Поиск совпадений не отличает код студента от кода нейросети</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── 4. Тур по настоящему сайту (16.8 – 28.3) ── -->
+      <section data-hf-id="hf-9g6y" id="ss" class="clip scene" data-start="16.8" data-duration="11.5" data-track-index="2">
+        <div data-hf-id="hf-fypb" id="camS" class="cam">
+          <div data-hf-id="hf-xgv4" id="ss-inner">
+            <div data-hf-id="hf-1p3k" id="persp-s" style="position:absolute;left:0;top:0;width:1920px;height:1080px;perspective:1800px;">
+              <div data-hf-id="hf-y3e7" id="browser">
+                <div data-hf-id="hf-dy05" id="br-bar">
+                  <span data-hf-id="hf-qw1o" class="dot" style="left:22px;background:#ff5f57"></span>
+                  <span data-hf-id="hf-6i6u" class="dot" style="left:46px;background:#febc2e"></span>
+                  <span data-hf-id="hf-z83x" class="dot" style="left:70px;background:#28c840"></span>
+                  <div data-hf-id="hf-dngj" id="br-url">localhost:8000 — CodeCheck</div>
+                </div>
+                <div data-hf-id="hf-tri5" id="br-view">
+                  <div data-hf-id="hf-udbs" id="br-strip">
+                    <img data-hf-id="hf-a1r5" src="assets/site-light/page-top.jpg" alt="">
+                    <img data-hf-id="hf-ylzq" src="assets/site-light/page-how.jpg" alt="">
+                    <img data-hf-id="hf-oue7" src="assets/site-light/page-quality.jpg" alt="">
+                    <img data-hf-id="hf-h1ep" src="assets/site-light/page-team.jpg" alt="">
+                    <img data-hf-id="hf-wy98" src="assets/site-light/page-check.jpg" alt="">
+                  </div>
+                  <img data-hf-id="hf-100d" id="br-nav" src="assets/site-light/nav.png" alt="">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div data-hf-id="hf-wy1u" id="cap-a" class="site-cap"><span data-hf-id="hf-522g">Сайт для преподавателей</span></div>
+        <div data-hf-id="hf-szxt" id="cap-b" class="site-cap"><span data-hf-id="hf-dv2u">Понятно, как это работает</span></div>
+        <div data-hf-id="hf-s8a0" id="cap-c" class="site-cap"><span data-hf-id="hf-rebj">Честные метрики качества</span></div>
+        <div data-hf-id="hf-m2k7" id="cap-d" class="site-cap"><span data-hf-id="hf-k4r0">Сделано студентами НовГУ</span></div>
+      </section>
+
+      <!-- ── 5. Редактор → сканирование → вердикт (28.0 – 40.85) ── -->
+      <section data-hf-id="hf-ye2m" id="s2" class="clip scene" data-start="28.0" data-duration="12.85" data-track-index="1">
+        <div data-hf-id="hf-fyla" id="cam2" class="cam">
+          <div data-hf-id="hf-7thp" id="s2-inner">
+            <div data-hf-id="hf-n42h" id="s2-caption">Вставьте код студента</div>
+            <div data-hf-id="hf-vc46" id="s2-caption2">Находит признаки генерации</div>
+            <div data-hf-id="hf-szin" id="persp">
+              <div data-hf-id="hf-7on1" id="win">
+                <div data-hf-id="hf-ea91" id="win-bar">
+                  <span data-hf-id="hf-z5pc" class="dot" style="left:26px;background:#ff5f57"></span>
+                  <span data-hf-id="hf-2y0n" class="dot" style="left:52px;background:#febc2e"></span>
+                  <span data-hf-id="hf-r55x" class="dot" style="left:78px;background:#28c840"></span>
+                  <span data-hf-id="hf-b883" id="win-file">solution.cpp</span>
+                  <span data-hf-id="hf-oq2v" id="btn-check">Проверить</span>
+                </div>
+                <div data-hf-id="hf-c1o2" id="code">
+                  <span data-hf-id="hf-smev" class="ln"><span data-hf-id="hf-45i8" class="p">#include</span> <span data-hf-id="hf-50jn" class="s">&lt;vector&gt;</span></span>
+                  <span data-hf-id="hf-oupj" class="ln"><span data-hf-id="hf-pioo" class="p">#include</span> <span data-hf-id="hf-nqmx" class="s">&lt;algorithm&gt;</span></span>
+                  <span data-hf-id="hf-ogei" class="ln"> </span>
+                  <span data-hf-id="hf-o23h" class="ln"><span data-hf-id="hf-lsi3" class="c">// Returns the k largest elements in descending order.</span></span>
+                  <span data-hf-id="hf-teyf" class="ln"><span data-hf-id="hf-n72r" class="t">std::vector</span>&lt;<span data-hf-id="hf-a0lp" class="k">int</span>&gt; topK(<span data-hf-id="hf-5jgn" class="k">const</span> <span data-hf-id="hf-onoz" class="t">std::vector</span>&lt;<span data-hf-id="hf-l1vl" class="k">int</span>&gt;&amp; nums, <span data-hf-id="hf-m8so" class="k">int</span> k) {</span>
+                  <span data-hf-id="hf-rd4a" class="ln">    <span data-hf-id="hf-o9dy" class="t">std::vector</span>&lt;<span data-hf-id="hf-luhn" class="k">int</span>&gt; result(nums.begin(), nums.end());</span>
+                  <span data-hf-id="hf-97ng" class="ln">    <span data-hf-id="hf-tnjk" class="t">std::sort</span>(result.begin(), result.end(), <span data-hf-id="hf-jv76" class="t">std::greater</span>&lt;<span data-hf-id="hf-juyi" class="k">int</span>&gt;());</span>
+                  <span data-hf-id="hf-qu8o" class="ln">    <span data-hf-id="hf-njo8" class="c">// Ensure k does not exceed the vector size.</span></span>
+                  <span data-hf-id="hf-itna" class="ln">    <span data-hf-id="hf-4m8j" class="k">if</span> (k &gt; <span data-hf-id="hf-e7qo" class="k">static_cast</span>&lt;<span data-hf-id="hf-jgnh" class="k">int</span>&gt;(result.size())) {</span>
+                  <span data-hf-id="hf-c9sx" class="ln">        k = result.size();</span>
+                  <span data-hf-id="hf-tpdq" class="ln">    }</span>
+                  <span data-hf-id="hf-jtqx" class="ln">    result.resize(k);</span>
+                  <span data-hf-id="hf-eqtr" class="ln">    <span data-hf-id="hf-lumi" class="k">return</span> result;</span>
+                  <span data-hf-id="hf-v82q" class="ln">}</span>
+                </div>
+                <div data-hf-id="hf-vz0a" id="scan"></div>
+              </div>
+            </div>
+            <div data-hf-id="hf-41j1" id="res">
+              <svg data-hf-id="hf-bsq9" id="ring" viewBox="0 0 380 380">
+                <circle data-hf-id="hf-6ej5" class="ring-track" cx="190" cy="190" r="170" />
+                <circle data-hf-id="hf-7u4w" id="ring-fill" cx="190" cy="190" r="170" />
+              </svg>
+              <div data-hf-id="hf-hlgq" id="res-num"><span data-hf-id="hf-5pxu" id="res-val">0</span><small data-hf-id="hf-ew4z">%</small></div>
+              <div data-hf-id="hf-u4mw" id="res-cap">вероятность ИИ</div>
+              <div data-hf-id="hf-eb1p" id="res-verdict">Почти точно написан ИИ</div>
+            </div>
+            <svg data-hf-id="hf-bm4l" id="cursor2" class="cursor" viewBox="0 0 44 54">
+              <path data-hf-id="hf-sgao" d="M4 3 L4 41 L14 32 L21 49 L28 46 L21 30 L34 30 Z" fill="#1d1d1f" stroke="#fff" stroke-width="2.5" stroke-linejoin="round" />
+            </svg>
+            <div data-hf-id="hf-ruj0" id="ripple2" class="ripple"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── 6. Как это работает (40.6 – 48.4) ── -->
+      <section data-hf-id="hf-necq" id="s6" class="clip scene" data-start="40.6" data-duration="7.8" data-track-index="2">
+        <div data-hf-id="hf-ee78" id="pp-title">Как CodeCheck принимает решение</div>
+        <div data-hf-id="hf-5re2" id="camF" class="cam">
+          <div data-hf-id="hf-8vrt" id="sf-inner">
+            <div data-hf-id="hf-kigb" id="wr1" class="wire"><div data-hf-id="hf-8shx" class="pkt"></div></div>
+            <div data-hf-id="hf-9myo" id="wr2" class="wire"><div data-hf-id="hf-94m1" class="pkt"></div></div>
+            <div data-hf-id="hf-cm89" id="wr3" class="wire"><div data-hf-id="hf-abj4" class="pkt"></div></div>
+            <div data-hf-id="hf-wdtp" id="nd1" class="node">
+              <div data-hf-id="hf-n74m" class="nd-n">1</div>
+              <div data-hf-id="hf-vayt" class="nd-h">Код студента</div>
+              <div data-hf-id="hf-5led" class="nd-p">Файл .cpp или вставленный текст программы</div>
+              <div data-hf-id="hf-syuz" class="nd-v">
+                <div data-hf-id="hf-p3rg" class="bar" style="width:62%"></div><div data-hf-id="hf-a0xc" class="bar" style="width:88%"></div>
+                <div data-hf-id="hf-xgvn" class="bar" style="width:74%"></div><div data-hf-id="hf-7upw" class="bar" style="width:40%"></div>
+              </div>
+            </div>
+            <div data-hf-id="hf-0bxq" id="nd2" class="node">
+              <div data-hf-id="hf-nlfn" class="nd-n">2</div>
+              <div data-hf-id="hf-5tgo" class="nd-h">Токены</div>
+              <div data-hf-id="hf-dytq" class="nd-p">До 512 за раз, длинный код — по фрагментам</div>
+              <div data-hf-id="hf-g7y3" class="nd-v">
+                <span data-hf-id="hf-f33x" class="tk kw">int</span><span data-hf-id="hf-tcbn" class="tk">main</span><span data-hf-id="hf-07vq" class="tk">(</span><span data-hf-id="hf-ztkp" class="tk">)</span><span data-hf-id="hf-jow3" class="tk">{</span><span data-hf-id="hf-fxdk" class="tk ty">std</span><span data-hf-id="hf-tbem" class="tk">::</span><span data-hf-id="hf-p22i" class="tk">sort</span>
+              </div>
+            </div>
+            <div data-hf-id="hf-4a1r" id="nd3" class="node">
+              <div data-hf-id="hf-nzqo" class="nd-n">3</div>
+              <div data-hf-id="hf-fygj" class="nd-h">CodeBERT</div>
+              <div data-hf-id="hf-jyol" class="nd-p">Модель Microsoft, дообученная на 1 343 примерах</div>
+              <div data-hf-id="hf-ftn2" class="nd-v">
+                <svg data-hf-id="hf-errt" id="net" width="336" height="72" viewBox="0 0 336 72">
+                  <g data-hf-id="hf-eyu6" stroke="#d2d2d7" stroke-width="1.5">
+                    <line data-hf-id="hf-xzf7" x1="40" y1="12" x2="168" y2="12" /><line data-hf-id="hf-e2v1" x1="40" y1="12" x2="168" y2="36" /><line data-hf-id="hf-mmvg" x1="40" y1="12" x2="168" y2="60" />
+                    <line data-hf-id="hf-xx69" x1="40" y1="36" x2="168" y2="12" /><line data-hf-id="hf-klrj" x1="40" y1="36" x2="168" y2="36" /><line data-hf-id="hf-tjcq" x1="40" y1="36" x2="168" y2="60" />
+                    <line data-hf-id="hf-t4rc" x1="40" y1="60" x2="168" y2="12" /><line data-hf-id="hf-s3ea" x1="40" y1="60" x2="168" y2="36" /><line data-hf-id="hf-4c7f" x1="40" y1="60" x2="168" y2="60" />
+                    <line data-hf-id="hf-fz3k" x1="168" y1="12" x2="296" y2="36" /><line data-hf-id="hf-6ob2" x1="168" y1="36" x2="296" y2="36" /><line data-hf-id="hf-x6uv" x1="168" y1="60" x2="296" y2="36" />
+                  </g>
+                  <g data-hf-id="hf-41jq" fill="#7b61ff">
+                    <circle data-hf-id="hf-wqpu" class="nn" cx="40" cy="12" r="8" /><circle data-hf-id="hf-wsrc" class="nn" cx="40" cy="36" r="8" /><circle data-hf-id="hf-53ed" class="nn" cx="40" cy="60" r="8" />
+                    <circle data-hf-id="hf-r7iv" class="nn" cx="168" cy="12" r="8" /><circle data-hf-id="hf-9rdd" class="nn" cx="168" cy="36" r="8" /><circle data-hf-id="hf-ywaw" class="nn" cx="168" cy="60" r="8" />
+                    <circle data-hf-id="hf-u93c" class="nn" cx="296" cy="36" r="10" />
+                  </g>
+                </svg>
+              </div>
+            </div>
+            <div data-hf-id="hf-afrk" id="nd4" class="node">
+              <div data-hf-id="hf-l7lh" class="nd-n">4</div>
+              <div data-hf-id="hf-yzxr" class="nd-h">Вероятность ИИ</div>
+              <div data-hf-id="hf-6ys4" class="nd-p">Решение остаётся за преподавателем</div>
+              <div data-hf-id="hf-ffc1" class="nd-v">
+                <svg data-hf-id="hf-mncm" id="nd4-ring" viewBox="0 0 80 80">
+                  <circle data-hf-id="hf-qyue" cx="40" cy="40" r="32" fill="none" stroke="rgba(0,0,0,0.08)" stroke-width="9" />
+                  <circle data-hf-id="hf-ot4b" id="nd4-fill" cx="40" cy="40" r="32" />
+                </svg>
+                <div data-hf-id="hf-dd62" id="nd4-val"><span data-hf-id="hf-xurb" id="nd4-n">0</span>%</div>
+                <div data-hf-id="hf-a6u1" id="nd4-lab">почти точно ИИ</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div data-hf-id="hf-w8k4" id="pp-sub"><span data-hf-id="hf-419k">Работает локально — код студентов не уходит в облако</span></div>
+      </section>
+
+      <!-- ── 7. Цифры качества (48.2 – 53.0) ── -->
+      <section data-hf-id="hf-uqo1" id="s3" class="clip scene" data-start="48.2" data-duration="4.8" data-track-index="1">
+        <div data-hf-id="hf-jwpb" id="cam3" class="cam">
+          <div data-hf-id="hf-fly8" id="s3-inner">
+            <div data-hf-id="hf-mj5i" id="stats-title">Проверено на реальном коде</div>
+            <div data-hf-id="hf-8fpj" id="card1" class="card">
+              <div data-hf-id="hf-c97k" class="card-num"><span data-hf-id="hf-mz5j" id="n1">0</span>%</div>
+              <div data-hf-id="hf-0sya" class="card-label">точность модели</div>
+              <div data-hf-id="hf-0n7n" class="card-sub">тестовая выборка, 214 программ</div>
+            </div>
+            <div data-hf-id="hf-zrto" id="card2" class="card">
+              <div data-hf-id="hf-gfbs" class="card-num"><span data-hf-id="hf-jem2" id="n2">0</span>%</div>
+              <div data-hf-id="hf-sj98" class="card-label">ложных срабатываний</div>
+              <div data-hf-id="hf-63jo" class="card-sub">на коде людей: 6 из 111</div>
+            </div>
+            <div data-hf-id="hf-0jhh" id="card3" class="card">
+              <div data-hf-id="hf-gerp" class="card-num"><span data-hf-id="hf-fu2l" id="n3">0</span></div>
+              <div data-hf-id="hf-wbuu" class="card-label">примера в обучении</div>
+              <div data-hf-id="hf-a3q8" class="card-sub">включая 568 олимпиадных решений</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── 8. Проект студентов НовГУ (52.8 – 56.3) ── -->
+      <section data-hf-id="hf-ljze" id="s4" class="clip scene" data-start="52.8" data-duration="3.5" data-track-index="2">
+        <div data-hf-id="hf-nutc" id="cam4" class="cam">
+          <div data-hf-id="hf-laib" id="s4-inner">
+            <div data-hf-id="hf-4kz4" id="cr-title">Проект студентов НовГУ</div>
+            <div data-hf-id="hf-h9tl" id="cr-logos">
+              <img data-hf-id="hf-2vc1" id="cr-novsu" src="assets/logos/novsu-dark.png" alt="">
+              <div data-hf-id="hf-g9et" id="cr-line"></div>
+              <img data-hf-id="hf-zpil" id="cr-emblem" src="assets/logos/ieis-emblem.png" alt="">
+            </div>
+            <div data-hf-id="hf-hoqg" id="cr-sub">Направление «Информатика и вычислительная техника» · 2026</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── 9. Финал (56.1 – 60.0) ── -->
+      <section data-hf-id="hf-a8qv" id="s5" class="clip scene" data-start="56.1" data-duration="3.9" data-track-index="1">
+        <div data-hf-id="hf-omh5" id="cam5" class="cam">
+          <div data-hf-id="hf-o2um" id="s5-inner">
+            <div data-hf-id="hf-4zhn" id="end-row">
+              <img data-hf-id="hf-is10" id="end-logo" src="assets/codecheck-logo.svg" alt="">
+              <div data-hf-id="hf-10yn" id="end-name">CodeCheck</div>
+            </div>
+            <div data-hf-id="hf-o6c5" id="end-sub">Детектор ИИ-кода на C++ для преподавателей</div>
+            <div data-hf-id="hf-b2y2" id="end-btn">Проверьте код</div>
+            <div data-hf-id="hf-87hb" id="end-foot">Новгородский государственный университет имени Ярослава Мудрого · 2026</div>
+            <svg data-hf-id="hf-suzc" id="cursor3" class="cursor" viewBox="0 0 44 54">
+              <path data-hf-id="hf-6kxk" d="M4 3 L4 41 L14 32 L21 49 L28 46 L21 30 L34 30 Z" fill="#1d1d1f" stroke="#fff" stroke-width="2.5" stroke-linejoin="round" />
+            </svg>
+            <div data-hf-id="hf-utsl" id="ripple3" class="ripple"></div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      const W = 1920, H = 1080, TOTAL = 60;
+      const fmt = (v, d) => v.toFixed(d).replace(".", ",");
+
+      // Камера: состояние {s, fx, fy} — масштаб и точка фокуса, плюс медленный дрейф.
+      // Точка фокуса (fx, fy) всегда стоит в центре кадра: translate = центр − фокус·s.
+      function makeCamera(el, init, driftAmp, T = tl) {
+        const cam = { s: init.s, fx: init.fx, fy: init.fy, p: 0 };
+        const write = () => {
+          const dx = Math.sin(cam.p) * driftAmp, dy = Math.sin(cam.p * 1.3) * driftAmp * 0.6;
+          const tx = W / 2 - cam.fx * cam.s + dx, ty = H / 2 - cam.fy * cam.s + dy;
+          el.style.transform = `translate(${tx}px, ${ty}px) scale(${cam.s})`;
+        };
+        write();
+        T.to(cam, { p: Math.PI * 2, duration: TOTAL, ease: "none", onUpdate: write }, 0);
+        return { cam, write, move: (to, at, dur, ease = "power3.inOut") =>
+          T.to(cam, { ...to, duration: dur, ease, onUpdate: write }, at) };
+      }
+      // счётчик: dec — знаков после запятой, sep — разделитель тысяч («1 343»)
+      const counter = (id, to, at, dur, dec = 0, sep = false) => {
+        const o = { v: 0 }, node = document.getElementById(id);
+        tl.to(o, { v: to, duration: dur, ease: "power2.out", onUpdate: () => {
+          node.textContent = sep ? String(Math.round(o.v)).replace(/\B(?=(\d{3})+(?!\d))/g, " ") : fmt(o.v, dec);
+        } }, at);
+      };
+
+      // ── фоновые свечения ──
+      tl.to("#glow-blue", { opacity: 1, duration: 1.6, ease: "sine.inOut" }, 0.1);
+      tl.to("#glow-blue", { x: -140, y: 70, duration: 14, ease: "sine.inOut" }, 0);
+      tl.to("#glow-violet", { opacity: 1, duration: 2, ease: "sine.inOut" }, 4.9);
+      tl.to("#glow-red", { opacity: 1, duration: 1.0, ease: "sine.inOut" }, 13.8);
+      tl.to("#glow-red", { opacity: 0, duration: 1.0, ease: "sine.inOut" }, 16.4);
+      tl.to("#glow-red", { opacity: 1, duration: 1.2, ease: "sine.inOut" }, 36.8);
+      tl.to("#glow-red", { opacity: 0, duration: 1.0, ease: "sine.inOut" }, 40.0);
+      tl.to("#glow-blue", { x: 160, y: -40, duration: 20, ease: "sine.inOut" }, 30);
+      tl.to("#glow-violet", { x: -260, y: -80, duration: 24, ease: "sine.inOut" }, 34);
+
+      // ═══ 1. Вопрос (0 – 5.0) ═══
+      const c1 = makeCamera(document.getElementById("cam1"), { s: 1, fx: 960, fy: 540 }, 3);
+      tl.fromTo("#s1-eyebrow", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.9, ease: "power3.out" }, 0.2);
+      tl.fromTo("#s1-title .line:first-child .w", { opacity: 0, y: 48, filter: "blur(10px)" },
+        { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.9, ease: "power3.out", stagger: 0.2 }, 0.4);
+      tl.fromTo("#s1-title .line:last-child .w", { opacity: 0, y: 48, filter: "blur(10px)" },
+        { opacity: 1, y: 0, filter: "blur(0px)", duration: 1.0, ease: "power3.out" }, 1.45);
+      c1.move({ s: 1.08 }, 0, 4.2, "sine.inOut");                        // медленный наезд
+      c1.move({ s: 3.4, fx: 960, fy: 600 }, 4.25, 0.75, "power3.in");    // наезд сквозь кадр
+      tl.to("#s1-inner", { opacity: 0, filter: "blur(14px)", duration: 0.45, ease: "power2.in" }, 4.5);
+
+      // ═══ 2. Проблема в цифрах (4.9 – 11.1): камера панорамирует с 24% на 89% ═══
+      const cP = makeCamera(document.getElementById("camP"), { s: 1.2, fx: 960, fy: 540 }, 3);
+      tl.fromTo("#sp-inner", { opacity: 0 }, { opacity: 1, duration: 0.45, ease: "power2.out" }, 4.9);
+      cP.move({ s: 1, fx: 960, fy: 540 }, 4.9, 1.4, "power3.out");
+      tl.fromTo("#pr-a .pr-kicker", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 5.05);
+      tl.fromTo("#pr-a .pr-num", { opacity: 0, scale: 0.86 }, { opacity: 1, scale: 1, duration: 0.8, ease: "power3.out" }, 5.15);
+      counter("pa-n", 24, 5.2, 1.3);
+      tl.fromTo("#pr-a .pr-text", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, 5.7);
+      tl.fromTo("#pr-a .chip", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out", stagger: 0.14 }, 6.2);
+      tl.fromTo("#pr-a .pr-src", { opacity: 0 }, { opacity: 1, duration: 0.6 }, 6.7);
+      cP.move({ s: 0.8, fx: 1920, fy: 540 }, 7.7, 0.6, "power2.in");     // отъезд и панорама вправо
+      cP.move({ s: 1, fx: 2880, fy: 540 }, 8.3, 0.75, "power3.out");
+      tl.fromTo("#pr-b .pr-kicker", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 8.2);
+      tl.fromTo("#pr-b .pr-num", { opacity: 0, scale: 0.86 }, { opacity: 1, scale: 1, duration: 0.8, ease: "power3.out" }, 8.3);
+      counter("pb-n", 89, 8.4, 1.2);
+      tl.fromTo("#pr-b .pr-text", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, 8.85);
+      tl.fromTo("#pr-b .pr-src", { opacity: 0 }, { opacity: 1, duration: 0.6 }, 9.3);
+      cP.move({ s: 1.05, fx: 2880, fy: 520 }, 9.05, 1.35, "sine.inOut");
+      cP.move({ s: 3.0, fx: 2880, fy: 470 }, 10.45, 0.6, "power3.in");   // наезд сквозь «89%»
+      tl.to("#sp-inner", { opacity: 0, filter: "blur(14px)", duration: 0.4, ease: "power2.in" }, 10.65);
+
+      // ═══ 3. Поиск заимствований не видит ИИ-код (10.8 – 17.1) ═══
+      const cQ = makeCamera(document.getElementById("camQ"), { s: 1.2, fx: 960, fy: 540 }, 3);
+      tl.fromTo("#sq-inner", { opacity: 0 }, { opacity: 1, duration: 0.45, ease: "power2.out" }, 10.8);
+      cQ.move({ s: 1, fx: 960, fy: 540 }, 10.8, 1.3, "power3.out");
+      tl.fromTo("#pl-card", { opacity: 0, y: 50, scale: 0.95 }, { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: "power3.out" }, 10.95);
+      tl.fromTo("#p-cap1", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, 11.2);
+      tl.fromTo("#pl-fill", { scaleX: 0 }, { scaleX: 1, duration: 1.3, ease: "power1.inOut" }, 11.5);
+      tl.fromTo("#pl-big, #pl-big-l", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out", stagger: 0.08 }, 12.8);
+      tl.fromTo("#pl-badge", { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(1.8)" }, 13.05);
+      tl.to("#p-cap1", { opacity: 0, y: -16, duration: 0.35, ease: "power2.in" }, 13.55);
+      tl.fromTo("#p-cap2", { opacity: 0, y: 20 }, { immediateRender: false, opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 13.75);
+      tl.fromTo("#pl-stamp", { opacity: 0, scale: 2.4, rotation: -4 }, { opacity: 1, scale: 1, rotation: -10, duration: 0.32, ease: "power4.in" }, 13.9);
+      tl.to("#pl-card", { x: 6, duration: 0.05, yoyo: true, repeat: 3, ease: "none" }, 14.22);
+      tl.to("#pl-badge, #pl-big", { opacity: 0.3, duration: 0.5 }, 14.25);
+      tl.fromTo("#p-sub", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 14.6);
+      cQ.move({ s: 1.1, fx: 960, fy: 540 }, 14.2, 2.1, "sine.inOut");
+      cQ.move({ s: 3.2, fx: 960, fy: 500 }, 16.45, 0.6, "power3.in");    // наезд сквозь штамп
+      tl.to("#sq-inner", { opacity: 0, filter: "blur(14px)", duration: 0.4, ease: "power2.in" }, 16.65);
+
+      // ═══ 4. Тур по сайту (16.8 – 28.3) ═══
+      const cS = makeCamera(document.getElementById("camS"), { s: 1.25, fx: 960, fy: 560 }, 4);
+      tl.fromTo("#ss-inner", { opacity: 0 }, { opacity: 1, duration: 0.45, ease: "power2.out" }, 16.8);
+      cS.move({ s: 1, fy: 571 }, 16.8, 1.4, "power3.out");
+      tl.fromTo("#browser", { rotationX: 22, rotationY: -16, y: 60, scale: 0.86 },
+        { rotationX: 0, rotationY: 0, y: 0, scale: 1, duration: 1.5, ease: "power3.out" }, 16.85);
+      const cap = (id, inAt, outAt) => {
+        tl.fromTo(id, { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, inAt);
+        tl.to(id, { opacity: 0, y: -14, duration: 0.4, ease: "power2.in" }, outAt);
+      };
+      cap("#cap-a", 17.5, 19.45); cap("#cap-b", 20.4, 21.85); cap("#cap-c", 22.8, 24.15); cap("#cap-d", 25.0, 26.25);
+      cS.move({ s: 1.35, fx: 1222, fy: 680 }, 18.2, 1.2, "sine.inOut");          // наезд на демо первого экрана
+      cS.move({ s: 1, fx: 960, fy: 571 }, 19.55, 0.9, "power3.inOut");
+      tl.to("#br-strip", { y: -839, duration: 0.95, ease: "power3.inOut" }, 19.65);  // → «Как это работает»
+      cS.move({ s: 1.18, fx: 930, fy: 680 }, 20.6, 1.3, "sine.inOut");
+      cS.move({ s: 1, fx: 960, fy: 571 }, 21.95, 0.85, "power3.inOut");
+      tl.to("#br-strip", { y: -1678, duration: 0.95, ease: "power3.inOut" }, 22.05); // → «Качество моделей»
+      cS.move({ s: 1.5, fx: 600, fy: 646 }, 22.9, 1.1, "power3.inOut");           // наезд на 96,3%
+      cS.move({ s: 1, fx: 960, fy: 571 }, 24.2, 0.85, "power3.inOut");
+      tl.to("#br-strip", { y: -2517, duration: 0.95, ease: "power3.inOut" }, 24.3); // → «Команда»
+      cS.move({ s: 1.15, fx: 960, fy: 560 }, 25.1, 1.2, "sine.inOut");
+      cS.move({ s: 1, fx: 960, fy: 571 }, 26.35, 0.7, "power3.inOut");
+      tl.to("#br-strip", { y: -3356, duration: 0.85, ease: "power3.inOut" }, 26.4); // → «Проверьте код»
+      cS.move({ s: 2.9, fx: 960, fy: 700 }, 27.5, 0.7, "power3.in");              // наезд сквозь поле кода
+      tl.to("#ss-inner", { opacity: 0, filter: "blur(14px)", duration: 0.4, ease: "power2.in" }, 27.8);
+
+      // ═══ 5. Редактор → сканирование → вердикт (28.0 – 40.85) ═══
+      const T2 = gsap.timeline();   // локальные времена как в 20-секундной версии; блок сдвинут на +24.6 с
+      const c2 = makeCamera(document.getElementById("cam2"), { s: 1.25, fx: 960, fy: 560 }, 4, T2);
+      T2.fromTo("#s2-inner", { opacity: 0 }, { opacity: 1, duration: 0.45, ease: "power2.out" }, 3.4);
+      c2.move({ s: 1, fy: 540 }, 3.4, 1.4, "power3.out");
+      T2.fromTo("#win", { rotationX: 22, rotationY: -16, y: 60, scale: 0.86 },
+        { rotationX: 0, rotationY: 0, y: 0, scale: 1, duration: 1.5, ease: "power3.out" }, 3.45);
+      T2.fromTo("#s2-caption", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, 4.0);
+      T2.fromTo("#code .ln", { opacity: 0, x: -14 }, { opacity: 1, x: 0, duration: 0.45, ease: "power2.out", stagger: 0.1 }, 4.1);
+      T2.set("#cursor2", { x: 1720, y: 1010 }, 0);
+      T2.fromTo("#cursor2", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 6.1);
+      T2.to("#cursor2", { x: 1442, y: 218, duration: 1.1, ease: "power3.inOut" }, 6.25);
+      T2.to("#cursor2", { scale: 0.86, duration: 0.09, yoyo: true, repeat: 1, transformOrigin: "10% 10%" }, 7.4);
+      T2.to("#btn-check", { scale: 0.92, duration: 0.09, yoyo: true, repeat: 1 }, 7.4);
+      T2.fromTo("#ripple2", { x: 1412, y: 179, scale: 0.3, opacity: 0.9 }, { immediateRender: false, scale: 1.4, opacity: 0, duration: 0.6, ease: "power2.out" }, 7.42);
+      T2.to("#cursor2", { opacity: 0, duration: 0.4 }, 7.9);
+      T2.to("#s2-caption", { opacity: 0, y: -16, duration: 0.4, ease: "power2.in" }, 7.6);
+      T2.fromTo("#scan", { y: -120, opacity: 0 }, { y: 690, opacity: 1, duration: 1.6, ease: "power1.inOut" }, 7.7);
+      T2.to("#scan", { opacity: 0, duration: 0.25 }, 9.3);
+      const lines = document.querySelectorAll("#code .ln");
+      const hot = [3, 5, 6, 7], warm = [4, 8, 11];
+      c2.move({ s: 1.72, fx: 900, fy: 520 }, 9.15, 1.6, "power3.inOut");
+      hot.forEach((i, n) => T2.to(lines[i], { backgroundColor: "rgba(255,69,58,0.16)", boxShadow: "inset 5px 0 0 #ff453a",
+        duration: 0.35, ease: "power2.out" }, 9.6 + n * 0.14));
+      warm.forEach((i, n) => T2.to(lines[i], { backgroundColor: "rgba(255,159,10,0.11)", boxShadow: "inset 5px 0 0 #ff9f0a",
+        duration: 0.35, ease: "power2.out" }, 9.8 + n * 0.14));
+      T2.fromTo("#s2-caption2", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 10.0);
+      c2.move({ s: 1, fx: 960, fy: 540 }, 11.3, 1.1, "power3.inOut");
+      T2.to("#s2-caption2", { opacity: 0, y: -16, duration: 0.4, ease: "power2.in" }, 11.7);
+      T2.to("#win", { x: -330, scale: 0.74, duration: 1.0, ease: "power3.inOut" }, 12.0);
+      T2.fromTo("#res", { opacity: 0, x: 60 }, { opacity: 1, x: 0, duration: 0.8, ease: "power3.out" }, 12.45);
+      T2.fromTo("#res-cap", { opacity: 0 }, { opacity: 1, duration: 0.5 }, 12.6);
+      T2.fromTo("#res-verdict", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 13.95);
+      T2.to("#ring-fill", { strokeDashoffset: 1068.14 * (1 - 0.91), duration: 1.4, ease: "power2.out" }, 12.6);
+      const rv = { v: 0 }, resVal = document.getElementById("res-val");
+      T2.to(rv, { v: 91, duration: 1.4, ease: "power2.out", onUpdate: () => { resVal.textContent = Math.round(rv.v); } }, 12.6);
+      c2.move({ s: 1.1, fx: 1200, fy: 530 }, 13.2, 1.8, "sine.inOut");
+      c2.move({ s: 3.6, fx: 1450, fy: 445 }, 15.55, 0.7, "power3.in");    // наезд сквозь кольцо
+      T2.to("#s2-inner", { opacity: 0, filter: "blur(14px)", duration: 0.45, ease: "power2.in" }, 15.8);
+      tl.add(T2, 24.6);
+
+      // ═══ 6. Как это работает (40.6 – 48.4): камера идёт вдоль конвейера ═══
+      const cF = makeCamera(document.getElementById("camF"), { s: 1.4, fx: 480, fy: 560 }, 3);
+      tl.fromTo("#sf-inner", { opacity: 0 }, { opacity: 1, duration: 0.45, ease: "power2.out" }, 40.6);
+      cF.move({ s: 1.2, fx: 480, fy: 560 }, 40.6, 1.2, "power3.out");
+      tl.fromTo("#pp-title", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, 40.8);
+      const pop = (sel, at) => tl.fromTo(sel, { opacity: 0, y: 40, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, duration: 0.6, ease: "power3.out" }, at);
+      pop("#nd1", 40.85);
+      tl.fromTo("#nd1 .bar", { scaleX: 0, transformOrigin: "0 50%" }, { scaleX: 1, duration: 0.5, ease: "power2.out", stagger: 0.08 }, 41.2);
+      const packet = (wire, at) => {
+        tl.fromTo(`${wire} .pkt`, { x: 0, opacity: 0 }, { x: 223, opacity: 1, duration: 0.7, ease: "power2.inOut" }, at);
+        tl.to(`${wire} .pkt`, { opacity: 0, duration: 0.2 }, at + 0.65);
+        tl.fromTo(wire, { backgroundColor: "#e5e5ea" }, { backgroundColor: "#b9d6f7", duration: 0.4 }, at);
+      };
+      packet("#wr1", 41.75); cF.move({ s: 1.2, fx: 1120 }, 41.7, 1.0, "power3.inOut");
+      pop("#nd2", 42.2);
+      tl.fromTo("#nd2 .tk", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.3, ease: "power2.out", stagger: 0.06 }, 42.5);
+      packet("#wr2", 43.15); cF.move({ s: 1.2, fx: 1760 }, 43.1, 1.0, "power3.inOut");
+      pop("#nd3", 43.6);
+      tl.fromTo("#net .nn", { opacity: 0.25 }, { opacity: 1, duration: 0.25, stagger: 0.08 }, 43.9);
+      packet("#wr3", 44.55); cF.move({ s: 1.2, fx: 2400 }, 44.5, 1.0, "power3.inOut");
+      pop("#nd4", 45.0);
+      tl.to("#nd4-fill", { strokeDashoffset: 201.06 * (1 - 0.91), duration: 1.0, ease: "power2.out" }, 45.25);
+      counter("nd4-n", 91, 45.25, 1.0);
+      cF.move({ s: 0.7, fx: 1440, fy: 600 }, 46.25, 1.2, "power3.inOut");   // отъезд: весь конвейер целиком
+      tl.fromTo("#pp-sub", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 46.75);
+      cF.move({ s: 2.4, fx: 2400, fy: 560 }, 47.85, 0.55, "power3.in");      // наезд в результат
+      tl.to("#sf-inner, #pp-title, #pp-sub", { opacity: 0, filter: "blur(12px)", duration: 0.35, ease: "power2.in" }, 48.0);
+
+      // ═══ 7. Цифры качества (48.2 – 53.0) ═══
+      const c3 = makeCamera(document.getElementById("cam3"), { s: 1.15, fx: 960, fy: 540 }, 3);
+      tl.fromTo("#s3-inner", { opacity: 0 }, { opacity: 1, duration: 0.45, ease: "power2.out" }, 48.2);
+      c3.move({ s: 1, fx: 960, fy: 540 }, 48.2, 1.6, "power3.out");
+      c3.move({ s: 1.04, fx: 960, fy: 530 }, 49.9, 2.4, "sine.inOut");
+      tl.fromTo("#stats-title", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 48.35);
+      tl.fromTo(".card", { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out", stagger: 0.15 }, 48.5);
+      counter("n1", 96.3, 48.65, 1.4, 1);
+      counter("n2", 5.4, 48.8, 1.4, 1);
+      counter("n3", 1343, 48.95, 1.4, 0, true);
+      tl.to("#s3-inner", { opacity: 0, y: -30, filter: "blur(8px)", duration: 0.45, ease: "power2.in" }, 52.55);
+
+      // ═══ 8. Проект студентов НовГУ (52.8 – 56.3) ═══
+      const c4 = makeCamera(document.getElementById("cam4"), { s: 1.07, fx: 960, fy: 540 }, 2);
+      c4.move({ s: 1, fx: 960, fy: 540 }, 52.8, 3.3, "sine.out");
+      tl.fromTo("#cr-title", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, 52.95);
+      tl.fromTo("#cr-novsu", { opacity: 0, x: -40, filter: "blur(8px)" }, { opacity: 1, x: 0, filter: "blur(0px)", duration: 0.9, ease: "power3.out" }, 53.15);
+      tl.fromTo("#cr-line", { scaleY: 0 }, { scaleY: 1, duration: 0.7, ease: "power3.out" }, 53.3);
+      tl.fromTo("#cr-emblem", { opacity: 0, x: 40, filter: "blur(8px)" }, { opacity: 1, x: 0, filter: "blur(0px)", duration: 0.9, ease: "power3.out" }, 53.35);
+      tl.fromTo("#cr-sub", { opacity: 0 }, { opacity: 1, duration: 0.6 }, 53.7);
+      tl.to("#s4-inner", { opacity: 0, filter: "blur(8px)", duration: 0.4, ease: "power2.in" }, 55.9);
+
+      // ═══ 9. Финал (56.1 – 60.0) ═══
+      const c5 = makeCamera(document.getElementById("cam5"), { s: 1.0, fx: 960, fy: 540 }, 3);
+      tl.fromTo("#end-logo", { opacity: 0, scale: 0.6, rotation: -12 }, { opacity: 1, scale: 1, rotation: 0, duration: 0.7, ease: "back.out(1.6)" }, 56.15);
+      tl.fromTo("#end-name", { opacity: 0, x: -24 }, { opacity: 1, x: 0, duration: 0.6, ease: "power3.out" }, 56.25);
+      tl.fromTo("#end-sub", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 56.45);
+      tl.fromTo("#end-btn", { opacity: 0, y: 20, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, duration: 0.6, ease: "power3.out" }, 56.65);
+      tl.fromTo("#end-foot", { opacity: 0 }, { opacity: 1, duration: 0.6 }, 56.85);
+      tl.set("#cursor3", { x: 1500, y: 900 }, 0);
+      tl.fromTo("#cursor3", { opacity: 0 }, { opacity: 1, duration: 0.25 }, 57.0);
+      tl.to("#cursor3", { x: 952, y: 624, duration: 0.9, ease: "power3.inOut" }, 57.1);
+      tl.to("#cursor3", { scale: 0.86, duration: 0.09, yoyo: true, repeat: 1, transformOrigin: "10% 10%" }, 58.1);
+      tl.to("#end-btn", { scale: 0.95, duration: 0.09, yoyo: true, repeat: 1 }, 58.1);
+      tl.fromTo("#ripple3", { x: 915, y: 587, scale: 0.3, opacity: 0.9 }, { immediateRender: false, scale: 1.5, opacity: 0, duration: 0.6, ease: "power2.out" }, 58.12);
+      c5.move({ s: 1.06, fx: 960, fy: 520 }, 56.1, 3.9, "sine.inOut");    // финальный медленный наезд
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>
